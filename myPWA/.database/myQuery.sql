@@ -1,0 +1,13 @@
+-- CREATE TABLE sddstudents(nesaID INTEGER NOT NULL PRIMARY KEY, name TEXT NOT NULL, age INTEGER NOT NULL)
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (1234, "David Smith", "17");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (3201, "Carl Wheezer", "54");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (5621, "Doug Dimmadome", "83");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (1743, "Jeremiah Jebediah", "12");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (9281, "David Smith", "17");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (5633, "Cammy White", "35");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (3502, "Michael Schmidt", "96");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (2394, "Clara Afton", "42");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (7192, "John Smith", "15");
+-- INSERT INTO sddstudents(nesaID, name, age) VALUES (8945, "Johnathan Pedley", "33");
+-- SELECT * FROM sddstudents;
+-- SELECT * FROM sddstudents WHERE name LIKE 'David Smith';
