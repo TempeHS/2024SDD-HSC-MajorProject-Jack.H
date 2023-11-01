@@ -1,3 +1,17 @@
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('.database/datasource.db');
+
+let myString = '123';
+
+
+var fs = require('fs');
+fs.writeFile("public/frontEndData.json", myString + "]", function(err) {
+    if (err) {
+        console.log(err);
+    }
+});
+
+
 const express = require("express");
 const path = require("path");
 const app = express();
