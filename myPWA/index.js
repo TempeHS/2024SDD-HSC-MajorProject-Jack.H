@@ -1,7 +1,25 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('.database/datasource.db');
 
-let myString = '123';
+let myString = '[\n';
+db.all("SELECT * FROM sddstudents", function(err, rows) {
+    let myCounter = 0;
+    rows.forEach(function(row) {
+        myString += '{\n"nesaID":' + row.nesaID + ',\n"name":"' + row.name + '",\n"age":"' + row.age;
+        myCounter++;
+        if (myCounter == rows.length) {
+            myString += '"\n}\n';
+        } else {
+            myString += '"\n},\n';
+        }
+    });
+    var fs = require('fs');
+    fs.writeFile("public/frontEndData.json", myString + "]", function(err) {
+    if (err) {
+        console.log(err);
+    }
+    });
+});
 
 /*
 START
@@ -26,12 +44,7 @@ END SUBROUTINE
 */
 
 
-var fs = require('fs');
-fs.writeFile("public/frontEndData.json", myString + "]", function(err) {
-    if (err) {
-        console.log(err);
-    }
-});
+
 
 
 const express = require("express");
