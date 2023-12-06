@@ -1,4 +1,4 @@
-let result = ""; 
+/*let result = ""; 
 
 fetch('./frontEndData.json') 
 
@@ -62,4 +62,4 @@ fetch('./frontEndData.json')
 
     }); 
 
-  } 
+  } */
