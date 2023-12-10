@@ -1,4 +1,4 @@
-1. Homescreen
+1. ~~Homescreen~~
 2. Name changer
 3. HTML Sanitizer
 4. Settings
