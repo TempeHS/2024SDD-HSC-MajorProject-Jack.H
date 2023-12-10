@@ -116,6 +116,9 @@ nav h1 {
     border: none;
   }
 
+  .settings:active {
+    transform: scale(1.05);
+  }
 
   .signIn {
     width: 100px;
@@ -123,4 +126,8 @@ nav h1 {
     float: right;
     margin-right: 5%;
     border: none;
+  }
+
+  .signIn:active {
+    transform: scale(1.05);
   }
