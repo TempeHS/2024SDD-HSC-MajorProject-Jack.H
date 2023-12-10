@@ -101,3 +101,19 @@ nav h1 {
     height: 80px;
     background-color: burlywood;
   }
+
+  .settings {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-left: 5%;
+    border: none;
+  }
+
+  .signIn {
+    width: 100px;
+    height: 100px;
+    float: right;
+    margin-right: 5%;
+    border: none;
+  }
