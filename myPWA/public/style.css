@@ -106,6 +106,7 @@ nav h1 {
   .homeButton:active {
     background-color: color-mix(in srgb,burlywood, black 10%);
     color: lightgray;
+    transform: scale(1.02);
   }
 
   .settings {
