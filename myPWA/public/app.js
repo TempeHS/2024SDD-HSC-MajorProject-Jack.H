@@ -64,4 +64,6 @@ fetch('./frontEndData.json')
 
   } */
 
-  
+  function signIn() {
+    
+  }

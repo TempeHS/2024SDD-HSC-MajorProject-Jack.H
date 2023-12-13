@@ -15,6 +15,7 @@ main {
   margin: auto;
   padding: 0.5rem;
   text-align: center;
+  align-items: center;
 }
 nav {
   display: flex;
@@ -131,4 +132,13 @@ nav h1 {
 
   .signIn:active {
     transform: scale(1.05);
+  }
+
+  .namePage {
+    width: 300px;
+    height: 600px;
+    background-color: color-mix(in srgb, lightgreen, black 10%);
+    display: block;
+    margin: 0 auto;
+    position: fixed;
   }
