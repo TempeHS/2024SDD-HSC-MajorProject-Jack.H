@@ -29,9 +29,10 @@
       <button class="signIn" onclick="signIn()"><img class="signIn" src="icons\signIn.png"></button>
       <div class="blocker" id="blocker"></div>
       <div class="namePage" id="namePage">
-        <p class="nameText">Current Name</p><br>
-        <button class="xButton" onclick="homeFromSign()"><img src="icons\x_button.png" class="xImage"></button><br>
-        <textarea class="username" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Set Username</textarea>
+        <p class="nameText" id="nameText">Current Name</p><br>
+        <button class="xButton" onclick="homeFromSign()"><img src="icons\x_button.png" class="xImage"></button><br><br>
+        <textarea class="username" id="usernameText" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Set Username</textarea>
+        <br><br><br><button class="changeButton" onclick="changeName()">Change Name</button>
       </div>
     </main>
     <script src="app.js"></script>

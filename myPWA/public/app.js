@@ -64,12 +64,23 @@ fetch('./frontEndData.json')
 
   } */
 
+  var username = "Default User";
+
   function signIn() {
     document.getElementById("namePage").style.display = "block";
     document.getElementById("blocker").style.display = "block";
+    document.getElementById("nameText").textContent = username;
   }
 
   function homeFromSign() {
     document.getElementById("namePage").style.display = "none";
     document.getElementById("blocker").style.display = "none";
+    document.getElementById("usernameText").value = document.getElementById("usernameText").defaultValue;
+  }
+
+  function changeName() {
+    if (document.getElementById("usernameText").value != document.getElementById("usernameText").defaultValue) {
+      username = document.getElementById("usernameText").value;
+      document.getElementById("nameText").textContent = username;
+    }
   }
