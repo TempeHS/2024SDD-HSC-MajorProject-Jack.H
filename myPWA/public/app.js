@@ -65,5 +65,11 @@ fetch('./frontEndData.json')
   } */
 
   function signIn() {
-    
+    document.getElementById("namePage").style.display = "block";
+    document.getElementById("blocker").style.display = "block";
+  }
+
+  function homeFromSign() {
+    document.getElementById("namePage").style.display = "none";
+    document.getElementById("blocker").style.display = "none";
   }

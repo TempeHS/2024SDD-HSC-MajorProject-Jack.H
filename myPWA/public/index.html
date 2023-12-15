@@ -21,14 +21,16 @@
   </head>
   <body>
     <main>
-      <div class="blocker"></div>
-      <div class="namePage"></div>
       <div class='title'>Tilt Rush</div><br>
       <button class="homeButton">Play</button><br><br><br><br>
       <button class="homeButton">Tutorial</button><br><br><br><br>
       <button class="homeButton">Stats</button><br><br><br>
       <button class="settings" ><img class="settings" src="icons\settings.png"></button>
       <button class="signIn" onclick="signIn()"><img class="signIn" src="icons\signIn.png"></button>
+      <div class="blocker" id="blocker"></div>
+      <div class="namePage" id="namePage">
+        <button class="xButton" onclick="homeFromSign()"><img class="xButton" src="icons\x_button.png"></button>
+      </div>
     </main>
     <script src="app.js"></script>
   </body>
