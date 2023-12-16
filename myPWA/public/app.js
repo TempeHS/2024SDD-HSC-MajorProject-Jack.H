@@ -65,6 +65,7 @@ fetch('./frontEndData.json')
   } */
 
   var username = "Default User";
+  document.getElementById("homescreen").style.display = "none";
 
   function signIn() {
     document.getElementById("namePage").style.display = "block";
@@ -82,5 +83,19 @@ fetch('./frontEndData.json')
     if (document.getElementById("usernameText").value != document.getElementById("usernameText").defaultValue) {
       username = document.getElementById("usernameText").value;
       document.getElementById("nameText").textContent = username;
+    }
+  }
+
+  function outofhome(page) {
+    document.getElementById("homescreen").style.display = "none";
+    if (page == "stats") {
+      document.getElementById("statsPage").style.display = "block";
+    }
+  }
+
+  function homescreen(page) {
+    document.getElementById("homescreen").style.display = "block";
+    if (page == "stats") {
+      document.getElementById("statsPage").style.display = "none";
     }
   }

@@ -20,11 +20,11 @@
     <link rel="icon" type="image/x-icon" href="images/icons/icon-512x512.png" />
   </head>
   <body>
-    <main>
+    <main id="homescreen">
       <div class='title'>Tilt Rush</div><br>
       <button class="homeButton">Play</button><br><br><br><br>
       <button class="homeButton">Tutorial</button><br><br><br><br>
-      <button class="homeButton">Stats</button><br><br><br>
+      <button class="homeButton" onclick="outofhome('stats')">Stats</button><br><br><br>
       <button class="settings" ><img class="settings" src="icons\settings.png"></button>
       <button class="signIn" onclick="signIn()"><img class="signIn" src="icons\signIn.png"></button>
       <div class="blocker" id="blocker"></div>
@@ -34,6 +34,11 @@
         <textarea class="username" id="usernameText" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Set Username</textarea>
         <br><br><br><button class="changeButton" onclick="changeName()">Change Name</button>
       </div>
+    </main>
+    <main id="statsPage">
+      <button class="backButton" onclick="homescreen('stats')"><img class="backButton" src="icons\back_arrow.png"></button><br><br>
+      <p class="nameText">Best Games</p><br><br>
+      <div class="scoreText" id="attemptCount">Total Attempts: 0</div>
     </main>
     <script src="app.js"></script>
   </body>
