@@ -8,3 +8,5 @@
 # Increment (what must be finished)
 * ~~Homescreen loads~~
 * ~~5 buttons can be pressed~~
+# Sprint Review
+This sprint went very well, but was only a short sprint in order to get a base for the app and learn the flow of sprints.
