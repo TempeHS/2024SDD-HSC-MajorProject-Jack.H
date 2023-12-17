@@ -65,7 +65,11 @@ fetch('./frontEndData.json')
   } */
 
   var username = "Default User";
-  document.getElementById("homescreen").style.display = "none";
+  var topScores = [ 0, 0, 0, 0, 0 ];
+  var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
+  var timesPlayed = -1;
+  document.getElementById("statsPage").style.display = "none";
+  addScore(0, "N/A");
 
   function signIn() {
     document.getElementById("namePage").style.display = "block";
@@ -98,4 +102,22 @@ fetch('./frontEndData.json')
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "none";
     }
+  }
+
+  function addScore(score, name) {
+    timesPlayed++;
+    for (let i=0; i < topScores.length; i++) {
+      if (score >= topScores[i]) {
+        topScores.splice(i, 0, score);
+        topNames.splice(i, 0, name)
+        break;
+      }
+    }
+    if (topScores.length > 5) {
+      topScores.splice(6, 1);
+      topNames.splice(6, 1);
+    }
+    document.getElementById("scoreText").innerHTML = 
+    '<span style="float:left">' + topNames[0] + '</span><span style="float:right">' + topScores[0] + '</span><br><br><br><span style="float:left">' + topNames[1] + '</span><span style="float:right">' + topScores[1] + '</span><br><br><br><span style="float:left">' + topNames[2] + '</span><span style="float:right">' + topScores[2] + '</span><br><br><br><span style="float:left">' + topNames[3] + '</span><span style="float:right">' + topScores[3] + '</span><br><br><br><span style="float:left">' + topNames[4] + '</span><span style="float:right">' + topScores[4] + '</span><br><br><br>';
+    document.getElementById("scoreText").value = "Total Attempts: " + timesPlayed;
   }

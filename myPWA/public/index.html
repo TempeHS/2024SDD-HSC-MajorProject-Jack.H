@@ -22,6 +22,7 @@
   <body>
     <main id="homescreen">
       <div class='title'>Tilt Rush</div><br>
+      <input class="test" type="number" id="testInput"></input><button class="testButton" onclick="addScore( document.getElementById('testInput').value, username)">test</button>
       <button class="homeButton">Play</button><br><br><br><br>
       <button class="homeButton">Tutorial</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('stats')">Stats</button><br><br><br>
@@ -31,19 +32,14 @@
       <div class="namePage" id="namePage">
         <p class="nameText" id="nameText">Current Name</p><br>
         <button class="xButton" onclick="homeFromSign()"><img src="icons\x_button.png" class="xImage"></button><br><br>
-        <textarea class="username" id="usernameText" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Set Username</textarea>
+        <textarea class="username" id="usernameText" maxlength="15" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Set Username</textarea>
         <br><br><br><button class="changeButton" onclick="changeName()">Change Name</button>
       </div>
     </main>
     <main id="statsPage">
       <button class="backButton" onclick="homescreen('stats')"><img class="backButton" src="icons\back_arrow.png"></button><br><br>
       <p class="bestGames">Best Games</p><br><br>
-      <div class="scoreText">
-        <span style="float:left">Name</span><span style="float:right">Score</span><br><br><br>
-        <span style="float:left">Name</span><span style="float:right">Score</span><br><br><br>
-        <span style="float:left">Name</span><span style="float:right">Score</span><br><br><br>
-        <span style="float:left">Name</span><span style="float:right">Score</span><br><br><br>
-        <span style="float:left">Name</span><span style="float:right">Score</span><br><br><br>
+      <div class="scoreText" id="scoreText">
       </div>
       <p class="scoreText" id="attemptCount">Total Attempts: 0</p>
     </main>
