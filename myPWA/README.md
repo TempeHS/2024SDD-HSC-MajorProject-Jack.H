@@ -4,7 +4,7 @@
 * ~~Displays current name~~
 * ~~Text box input~~
 * ~~"Change name" button~~
-* HTML sanitizer
+* ~~HTML sanitizer~~ (Pushed back, potentially cancelled due to new sanitizer system)
 * ~~"X" button~~
 * ~~Stats button opens page~~
 * ~~Stub results are displayed~~
