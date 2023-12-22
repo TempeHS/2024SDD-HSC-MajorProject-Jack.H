@@ -64,7 +64,6 @@ fetch('./frontEndData.json')
 
   } */
 
-  import sanitizeHtml from '../sanitize-html';
   var username = "Default User";
   var topScores = [ 0, 0, 0, 0, 0 ];
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
@@ -114,19 +113,16 @@ fetch('./frontEndData.json')
 
   function addScore(score, name) {
     timesPlayed++;
-    name = sanitizeHtml(name);
-    name = "&lt" + name + "&gt";
     for (let i=0; i < topScores.length; i++) {
       if (score >= topScores[i]) {
-        console.log("hi");
         topScores.splice(i, 0, score);
         topNames.splice(i, 0, name);
         break;
       }
     }
     if (topScores.length > 5) {
-      topScores.splice(5, 1);
-      topNames.splice(5, 1);
+      topScores.splice(6, 1);
+      topNames.splice(6, 1);
     }
     document.getElementById("scoreText").innerHTML = 
     '<span style="float:left">' + topNames[0] + '</span><span style="float:right">' + topScores[0] + '</span><br><br><br><span style="float:left">' + topNames[1] + '</span><span style="float:right">' + topScores[1] + '</span><br><br><br><span style="float:left">' + topNames[2] + '</span><span style="float:right">' + topScores[2] + '</span><br><br><br><span style="float:left">' + topNames[3] + '</span><span style="float:right">' + topScores[3] + '</span><br><br><br><span style="float:left">' + topNames[4] + '</span><span style="float:right">' + topScores[4] + '</span><br><br><br>';
