@@ -70,12 +70,6 @@ fetch('./frontEndData.json')
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
   var timesPlayed = -1;
   document.getElementById("statsPage").style.display = "none";
-  if (localStorage.currentUsername != undefined) { 
-    username = localStorage.currentUsername;
-    topScores = localStorage.currentScores.split(",");
-    topNames = localStorage.currentNames.split(",");
-    timesPlayed = localStorage.currentTimes - 1;
-  }
   addScore(0, "N/A");
 
   function signIn() {
@@ -95,7 +89,6 @@ fetch('./frontEndData.json')
       username = document.getElementById("usernameText").value;
       document.getElementById("nameText").textContent = username;
     }
-    localStorage.currentUsername = username;
   }
 
   function outofhome(page) {
@@ -120,7 +113,7 @@ fetch('./frontEndData.json')
       if (score >= topScores[i]) {
         console.log("hi");
         topScores.splice(i, 0, score);
-        topNames.splice(i, 0, name);
+        topNames.splice(i, 0, name)
         break;
       }
     }
@@ -130,8 +123,5 @@ fetch('./frontEndData.json')
     }
     document.getElementById("scoreText").innerHTML = 
     '<span style="float:left">' + topNames[0] + '</span><span style="float:right">' + topScores[0] + '</span><br><br><br><span style="float:left">' + topNames[1] + '</span><span style="float:right">' + topScores[1] + '</span><br><br><br><span style="float:left">' + topNames[2] + '</span><span style="float:right">' + topScores[2] + '</span><br><br><br><span style="float:left">' + topNames[3] + '</span><span style="float:right">' + topScores[3] + '</span><br><br><br><span style="float:left">' + topNames[4] + '</span><span style="float:right">' + topScores[4] + '</span><br><br><br>';
-    document.getElementById("attemptCount").innerHTML = "Total Attempts: " + timesPlayed;
-    localStorage.currentTimes = timesPlayed;
-    localStorage.currentScores = topScores.join();
-    localStorage.currentNames = topNames.join();
+    document.getElementById("scoreText").value = "Total Attempts: " + timesPlayed;
   }
