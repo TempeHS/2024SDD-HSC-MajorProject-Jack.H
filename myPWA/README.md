@@ -9,7 +9,7 @@
 * ~~Stats button opens page~~
 * ~~Stub results are displayed~~
 * ~~Temporary text box to add scores to stats page~~
-* Stats/name in localstorage
+* ~~Stats/name in localstorage~~
 # Increment (what must be finished)
 * Connection between homescreen and sign-in
 * Working name changing
