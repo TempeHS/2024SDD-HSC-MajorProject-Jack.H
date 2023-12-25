@@ -19,3 +19,6 @@
 * Stats/name saves after leaving the page
 * App can be accessed by public users
 # Sprint Review
+Overall this sprint ended up working very well, and the temporary text box needed to test this sprint is unobtrusive and easy to remove.
+There were still complications as the HTML sanitizer in its current form ended up being complicated and using code I have not worked with before, meaning that it will be pushed back, potentially indefinitely.
+Besides that, the sign-in page and score pages work properly and look fine.
