@@ -1,24 +1,18 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* ~~Sign-In button opens pop-up~~
-* ~~Displays current name~~
-* ~~Text box input~~
-* ~~"Change name" button~~
-* ~~HTML sanitizer~~ (Pushed back, potentially cancelled due to new sanitizer system)
-* ~~"X" button~~
-* ~~Stats button opens page~~
-* ~~Stub results are displayed~~
-* ~~Temporary text box to add scores to stats page~~
-* ~~Stats/name in localstorage~~
+* Tutorial screen
+* Buttons connect tutorial and homescreen
+* Buttons connect settings and homescreen
+* Ball coulor changer
+* Multiple level theme coulor options
+* Changes coulor of other screens
+* Coulor preferences saved to localstorage
+* SQL coulor database
+* Coulor changes based on time
 # Increment (what must be finished)
-* Connection between homescreen and sign-in
-* Working name changing
-* HTML sanitizer
-* Connection between homescreen and stats page
-* Results display with correct name and score
-* Stats/name saves after leaving the page
-* App can be accessed by public users
+* Can swap between tutorial and homescreen
+* Can swap between settings and homescreen
+* Preferences save between sessions
+* Coulors change on all screens
+* Coulors change with the time
 # Sprint Review
-Overall this sprint ended up working very well, and the temporary text box needed to test this sprint is unobtrusive and easy to remove.
-There were still complications as the HTML sanitizer in its current form ended up being complicated and using code I have not worked with before, meaning that it will be pushed back, potentially indefinitely.
-Besides that, the sign-in page and score pages work properly and look fine.
