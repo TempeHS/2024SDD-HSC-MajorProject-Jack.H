@@ -68,7 +68,6 @@ fetch('./frontEndData.json')
   var topScores = [ 0, 0, 0, 0, 0 ];
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
   var timesPlayed = -1;
-  document.getElementById("statsPage").style.display = "none";
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -101,6 +100,8 @@ fetch('./frontEndData.json')
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
+    } else if (page == "tutorial") {
+      document.getElementById("tutorialPage").style.display = "block";
     }
   }
 
@@ -108,6 +109,8 @@ fetch('./frontEndData.json')
     document.getElementById("homescreen").style.display = "block";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "none";
+    } else if (page == "tutorial") {
+      document.getElementById("tutorialPage").style.display = "none";
     }
   }
 

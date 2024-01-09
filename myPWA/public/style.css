@@ -245,3 +245,26 @@ nav h1 {
     height: 20px;
     left: 60px;
   }
+
+  .otherPage {
+    display: none;
+  }
+
+  .tiltText {
+    text-align: left;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    width: 150px;
+    margin-left: 10px;
+  }
+
+  .tutorialImage {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    border-style: solid;
+    border-radius: 3em;
+    border-color: black;
+    top: 100px;
+    right: 10px;
+  }
