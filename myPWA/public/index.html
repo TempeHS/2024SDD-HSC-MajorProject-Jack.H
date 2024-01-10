@@ -25,7 +25,7 @@
       <button class="homeButton">Play</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('tutorial')">Tutorial</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('stats')">Stats</button><br><br><br>
-      <button class="settings" ><img class="settings" src="icons/settings.png"></button>
+      <button class="settings" onclick="outofhome('settings')"><img class="settings" src="icons/settings.png"></button>
       <button class="signIn" onclick="signIn()"><img class="signIn" src="icons/signIn.png"></button>
       <div class="blocker" id="blocker"></div>
       <div class="namePage" id="namePage">
@@ -50,6 +50,10 @@
       <p class="tiltText" style="text-align:right; margin-left:auto; margin-right:5px;">Head towards the goal!</p>
       <img src="icons/obstacle-tutorial.png" class="tutorialImage" style="top:460px;"><br><br><br>
       <p class="tiltText">Avoid the various objects!</p>
+    </main>
+    <main id="settingsPage" class="otherPage">
+      <button class="backButton" onclick="homescreen('settings')"><img class="backButton" src="icons/back_arrow.png"></button><br><br><br><br><br>
+      <p class="scoreText" style="font-size: 35px;">Ball Coulor: <input type="color" class="ballCoulor" id="ballCoulor"></p>
     </main>
     <script src="app.js"></script>
   </body>

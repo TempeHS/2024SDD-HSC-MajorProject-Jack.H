@@ -102,6 +102,8 @@ fetch('./frontEndData.json')
       document.getElementById("statsPage").style.display = "block";
     } else if (page == "tutorial") {
       document.getElementById("tutorialPage").style.display = "block";
+    } else if (page == "settings") {
+      document.getElementById("settingsPage").style.display = "block";
     }
   }
 
@@ -111,7 +113,10 @@ fetch('./frontEndData.json')
       document.getElementById("statsPage").style.display = "none";
     } else if (page == "tutorial") {
       document.getElementById("tutorialPage").style.display = "none";
+    } else if (page == "settings") {
+      document.getElementById("settingsPage").style.display = "none"; 
     }
+    console.log(document.getElementById("ballCoulor").value);
   }
 
   function addScore(score, name) {
