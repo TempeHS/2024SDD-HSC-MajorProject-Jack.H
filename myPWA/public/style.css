@@ -253,9 +253,9 @@ nav h1 {
   .tiltText {
     text-align: left;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 40px;
-    width: 150px;
-    margin-left: 10px;
+    font-size: 36px;
+    width: 160px;
+    margin-left: 5px;
   }
 
   .tutorialImage {
@@ -265,6 +265,6 @@ nav h1 {
     border-style: solid;
     border-radius: 3em;
     border-color: black;
-    top: 100px;
+    top: 60px;
     right: 10px;
   }

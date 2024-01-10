@@ -1,7 +1,7 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* Tutorial screen
-* Buttons connect tutorial and homescreen
+* ~~Tutorial screen~~
+* ~~Buttons connect tutorial and homescreen~~
 * Buttons connect settings and homescreen
 * Ball coulor changer
 * Multiple level theme coulor options
