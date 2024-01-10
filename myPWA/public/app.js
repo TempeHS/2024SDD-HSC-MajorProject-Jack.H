@@ -104,6 +104,7 @@ fetch('./frontEndData.json')
       document.getElementById("tutorialPage").style.display = "block";
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "block";
+      defineButtons();
     }
   }
 
@@ -116,7 +117,6 @@ fetch('./frontEndData.json')
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "none"; 
     }
-    console.log(document.getElementById("ballCoulor").value);
   }
 
   function addScore(score, name) {
@@ -138,4 +138,20 @@ fetch('./frontEndData.json')
     localStorage.currentTimes = timesPlayed;
     localStorage.currentScores = topScores.join();
     localStorage.currentNames = topNames.join();
+  }
+
+  function defineButtons() {
+    const theme1 = document.getElementById("levelCanvas1").getContext("2d");
+    theme1.fillStyle = "green";
+    theme1.fillRect(0, 0, 80, 80);
+    theme1.fillStyle = "yellow";
+    theme1.beginPath();
+    theme1.moveTo(55, 40);
+    theme1.lineTo(70, 70);
+    theme1.lineTo(40, 70);
+    theme1.fill();
+    theme1.fillStyle = "red";
+    theme1.beginPath();
+    theme1.arc(25, 25, 15, 0, 2 * Math.PI);
+    theme1.fill();
   }

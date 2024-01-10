@@ -273,3 +273,9 @@ nav h1 {
     width: 40px;
     height: 35px;
   }
+
+  .themeButton {
+    width: 80px;
+    height: 80px;
+    border: none;
+  }
