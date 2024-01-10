@@ -154,4 +154,7 @@ fetch('./frontEndData.json')
     theme1.beginPath();
     theme1.arc(25, 25, 15, 0, 2 * Math.PI);
     theme1.fill();
+    theme1.strokeStyle = "black";
+    theme1.lineWidth = 4.0;
+    theme1.strokeRect(0, 0, 80, 80);
   }

@@ -11,3 +11,11 @@
 -- INSERT INTO sddstudents(nesaID, name, age) VALUES (8945, "Johnathan Pedley", "33");
 -- SELECT * FROM sddstudents;
 -- SELECT * FROM sddstudents WHERE name LIKE 'David Smith';
+-- CREATE TABLE levelThemes(number INTEGER NOT NULL PRIMARY KEY, day TEXT NOT NULL, change TEXT NOT NULL, night TEXT NOT NULL);
+-- INSERT INTO levelThemes(number, day, change, night) VALUES (1, "90ee90ff5757deb887", "6fbf6fcf3e3ec7ac89", "407a409925258f724c");
+-- INSERT INTO levelThemes(number, day, change, night) VALUES (2, "f7f7f7635959635959", "e6e7eb3d3b3b3d3b3b", "c9cdd6000000000000");
+-- INSERT INTO levelThemes(number, day, change, night) VALUES (3, "753802e6f9ffffcfe0", "802e08c5dee6ffb0cc", "701c1396c5d4ffa3dd");
+-- INSERT INTO levelThemes(number, day, change, night) VALUES (4, "c72e2eaaeba4fac564", "ab1a0f67bf7af0b52b", "780a023a9e5deb9310");
+-- INSERT INTO levelThemes(number, day, change, night) VALUES (5, "45778fa484c2335232", "4260788b5eb5408531", "3e4a5c59248a49ab33");
+-- INSERT INTO levelThemes(number, day, change, night) VALUES (6, "0a000dfffc69b8b8b8", "200129ff8c00e0e0e0", "260030ff0303f2f2f2");
+-- SELECT * FROM levelThemes;

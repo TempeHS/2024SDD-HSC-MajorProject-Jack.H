@@ -2,10 +2,10 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('.database/datasource.db');
 
 let myString = '[\n';
-db.all("SELECT * FROM sddstudents", function(err, rows) {
+db.all("SELECT * FROM levelThemes", function(err, rows) {
     let myCounter = 0;
     rows.forEach(function(row) {
-        myString += '{\n"nesaID":' + row.nesaID + ',\n"name":"' + row.name + '",\n"age":"' + row.age;
+        myString += '{\n"number":' + row.number + ',\n"day":"' + row.day + '",\n"change":"' + row.change + '",\n"night":"' + row.night;
         myCounter++;
         if (myCounter == rows.length) {
             myString += '"\n}\n';
