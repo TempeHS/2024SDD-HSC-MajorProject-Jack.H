@@ -74,6 +74,11 @@ fetch('./frontEndData.json')
     topNames = localStorage.currentNames.split(",");
     timesPlayed = localStorage.currentTimes - 1;
   }
+  var hi;
+  fetch('frontEndData.json') 
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error fetching JSON:', error));
   addScore(0, "N/A");
 
   function signIn() {
@@ -141,20 +146,31 @@ fetch('./frontEndData.json')
   }
 
   function defineButtons() {
-    const theme1 = document.getElementById("levelCanvas1").getContext("2d");
-    theme1.fillStyle = "green";
-    theme1.fillRect(0, 0, 80, 80);
-    theme1.fillStyle = "yellow";
-    theme1.beginPath();
-    theme1.moveTo(55, 40);
-    theme1.lineTo(70, 70);
-    theme1.lineTo(40, 70);
-    theme1.fill();
-    theme1.fillStyle = "red";
-    theme1.beginPath();
-    theme1.arc(25, 25, 15, 0, 2 * Math.PI);
-    theme1.fill();
-    theme1.strokeStyle = "black";
-    theme1.lineWidth = 4.0;
-    theme1.strokeRect(0, 0, 80, 80);
+    var time = new Date();
+    if (time.getHours() >= 10 && time.getHours() <= 16) {
+      time = 0;
+    } else if (time.getHours() <= 4 || time.getHours() >= 20) {
+      time = 11;
+    } else {
+      time = 5;
+    }
+    console.log(time);
+    for (let i = 1; i < 7; i++) {
+      const theme = document.getElementById("levelCanvas" + i).getContext("2d");
+      theme.fillStyle = "green";
+      theme.fillRect(0, 0, 80, 80);
+      theme.fillStyle = "yellow";
+      theme.beginPath();
+      theme.moveTo(55, 40);
+      theme.lineTo(70, 70);
+      theme.lineTo(40, 70);
+      theme.fill();
+      theme.fillStyle = "red";
+      theme.beginPath();
+      theme.arc(25, 25, 15, 0, 2 * Math.PI);
+      theme.fill();
+      theme.strokeStyle = "black";
+      theme.lineWidth = 4.0;
+      theme.strokeRect(0, 0, 80, 80);
+    }
   }
