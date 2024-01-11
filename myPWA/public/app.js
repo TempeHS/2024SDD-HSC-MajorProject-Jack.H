@@ -74,11 +74,6 @@ fetch('./frontEndData.json')
     topNames = localStorage.currentNames.split(",");
     timesPlayed = localStorage.currentTimes - 1;
   }
-  var hi;
-  fetch('frontEndData.json') 
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error fetching JSON:', error));
   addScore(0, "N/A");
 
   function signIn() {
@@ -109,7 +104,7 @@ fetch('./frontEndData.json')
       document.getElementById("tutorialPage").style.display = "block";
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "block";
-      defineButtons();
+      getThemes();
     }
   }
 
@@ -145,27 +140,41 @@ fetch('./frontEndData.json')
     localStorage.currentNames = topNames.join();
   }
 
-  function defineButtons() {
+  function getThemes() {
+    fetch('frontEndData.json') 
+    .then(response => response.json())
+    .then(data => defineButtons(data))
+    .catch(error => console.error('Error fetching JSON:', error));
+  }
+
+  function defineButtons(levels) {
     var time = new Date();
+    var currentTheme;
     if (time.getHours() >= 10 && time.getHours() <= 16) {
-      time = 0;
+      time = "day";
     } else if (time.getHours() <= 4 || time.getHours() >= 20) {
-      time = 11;
+      time = "night";
     } else {
-      time = 5;
+      time = "change";
     }
-    console.log(time);
-    for (let i = 1; i < 7; i++) {
-      const theme = document.getElementById("levelCanvas" + i).getContext("2d");
-      theme.fillStyle = "green";
+    for (let i = 0; i < 6; i++) {
+      const theme = document.getElementById("levelCanvas" + (i+1)).getContext("2d");
+      if (time == "day") {
+        currentTheme = levels[i].day;
+      } else if (time == "night") {
+        currentTheme = levels[i].night;
+      } else {
+        currentTheme = levels[i].change;
+      }
+      theme.fillStyle = "#" + currentTheme.substr(0, 6);
       theme.fillRect(0, 0, 80, 80);
-      theme.fillStyle = "yellow";
+      theme.fillStyle = "#" + currentTheme.substr(12, 6);
       theme.beginPath();
       theme.moveTo(55, 40);
       theme.lineTo(70, 70);
       theme.lineTo(40, 70);
       theme.fill();
-      theme.fillStyle = "red";
+      theme.fillStyle = "#" + currentTheme.substr(6, 6);
       theme.beginPath();
       theme.arc(25, 25, 15, 0, 2 * Math.PI);
       theme.fill();
