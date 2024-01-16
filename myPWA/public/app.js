@@ -110,6 +110,11 @@ fetch('./frontEndData.json')
       document.getElementById("tutorialPage").style.display = "block";
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "block";
+      if (ballCoulor == "default") {
+        document.getElementById("ballCoulor").value = "#000000";
+      } else {
+        document.getElementById("ballCoulor").value = ballCoulor;
+      }
       getThemes(0);
     }
   }
