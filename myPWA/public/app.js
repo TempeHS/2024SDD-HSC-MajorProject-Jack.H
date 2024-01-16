@@ -104,7 +104,7 @@ fetch('./frontEndData.json')
       document.getElementById("tutorialPage").style.display = "block";
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "block";
-      getThemes();
+      getThemes(0);
     }
   }
 
@@ -140,11 +140,18 @@ fetch('./frontEndData.json')
     localStorage.currentNames = topNames.join();
   }
 
-  function getThemes() {
-    fetch('frontEndData.json') 
+  function getThemes(send) {
+    if (send == 0) {
+      fetch('frontEndData.json') 
     .then(response => response.json())
     .then(data => defineButtons(data))
     .catch(error => console.error('Error fetching JSON:', error));
+    } else {
+      fetch('frontEndData.json') 
+    .then(response => response.json())
+    .then(data => setTheme(data, send))
+    .catch(error => console.error('Error fetching JSON:', error));
+    }
   }
 
   function defineButtons(levels) {
@@ -181,5 +188,27 @@ fetch('./frontEndData.json')
       theme.strokeStyle = "black";
       theme.lineWidth = 4.0;
       theme.strokeRect(0, 0, 80, 80);
+    }
+  }
+
+  function setTheme(levels, id) {
+    id --;
+    var time = new Date();
+    var currentTheme;
+    var cssClass;
+    if (time.getHours() >= 10 && time.getHours() <= 16) {
+      currentTheme = levels[id].day;
+    } else if (time.getHours() <= 4 || time.getHours() >= 20) {
+      currentTheme = levels[id].night;
+    } else {
+      currentTheme = levels[id].change;
+    }
+    cssClass = document.querySelectorAll('*');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(0, 6);
+    }
+    cssClass = document.querySelectorAll('.homeButton');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(12, 6);
     }
   }

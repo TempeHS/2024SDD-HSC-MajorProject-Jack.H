@@ -42,7 +42,7 @@
       </div>
       <p class="scoreText" id="attemptCount">Total Attempts: 0</p>
     </main>
-    <main id="tutorialPage" class="otherPage">
+    <main id="tutorialPage" class="otherPage" style="position: fixed">
       <button class="backButton" onclick="homescreen('tutorial')"><img class="backButton" src="icons/back_arrow.png"></button><br><br><br><br>
       <p class="tiltText">Tilt the phone to play!</p>
       <img src="icons/tilt-tutorial.png" class="tutorialImage">
@@ -55,12 +55,12 @@
       <button class="backButton" onclick="homescreen('settings')"><img class="backButton" src="icons/back_arrow.png"></button><br><br><br><br><br>
       <p class="scoreText" style="font-size: 35px;">Ball Coulor: <input type="color" class="ballCoulor" id="ballCoulor"></p><br><br>
       <p class="scoreText" style="font-size: 35px;">Level Theme:</p><br><br>
-      <button class="themeButton"><canvas id="levelCanvas1"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <button class="themeButton"><canvas id="levelCanvas2"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <button class="themeButton"><canvas id="levelCanvas3"></canvas></button><br>
-      <button class="themeButton"><canvas id="levelCanvas4"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <button class="themeButton"><canvas id="levelCanvas5"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <button class="themeButton"><canvas id="levelCanvas6"></canvas></button>
+      <button class="themeButton" onclick="getThemes(1)"><canvas id="levelCanvas1"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <button class="themeButton" onclick="getThemes(2)"><canvas id="levelCanvas2"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <button class="themeButton" onclick="getThemes(3)"><canvas id="levelCanvas3"></canvas></button><br>
+      <button class="themeButton" onclick="getThemes(4)"><canvas id="levelCanvas4"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <button class="themeButton" onclick="getThemes(5)"><canvas id="levelCanvas5"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <button class="themeButton" onclick="getThemes(6)"><canvas id="levelCanvas6"></canvas></button>
     </main>
     <script src="app.js"></script>
   </body>
