@@ -167,6 +167,8 @@ nav h1 {
     border: none;
     margin-right: 2%;
     margin-top: -17%;
+    filter: invert(0);
+    background-color: green;
   }
 
   .xButton:active {
@@ -232,20 +234,6 @@ nav h1 {
     text-decoration-line: underline;
   }
 
-  .test {
-    position: fixed;
-    width: 60px;
-    height: 20px;
-    left: 0px;
-  }
-
-  .testButton {
-    position: fixed;
-    width: 60px;
-    height: 20px;
-    left: 60px;
-  }
-
   .otherPage {
     display: none;
   }
@@ -267,6 +255,7 @@ nav h1 {
     border-color: black;
     top: 60px;
     right: 10px;
+    background: white;
   }
 
   .ballCoulor {

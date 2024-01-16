@@ -68,6 +68,7 @@ fetch('./frontEndData.json')
   var topScores = [ 0, 0, 0, 0, 0 ];
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
   var timesPlayed = -1;
+  var currentId = 1;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -75,6 +76,7 @@ fetch('./frontEndData.json')
     timesPlayed = localStorage.currentTimes - 1;
   }
   addScore(0, "N/A");
+  getThemes(currentId);
 
   function signIn() {
     document.getElementById("namePage").style.display = "block";
@@ -97,6 +99,7 @@ fetch('./frontEndData.json')
   }
 
   function outofhome(page) {
+    getThemes(currentId);
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
@@ -109,6 +112,7 @@ fetch('./frontEndData.json')
   }
 
   function homescreen(page) {
+    getThemes(currentId);
     document.getElementById("homescreen").style.display = "block";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "none";
@@ -192,6 +196,7 @@ fetch('./frontEndData.json')
   }
 
   function setTheme(levels, id) {
+    currentId = id;
     id --;
     var time = new Date();
     var currentTheme;
@@ -203,12 +208,69 @@ fetch('./frontEndData.json')
     } else {
       currentTheme = levels[id].change;
     }
+
     cssClass = document.querySelectorAll('*');
     for(var i=0; i<cssClass.length; i++) {
       cssClass[i].style.backgroundColor = "#" + currentTheme.substr(0, 6);
+      if (id == 2 || id > 3) {
+        cssClass[i].style.color = "white";
+      } else {
+        cssClass[i].style.color = "black";
+      }
     }
+
     cssClass = document.querySelectorAll('.homeButton');
     for(var i=0; i<cssClass.length; i++) {
       cssClass[i].style.backgroundColor = "#" + currentTheme.substr(12, 6);
+      if (id == 1) {
+        cssClass[i].style.color = "white";
+      } else if (id == 2 || id == 5) {
+        cssClass[i].style.color = "black";
+      }
+    }
+
+    cssClass = document.querySelectorAll('.blocker');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "black";
+    }
+
+    if (id == 5) {
+      cssClass = document.querySelectorAll('.tutorialImage');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].style.backgroundColor = "white";
+      }
+      cssClass = document.querySelectorAll('.xImage');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/x_button_invert.png";
+      }
+      cssClass = document.querySelectorAll('.backButton');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/back_arrow_invert.png";
+      }
+      cssClass = document.querySelectorAll('.settings');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/settings_invert.png";
+      }
+      cssClass = document.querySelectorAll('.signIn');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/signIn_invert.png";
+      }
+    } else {
+      cssClass = document.querySelectorAll('.xImage');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/x_button.png";
+      }
+      cssClass = document.querySelectorAll('.backButton');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/back_arrow.png";
+      }
+      cssClass = document.querySelectorAll('.settings');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/settings.png";
+      }
+      cssClass = document.querySelectorAll('.signIn');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/signIn.png";
+      }
     }
   }
