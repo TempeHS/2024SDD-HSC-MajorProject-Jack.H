@@ -249,7 +249,7 @@ nav h1 {
   .tutorialImage {
     width: 200px;
     height: 200px;
-    position: fixed;
+    position: absolute;
     border-style: solid;
     border-radius: 3em;
     border-color: black;
