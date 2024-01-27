@@ -116,6 +116,8 @@ fetch('./frontEndData.json')
         document.getElementById("ballCoulor").value = ballCoulor;
       }
       getThemes(0);
+    } else if (page == "gameplay") {
+      document.getElementById("gameplay").style.display = "block";
     }
   }
 
@@ -258,7 +260,7 @@ fetch('./frontEndData.json')
       cssClass[i].style.backgroundColor = "black";
     }
 
-    if (id == 5) {
+    if (id == 5 || id == 2) {
       cssClass = document.querySelectorAll('.tutorialImage');
       for(var i=0; i<cssClass.length; i++) {
         cssClass[i].style.backgroundColor = "white";
@@ -279,6 +281,10 @@ fetch('./frontEndData.json')
       for(var i=0; i<cssClass.length; i++) {
         cssClass[i].src = "icons/signIn_invert.png";
       }
+      cssClass = document.querySelectorAll('.pause');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/pause_invert.png";
+      }
     } else {
       cssClass = document.querySelectorAll('.xImage');
       for(var i=0; i<cssClass.length; i++) {
@@ -295,6 +301,10 @@ fetch('./frontEndData.json')
       cssClass = document.querySelectorAll('.signIn');
       for(var i=0; i<cssClass.length; i++) {
         cssClass[i].src = "icons/signIn.png";
+      }
+      cssClass = document.querySelectorAll('.pause');
+      for(var i=0; i<cssClass.length; i++) {
+        cssClass[i].src = "icons/pause.png";
       }
     }
   }

@@ -278,3 +278,18 @@ nav h1 {
     border-radius: 15%;
     color: black;
   }
+
+  .pause {
+    position: fixed;
+    width: 55px;
+    height: 65px;
+    top: 10px;
+    right: 10px;
+    border: none;
+  }
+
+  .pause:active {
+    transform: scale(1.05);
+    top: 4.5px;
+    right: 4.5px;
+  }

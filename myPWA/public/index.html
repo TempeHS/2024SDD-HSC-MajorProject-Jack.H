@@ -22,7 +22,7 @@
   <body>
     <main id="homescreen">
       <div class='title'>Tilt Rush</div><br>
-      <button class="homeButton">Play</button><br><br><br><br>
+      <button class="homeButton" onclick="outofhome('gameplay')">Play</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('tutorial')">Tutorial</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('stats')">Stats</button><br><br><br>
       <button class="settings" onclick="outofhome('settings')"><img class="settings" src="icons/settings.png"></button>
@@ -62,6 +62,9 @@
       <button class="themeButton" onclick="getThemes(4)"><canvas id="levelCanvas4"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <button class="themeButton" onclick="getThemes(5)"><canvas id="levelCanvas5"></canvas></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <button class="themeButton" onclick="getThemes(6)"><canvas id="levelCanvas6"></canvas></button>
+    </main>
+    <main id="gameplay" class="otherPage">
+      <button class="pause"><img src="icons/pause.png" class="pause"></button>
     </main>
     <script src="app.js"></script>
   </body>
