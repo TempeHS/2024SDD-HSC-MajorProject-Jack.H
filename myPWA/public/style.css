@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: lightgreen;
+  background-color: black;
 }
 body {
   background: #fdfdfd;
@@ -100,7 +100,7 @@ nav h1 {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 220px;
     height: 80px;
-    background-color: burlywood;
+    background-color: black;
     border-radius: 15%;
     color: black;
   }

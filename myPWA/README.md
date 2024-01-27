@@ -10,7 +10,7 @@
 * Player can't move past screen borders
 * Coulors are what is chosen
 * Score display
-* Loading app doesn't start with default coulors
+* ~~Loading app doesn't start with default coulors~~
 # Increment (what must be finished)
 * The player is able to move the ball
 * The player is affected by screen boundaries
