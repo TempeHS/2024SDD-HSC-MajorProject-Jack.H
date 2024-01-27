@@ -69,7 +69,7 @@ fetch('./frontEndData.json')
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
   var timesPlayed = -1;
   var currentId = 1;
-  var ballCoulor = "default";
+  var ballCoulor;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -118,6 +118,7 @@ fetch('./frontEndData.json')
       getThemes(0);
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
+      generateGraphics();
     }
   }
 
@@ -167,7 +168,7 @@ fetch('./frontEndData.json')
     } else if (send == 7) {
       fetch('frontEndData.json') 
     .then(response => response.json())
-    .then(data => setBall(true))
+    .then(data => setBall(true, data))
     .catch(error => console.error('Error fetching JSON:', error));
     } else {
       fetch('frontEndData.json') 
@@ -221,6 +222,7 @@ fetch('./frontEndData.json')
     var time = new Date();
     var currentTheme;
     var cssClass;
+    getThemes(7);
     if (time.getHours() >= 10 && time.getHours() <= 16) {
       currentTheme = levels[id].day;
     } else if (time.getHours() <= 4 || time.getHours() >= 20) {
@@ -313,11 +315,21 @@ fetch('./frontEndData.json')
     }
   }
 
-  function setBall(original) {
+  function setBall(original, info) {
     ballCoulor = document.getElementById("ballCoulor").value;
     if (original == true) {
-      ballCoulor = "default";
+      var time = new Date();
+      var currentTime;
+      if (time.getHours() >= 10 && time.getHours() <= 16) {
+        currentTime = info[currentId-1].day;
+      } else if (time.getHours() <= 4 || time.getHours() >= 20) {
+        currentTime = info[currentId-1].night;
+      } else {
+        currentTime = info[currentId-1].change;
+      }
+      ballCoulor = "#" + currentTime.substr(6, 6);
     }
+    console.log(ballCoulor);
     localStorage.currentBallCoulor = ballCoulor;
   }
 
@@ -329,4 +341,13 @@ fetch('./frontEndData.json')
   function gameFromPause() {
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
+  }
+
+  function generateGraphics() {
+    const game = document.getElementById("graphics").getContext("2D");
+
+    game.fillStyle = ballCoulor;
+    game.beginPath();
+    game.arc(25, 25, 15, 0, 2 * Math.PI);
+    game.fill();
   }
