@@ -64,7 +64,12 @@
       <button class="themeButton" onclick="getThemes(6)"><canvas id="levelCanvas6"></canvas></button>
     </main>
     <main id="gameplay" class="otherPage">
-      <button class="pause"><img src="icons/pause.png" class="pause"></button>
+      <button class="pause" onclick="pauseMenu()"><img src="icons/pause.png" class="pause"></button>
+      <div class="blocker" id="gameplayBlocker"></div>
+      <div class="namePage" id="pausePage">
+        <br><br><button class="homeButton" onclick="gameFromPause()">Resume</button><br><br><br>
+        <button class="homeButton" onclick="homescreen('gameplay')">Quit</button>
+      </div>
     </main>
     <script src="app.js"></script>
   </body>

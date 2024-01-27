@@ -130,6 +130,10 @@ fetch('./frontEndData.json')
       document.getElementById("tutorialPage").style.display = "none";
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "none"; 
+    } else if (page == "gameplay") {
+      document.getElementById("gameplay").style.display = "none";  
+      document.getElementById("gameplayBlocker").style.display = "none"; 
+      document.getElementById("pausePage").style.display = "none"; 
     }
   }
 
@@ -315,4 +319,14 @@ fetch('./frontEndData.json')
       ballCoulor = "default";
     }
     localStorage.currentBallCoulor = ballCoulor;
+  }
+
+  function pauseMenu() {
+    document.getElementById("gameplayBlocker").style.display = "block";
+    document.getElementById("pausePage").style.display = "block";
+  }
+  
+  function gameFromPause() {
+    document.getElementById("gameplayBlocker").style.display = "none";
+    document.getElementById("pausePage").style.display = "none";
   }
