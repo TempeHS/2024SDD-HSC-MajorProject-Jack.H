@@ -1,15 +1,15 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* Play button opens screen
-* Pause button
-* Pause menu
-* Resume button
-* Quit button
+* ~~Play button opens screen~~
+* ~~Pause button~~
+* ~~Pause menu~~
+* ~~Resume button~~
+* ~~Quit button~~
 * Generates player
 * Player can move
 * Player can't move past screen borders
 * Coulors are what is chosen
-* Score display
+* ~~Score display~~
 * ~~Loading app doesn't start with default coulors~~
 # Increment (what must be finished)
 * The player is able to move the ball

@@ -293,3 +293,10 @@ nav h1 {
     top: 4.5px;
     right: 4.5px;
   }
+
+  .scoreDisplay {
+    float: left;
+    margin-left: 3%;
+    margin-top: 1%;
+    font-size: 31px;
+  }
