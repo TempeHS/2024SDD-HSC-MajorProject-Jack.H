@@ -299,9 +299,12 @@ nav h1 {
     margin-left: 3%;
     margin-top: 1%;
     font-size: 31px;
+    position: fixed;
+    background-color: transparent;
   }
 
   .graphics {
-    width: 100px;
-    height: 100px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
   }

@@ -1,69 +1,3 @@
-/*let result = ""; 
-
-fetch('./frontEndData.json') 
-
-  .then(function (response) { 
-
-    return response.json(); 
-
-  }) 
-
-  .then(function (data) { 
-
-    appendData(data); 
-
-  }) 
-
-  .catch(function (err) { 
-
-    console.log('error: ' + err); 
-
-  }); 
-
-  function appendData(data) { 
-
-    data.forEach(({ nesaID, name, age } = rows) => { 
-
-      result += ` 
-
-       <div class="card"> 
-
-            <img class="card-image" src="https://windsorpreschool.com/teachers/generic-profile-image-7" alt=""/> 
-
-            <h1 class="card-name">${name}</h1> 
-
-            <p class="card-about">${age}</p> 
-
-            <a class="card-link" ${nesaID}</a> 
-
-        </div> 
-
-       `; 
-
-    }); 
-
-    document.querySelector(".container").innerHTML = result; 
-
-  } 
-
-   
-
-  if ("serviceWorker" in navigator) { 
-
-    window.addEventListener("load", function () { 
-
-      navigator.serviceWorker 
-
-        .register("/serviceWorker.js") 
-
-        .then((res) => console.log("service worker registered")) 
-
-        .catch((err) => console.log("service worker not registered", err)); 
-
-    }); 
-
-  } */
-
   var username = "Default User";
   var topScores = [ 0, 0, 0, 0, 0 ];
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
@@ -266,7 +200,17 @@ fetch('./frontEndData.json')
       cssClass[i].style.backgroundColor = "black";
     }
 
-    if (id == 5 || id == 2) {
+    cssClass = document.querySelectorAll('.scoreDisplay');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
+    cssClass = document.querySelectorAll('.pause');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
+    if (id == 5) {
       cssClass = document.querySelectorAll('.tutorialImage');
       for(var i=0; i<cssClass.length; i++) {
         cssClass[i].style.backgroundColor = "white";
@@ -329,7 +273,6 @@ fetch('./frontEndData.json')
       }
       ballCoulor = "#" + currentTime.substr(6, 6);
     }
-    console.log(ballCoulor);
     localStorage.currentBallCoulor = ballCoulor;
   }
 
@@ -344,10 +287,12 @@ fetch('./frontEndData.json')
   }
 
   function generateGraphics() {
-    const game = document.getElementById("graphics").getContext("2D");
-
+    const canvas = document.getElementById("graphics");
+    const game = canvas.getContext("2d");
+    game.canvas.width = window.innerWidth;
+    game.canvas.height = window.innerHeight;
     game.fillStyle = ballCoulor;
     game.beginPath();
-    game.arc(25, 25, 15, 0, 2 * Math.PI);
+    game.arc(50, 50, 50, 0, 2 * Math.PI);
     game.fill();
   }
