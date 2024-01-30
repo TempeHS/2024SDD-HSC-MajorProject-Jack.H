@@ -293,6 +293,10 @@
     game.canvas.height = window.innerHeight;
     game.fillStyle = ballCoulor;
     game.beginPath();
-    game.arc(50, 50, 50, 0, 2 * Math.PI);
+    game.arc(random(50, 324), random(50, 611), 50, 0, 2 * Math.PI);
     game.fill();
+  }
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
   }
