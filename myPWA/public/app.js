@@ -4,6 +4,10 @@
   var timesPlayed = -1;
   var currentId = 1;
   var ballCoulor;
+  var gameOn = false;
+  var defaultBeta;
+  console.log(defaultBeta);
+  var defaultGamma;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -37,6 +41,7 @@
 
   function outofhome(page) {
     getThemes(currentId);
+    console.log(defaultBeta);
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
@@ -53,6 +58,7 @@
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
       generateGraphics();
+      gameOn = true;
     }
   }
 
@@ -69,6 +75,7 @@
       document.getElementById("gameplay").style.display = "none";  
       document.getElementById("gameplayBlocker").style.display = "none"; 
       document.getElementById("pausePage").style.display = "none"; 
+      gameOn = false;
     }
   }
 
@@ -300,3 +307,12 @@
   function random(min, max) {
     return Math.random() * (max - min) + min;
   }
+
+  ondeviceorientation = (event) => {
+    if (gameOn) {
+      document.getElementById("scoreDisplay").innerHTML = "Orientation: " + event.beta;
+    } else {
+      defaultBeta = event.beta;
+      defaultGamma = event.gamma;
+    }
+  };
