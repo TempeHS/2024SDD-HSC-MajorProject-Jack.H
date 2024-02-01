@@ -1,12 +1,11 @@
   var username = "Default User";
   var topScores = [ 0, 0, 0, 0, 0 ];
-  var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"]
+  var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"];
   var timesPlayed = -1;
   var currentId = 1;
   var ballCoulor;
   var gameOn = false;
   var defaultBeta;
-  console.log(defaultBeta);
   var defaultGamma;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
@@ -41,7 +40,6 @@
 
   function outofhome(page) {
     getThemes(currentId);
-    console.log(defaultBeta);
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
@@ -300,7 +298,7 @@
     game.canvas.height = window.innerHeight;
     game.fillStyle = ballCoulor;
     game.beginPath();
-    game.arc(random(50, 324), random(50, 611), 50, 0, 2 * Math.PI);
+    game.arc(random(50, (window.innerWidth-51)), random(50, (window.innerHeight-55)), 50, 0, 2 * Math.PI);
     game.fill();
   }
 
@@ -309,8 +307,8 @@
   }
 
   ondeviceorientation = (event) => {
-    if (gameOn) {
-      document.getElementById("scoreDisplay").innerHTML = "Orientation: " + event.beta;
+    if (gameOn && defaultBeta != undefined) {
+      //document.getElementById("scoreDisplay").innerHTML = "Orientation: " + event.beta;
     } else {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
