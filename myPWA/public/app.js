@@ -17,7 +17,6 @@
   }
   addScore(0, "N/A");
   getThemes(currentId);
-  requestDeviceOrientation();
 
   function signIn() {
     document.getElementById("namePage").style.display = "block";
