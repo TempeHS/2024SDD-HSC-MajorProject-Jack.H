@@ -17,6 +17,7 @@
   }
   addScore(0, "N/A");
   getThemes(currentId);
+  requestDeviceOrientation();
 
   function signIn() {
     document.getElementById("namePage").style.display = "block";
@@ -307,7 +308,6 @@
   }
 
   ondeviceorientation = (event) => {
-    requestDeviceOrientation();
     if (gameOn && defaultBeta != undefined) {
       document.getElementById("scoreDisplay").innerHTML = "Orientation: " + event.beta;
     } else {
