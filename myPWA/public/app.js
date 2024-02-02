@@ -8,6 +8,10 @@
   var gameOn = false;
   var defaultBeta;
   var defaultGamma;
+  var xMomentum = 0;
+  var yMomentum = 0;
+  var xBall = 80;
+  var yBall = 100;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -312,7 +316,7 @@
 
   ondeviceorientation = (event) => {
     if (gameOn && defaultBeta != undefined) {
-
+      generateMomentum(defaultGamma - event.gamma, defaultBeta - event.beta);
     } else {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
@@ -343,4 +347,27 @@
     game.beginPath();
     game.arc(80, 100, 50, 0, 2 * Math.PI);
     game.fill();
+    window.requestAnimationFrame(generateFrame);
+  }
+
+  function generateMomentum(x, y) {
+    xMomentum += x;
+    yMomentum += y;
+    console.log(xMomentum);
+    console.log(yMomentum);
+  }
+
+  function generateFrame() {
+    xBall += xMomentum;
+    yBall += yMomentum;
+    const canvas = document.getElementById("graphics");
+    const game = canvas.getContext("2d");
+    game.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    game.fillStyle = ballCoulor;
+    game.beginPath();
+    game.arc(xBall, yBall, 50, 0, 2 * Math.PI);
+    game.fill();
+    if (gameOn) {
+      window.requestAnimationFrame(generateFrame);
+    }
   }
