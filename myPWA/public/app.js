@@ -200,6 +200,16 @@
       }
     }
 
+    cssClass = document.querySelectorAll('.changeButton');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(12, 6);
+      if (id == 1) {
+        cssClass[i].style.color = "white";
+      } else if (id == 2 || id == 5) {
+        cssClass[i].style.color = "black";
+      }
+    }
+
     cssClass = document.querySelectorAll('.blocker');
     for(var i=0; i<cssClass.length; i++) {
       cssClass[i].style.backgroundColor = "black";
@@ -315,7 +325,7 @@
     }
   };
 
-  function requestDeviceOrientation () {
+  function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission()
     .then(permissionState => {

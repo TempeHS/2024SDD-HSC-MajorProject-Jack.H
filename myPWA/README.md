@@ -5,12 +5,13 @@
 * ~~Pause menu~~
 * ~~Resume button~~
 * ~~Quit button~~
-* Generates player
+* ~~Generates player~~
 * Player can move
 * Player can't move past screen borders
 * Coulors are what is chosen
 * ~~Score display~~
 * ~~Loading app doesn't start with default coulors~~
+* Request button for ios orientation information
 # Increment (what must be finished)
 * The player is able to move the ball
 * The player is affected by screen boundaries
