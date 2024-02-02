@@ -4,6 +4,7 @@
   var timesPlayed = -1;
   var currentId = 1;
   var ballCoulor;
+  var ballDefault = false;
   var gameOn = false;
   var defaultBeta;
   var defaultGamma;
@@ -161,7 +162,9 @@
     var time = new Date();
     var currentTheme;
     var cssClass;
-    getThemes(7);
+    if (ballDefault) {
+      getThemes(7);
+    }
     if (time.getHours() >= 10 && time.getHours() <= 16) {
       currentTheme = levels[id].day;
     } else if (time.getHours() <= 4 || time.getHours() >= 20) {
@@ -276,7 +279,9 @@
 
   function setBall(original, info) {
     ballCoulor = document.getElementById("ballCoulor").value;
+    ballDefault = false;
     if (original == true) {
+      ballDefault = true;
       var time = new Date();
       var currentTime;
       if (time.getHours() >= 10 && time.getHours() <= 16) {
@@ -301,24 +306,13 @@
     document.getElementById("pausePage").style.display = "none";
   }
 
-  function generateGraphics() {
-    const canvas = document.getElementById("graphics");
-    const game = canvas.getContext("2d");
-    game.canvas.width = window.innerWidth;
-    game.canvas.height = window.innerHeight;
-    game.fillStyle = ballCoulor;
-    game.beginPath();
-    game.arc(random(50, (window.innerWidth-51)), random(50, (window.innerHeight-55)), 50, 0, 2 * Math.PI);
-    game.fill();
-  }
-
   function random(min, max) {
     return Math.random() * (max - min) + min;
   }
 
   ondeviceorientation = (event) => {
     if (gameOn && defaultBeta != undefined) {
-      document.getElementById("scoreDisplay").innerHTML = "Orientation: " + event.beta;
+
     } else {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
@@ -338,4 +332,15 @@
     // handle regular non iOS 13+ devices
     console.log ("not iOS");
     }
+  }
+
+  function generateGraphics() {
+    const canvas = document.getElementById("graphics");
+    const game = canvas.getContext("2d");
+    game.canvas.width = window.innerWidth;
+    game.canvas.height = window.innerHeight;
+    game.fillStyle = ballCoulor;
+    game.beginPath();
+    game.arc(80, 100, 50, 0, 2 * Math.PI);
+    game.fill();
   }
