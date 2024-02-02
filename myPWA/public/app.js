@@ -351,8 +351,8 @@
   }
 
   function generateMomentum(x, y) {
-    xMomentum += x;
-    yMomentum += y;
+    xMomentum += x / 100;
+    yMomentum += y / 100;
     console.log(xMomentum);
     console.log(yMomentum);
   }
@@ -360,6 +360,16 @@
   function generateFrame() {
     xBall += xMomentum;
     yBall += yMomentum;
+    if (xBall < 50) {
+      xBall = 50;
+    } else if (xBall > window.innerWidth) {
+      xBall = window.innerWidth
+    }
+    if (yBall < 50) {
+      yBall = 50;
+    } else if (yBall > window.innerHeight) {
+      yBall = window.innerWidth;
+    }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
     game.clearRect(0, 0, window.innerWidth, window.innerHeight);
