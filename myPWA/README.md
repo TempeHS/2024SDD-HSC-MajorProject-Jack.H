@@ -12,6 +12,7 @@
 * ~~Score display~~
 * ~~Loading app doesn't start with default coulors~~
 * ~~Request button for ios orientation information~~
+* Make ball bounce off walls
 # Increment (what must be finished)
 * The player is able to move the ball
 * The player is affected by screen boundaries
