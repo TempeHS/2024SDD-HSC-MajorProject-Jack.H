@@ -4,7 +4,6 @@
   var timesPlayed = -1;
   var currentId = 1;
   var ballCoulor;
-  var ballDefault = false;
   var gameOn = false;
   var defaultBeta;
   var defaultGamma;
@@ -112,7 +111,7 @@
     } else if (send == 7) {
       fetch('frontEndData.json') 
     .then(response => response.json())
-    .then(data => setBall(true, data))
+    .then(data => setBall(data))
     .catch(error => console.error('Error fetching JSON:', error));
     } else {
       fetch('frontEndData.json') 
@@ -160,15 +159,15 @@
   }
 
   function setTheme(levels, id) {
+    if (currentId != id) {
+      getThemes(7);
+    }
     currentId = id;
     localStorage.currentCurrentId = currentId;
     id --;
     var time = new Date();
     var currentTheme;
     var cssClass;
-    if (ballDefault) {
-      getThemes(7);
-    }
     if (time.getHours() >= 10 && time.getHours() <= 16) {
       currentTheme = levels[id].day;
     } else if (time.getHours() <= 4 || time.getHours() >= 20) {
@@ -281,11 +280,9 @@
     }
   }
 
-  function setBall(original, info) {
+  function setBall(info) {
     ballCoulor = document.getElementById("ballCoulor").value;
-    ballDefault = false;
-    if (original == true) {
-      ballDefault = true;
+    if (info != "n/a") {
       var time = new Date();
       var currentTime;
       if (time.getHours() >= 10 && time.getHours() <= 16) {
@@ -298,6 +295,7 @@
       ballCoulor = "#" + currentTime.substr(6, 6);
     }
     localStorage.currentBallCoulor = ballCoulor;
+    console.log(ballCoulor);
   }
 
   function pauseMenu() {
@@ -328,7 +326,7 @@
     DeviceOrientationEvent.requestPermission()
     .then(permissionState => {
     if (permissionState === 'granted') {
-    window.addEventListener('deviceorientation', () => {});
+    window.addEventListener('deviceorientation', () => {console.log("hi")});
     }
     })
     .catch(console.error);
@@ -384,17 +382,17 @@
     yBall += yMomentum;
     if (xBall < 50) {
       xBall = 50;
-      xMomentum = -(xMomentum * 0.5);
+      xMomentum = -(xMomentum * 3);
     } else if (xBall > window.innerWidth - 50) {
       xBall = window.innerWidth - 50;
-      xMomentum = -(xMomentum * 0.5);
+      xMomentum = -(xMomentum * 3);
     }
     if (yBall < 50) {
       yBall = 50;
-      yMomentum = -(yMomentum * 0.5);
+      yMomentum = -(yMomentum * 3);
     } else if (yBall > window.innerHeight - 50) {
       yBall = window.innerHeight - 50;
-      yMomentum = -(yMomentum * 0.5);
+      yMomentum = -(yMomentum * 3);
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
