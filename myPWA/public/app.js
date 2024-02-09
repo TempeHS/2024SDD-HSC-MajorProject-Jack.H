@@ -3,7 +3,7 @@
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"];
   var timesPlayed = -1;
   var currentId = 1;
-  var ballCoulor;
+  var ballCoulor = "ff5757";
   var gameOn = false;
   var defaultBeta;
   var defaultGamma;
@@ -382,17 +382,17 @@
     yBall += yMomentum;
     if (xBall < 50) {
       xBall = 50;
-      xMomentum = -(xMomentum * 3);
+      xMomentum = -xMomentum;
     } else if (xBall > window.innerWidth - 50) {
       xBall = window.innerWidth - 50;
-      xMomentum = -(xMomentum * 3);
+      xMomentum = -xMomentum;
     }
     if (yBall < 50) {
       yBall = 50;
-      yMomentum = -(yMomentum * 3);
+      yMomentum = -yMomentum;
     } else if (yBall > window.innerHeight - 50) {
       yBall = window.innerHeight - 50;
-      yMomentum = -(yMomentum * 3);
+      yMomentum = -yMomentum;
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
