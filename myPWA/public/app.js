@@ -351,26 +351,26 @@
   }
 
   function generateMomentum(x, y) {
-    xMomentum -= (x^(1/3)) / 70;
-    yMomentum -= (y^(1/3)) / 70;
+    xMomentum -= (x^(1/3)) / 90;
+    yMomentum -= (y^(1/3)) / 90;
     if (xMomentum > 0) {
-      xMomentum -= 0.03;
+      xMomentum -= 0.06;
       if (xMomentum < 0) {
         xMomentum = 0;
       }
     } else if (xMomentum < 0) {
-      xMomentum += 0.03;
+      xMomentum += 0.06;
       if (xMomentum > 0) {
         xMomentum = 0;
       }
     }
     if (yMomentum > 0) {
-      yMomentum -= 0.03;
+      yMomentum -= 0.06;
       if (yMomentum < 0) {
         yMomentum = 0;
       }
     } else if (yMomentum < 0) {
-      yMomentum += 0.03;
+      yMomentum += 0.06;
       if (yMomentum > 0) {
         yMomentum = 0;
       }
@@ -384,17 +384,17 @@
     yBall += yMomentum;
     if (xBall < 50) {
       xBall = 50;
-      xMomentum = 0;
+      xMomentum = -(xMomentum * 0.5);
     } else if (xBall > window.innerWidth - 50) {
       xBall = window.innerWidth - 50;
-      xMomentum = 0;
+      xMomentum = -(xMomentum * 0.5);
     }
     if (yBall < 50) {
       yBall = 50;
-      yMomentum = 0;
+      yMomentum = -(yMomentum * 0.5);
     } else if (yBall > window.innerHeight - 50) {
       yBall = window.innerHeight - 50;
-      yMomentum = 0;
+      yMomentum = -(yMomentum * 0.5);
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
