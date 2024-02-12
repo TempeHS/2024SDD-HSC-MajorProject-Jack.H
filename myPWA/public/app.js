@@ -11,6 +11,7 @@
   var yMomentum = 0;
   var xBall = 80;
   var yBall = 100;
+  var score = 0;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -60,7 +61,7 @@
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
       gameOn = true;
-      generateGraphics();
+      generateFrame();
     }
   }
 
@@ -82,6 +83,8 @@
       yMomentum = 0;
       xBall = 80;
       yBall = 100;
+      score = 0;
+      document.getElementById("scoreDisplay").innerHTML = "Current Score: 0";
     }
   }
 
@@ -342,21 +345,6 @@
     }
   }
 
-  function generateGraphics() {
-    const canvas = document.getElementById("graphics");
-    const game = canvas.getContext("2d");
-    game.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    game.canvas.width = window.innerWidth;
-    game.canvas.height = window.innerHeight;
-    game.fillStyle = ballCoulor;
-    game.beginPath();
-    game.arc(80, 100, 50, 0, 2 * Math.PI);
-    game.fill();
-    if (gameOn) {
-      window.requestAnimationFrame(generateFrame);
-    }
-  }
-
   function generateMomentum(x, y) {
     xMomentum -= (x^(1/3)) / 100;
     yMomentum -= (y^(1/3)) / 100;
@@ -401,9 +389,18 @@
       yBall = window.innerHeight - 50;
       yMomentum = -(yMomentum * 0.6);
     }
+    if (xBall > window.innerWidth - 98 && yBall > window.innerHeight - 98) {
+      newLevel();
+    }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
+    game.canvas.width = window.innerWidth;
+    game.canvas.height = window.innerHeight;
     game.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    game.fillStyle = "#000000";
+    game.beginPath();
+    game.arc(window.innerWidth - 68, window.innerHeight - 68, 60, 0, 2 * Math.PI);
+    game.fill();
     game.fillStyle = ballCoulor;
     game.beginPath();
     game.arc(xBall, yBall, 50, 0, 2 * Math.PI);
@@ -411,4 +408,13 @@
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
     }
+  }
+
+  function newLevel() {
+    xBall = 80;
+    yBall = 100;
+    xMomentum = 0;
+    yMomentum = 0;
+    score++;
+    document.getElementById("scoreDisplay").innerHTML = "Current Score: " + score;
   }
