@@ -78,6 +78,8 @@
       document.getElementById("gameplayBlocker").style.display = "none"; 
       document.getElementById("pausePage").style.display = "none"; 
       gameOn = false;
+      xMomentum = 0;
+      yMomentum = 0;
     }
   }
 
@@ -349,32 +351,30 @@
   }
 
   function generateMomentum(x, y) {
-    xMomentum -= (x^(1/3)) / 90;
-    yMomentum -= (y^(1/3)) / 90;
+    xMomentum -= (x^(1/3)) / 100;
+    yMomentum -= (y^(1/3)) / 100;
     if (xMomentum > 0) {
-      xMomentum -= 0.06;
+      xMomentum -= 0.07;
       if (xMomentum < 0) {
         xMomentum = 0;
       }
     } else if (xMomentum < 0) {
-      xMomentum += 0.06;
+      xMomentum += 0.07;
       if (xMomentum > 0) {
         xMomentum = 0;
       }
     }
     if (yMomentum > 0) {
-      yMomentum -= 0.06;
+      yMomentum -= 0.07;
       if (yMomentum < 0) {
         yMomentum = 0;
       }
     } else if (yMomentum < 0) {
-      yMomentum += 0.06;
+      yMomentum += 0.07;
       if (yMomentum > 0) {
         yMomentum = 0;
       }
     }
-    console.log(xMomentum);
-    console.log(yMomentum);
   }
 
   function generateFrame() {
@@ -382,17 +382,17 @@
     yBall += yMomentum;
     if (xBall < 50) {
       xBall = 50;
-      xMomentum = -xMomentum;
+      xMomentum = -(xMomentum * 0.6);
     } else if (xBall > window.innerWidth - 50) {
       xBall = window.innerWidth - 50;
-      xMomentum = -xMomentum;
+      xMomentum = -(xMomentum * 0.6);
     }
     if (yBall < 50) {
       yBall = 50;
-      yMomentum = -yMomentum;
+      yMomentum = -(yMomentum * 0.6);
     } else if (yBall > window.innerHeight - 50) {
       yBall = window.innerHeight - 50;
-      yMomentum = -yMomentum;
+      yMomentum = -(yMomentum * 0.6);
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
