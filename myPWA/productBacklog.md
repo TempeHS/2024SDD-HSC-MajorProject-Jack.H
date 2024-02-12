@@ -15,3 +15,4 @@
 15. Notifications
 16. Music/Sound effects
 17. ~~Local Storage~~
+18. Recalibraton button

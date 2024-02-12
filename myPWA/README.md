@@ -1,24 +1,19 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* ~~Play button opens screen~~
-* ~~Pause button~~
-* ~~Pause menu~~
-* ~~Resume button~~
-* ~~Quit button~~
-* ~~Generates player~~
-* ~~Player can move~~
-* ~~Player can't move past screen borders~~
-* ~~Coulors are what is chosen~~
-* ~~Score display~~
-* ~~Loading app doesn't start with default coulors~~
-* ~~Request button for ios orientation information~~
-* ~~Make ball bounce off walls~~
+* Goal is loaded into the screen
+* Ball interacts with goal
+* Finishing a level does the following:
+    - Loads a new level with the ball and goal in starting positions
+    - Makes the ball and goal slightly smaller
+    - Increases the score by 1
+    - Resets the player's momentum to 0
+* Scores are saved to stats page
+* Recalibration button
 # Increment (what must be finished)
-* ~~The player is able to move the ball~~
-* ~~The player is affected by screen boundaries~~
-* ~~The pause menu functions~~
-* ~~You can go from the home screen to the game~~
-* ~~You can go from the game to the home screen~~
-* ~~Coulors change with settings~~
+* The player can enter the goal
+* The game creates a new level after touching the goal
+* The game makes the player and goal smaller up to a certain point
+* The score is updated correctly
+* The score is saved correctly to the stats page
+* The recalibration button resets the default phone position
 # Sprint Review
-The new features included in this sprint ended up working very well, as the player controlled in an easily understandable way. There was the suggestion of adding a calibration button the play screen in order to not lock the player into a certain angle, which will further improve player experience. The main issue with this sprint was the time taken to complete it, which ended up being longer than I would've like due to me getting sick for a week.
