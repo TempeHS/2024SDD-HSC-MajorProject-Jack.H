@@ -299,7 +299,6 @@
       ballCoulor = "#" + currentTime.substr(6, 6);
     }
     localStorage.currentBallCoulor = ballCoulor;
-    console.log(ballCoulor);
   }
 
   function pauseMenu() {
@@ -333,7 +332,7 @@
     DeviceOrientationEvent.requestPermission()
     .then(permissionState => {
     if (permissionState === 'granted') {
-    window.addEventListener('deviceorientation', () => {console.log("hi")});
+    window.addEventListener('deviceorientation', () => {});
     }
     })
     .catch(console.error);
