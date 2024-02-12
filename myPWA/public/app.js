@@ -59,8 +59,8 @@
       getThemes(0);
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
-      generateGraphics();
       gameOn = true;
+      generateGraphics();
     }
   }
 
@@ -80,6 +80,8 @@
       gameOn = false;
       xMomentum = 0;
       yMomentum = 0;
+      xBall = 80;
+      yBall = 100;
     }
   }
 
@@ -303,11 +305,14 @@
   function pauseMenu() {
     document.getElementById("gameplayBlocker").style.display = "block";
     document.getElementById("pausePage").style.display = "block";
+    gameOn = false;
   }
   
   function gameFromPause() {
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
+    gameOn = true;
+    generateFrame();
   }
 
   function random(min, max) {
@@ -341,13 +346,16 @@
   function generateGraphics() {
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
+    game.clearRect(0, 0, window.innerWidth, window.innerHeight);
     game.canvas.width = window.innerWidth;
     game.canvas.height = window.innerHeight;
     game.fillStyle = ballCoulor;
     game.beginPath();
     game.arc(80, 100, 50, 0, 2 * Math.PI);
     game.fill();
-    window.requestAnimationFrame(generateFrame);
+    if (gameOn) {
+      window.requestAnimationFrame(generateFrame);
+    }
   }
 
   function generateMomentum(x, y) {
