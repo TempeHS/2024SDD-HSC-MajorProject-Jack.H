@@ -1,12 +1,12 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* Goal is loaded into the screen
-* Ball interacts with goal
-* Finishing a level does the following:
-    - Loads a new level with the ball and goal in starting positions
-    - Makes the ball and goal slightly smaller
-    - Increases the score by 1
-    - Resets the player's momentum to 0
+* ~~Goal is loaded into the screen~~
+* ~~Ball interacts with goal~~
+* ~~Finishing a level does the following:~~
+    - ~~Loads a new level with the ball and goal in starting positions~~
+    - ~~Makes the ball and goal slightly smaller~~
+    - ~~Increases the score by 1~~
+    - ~~Resets the player's momentum to 0~~
 * Scores are saved to stats page
 * Recalibration button
 # Increment (what must be finished)

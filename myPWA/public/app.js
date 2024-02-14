@@ -13,6 +13,7 @@
   var yBall = 100;
   var score = 0;
   var size = 50;
+  var win = false;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -348,8 +349,8 @@
   }
 
   function generateMomentum(x, y) {
-    xMomentum -= (x^(1/3)) / 100;
-    yMomentum -= (y^(1/3)) / 100;
+    xMomentum -= (x^(1/3)) / 110;
+    yMomentum -= (y^(1/3)) / 110;
     if (xMomentum > 0) {
       xMomentum -= 0.07;
       if (xMomentum < 0) {
@@ -391,8 +392,9 @@
       yBall = window.innerHeight - 50;
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - 48 - size * 1.2 / 2 && yBall > window.innerHeight - 48 - size * 1.2 / 2) {
+    if (xBall > window.innerWidth - 48 - size * 1.2 / 2 && yBall > window.innerHeight - 48 - size * 1.2 / 2 || win) {
       newLevel();
+      win = false;
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
@@ -401,11 +403,11 @@
     game.clearRect(0, 0, window.innerWidth, window.innerHeight);
     game.fillStyle = "#000000";
     game.beginPath();
-    game.arc(window.innerWidth - 38 - size * 1.2 / 2, window.innerHeight - 38 - size * 1.2 / 2, size * 1.2, 0, 2 * Math.PI);
+    game.arc(window.innerWidth - size * 1.2 - 3, window.innerHeight - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
     game.fill();
     game.fillStyle = ballCoulor;
     game.beginPath();
-    game.arc(xBall, yBall, size, 0, 2 * Math.PI);
+    game.arc(xBall + size - 50, yBall + size - 50, size, 0, 2 * Math.PI);
     game.fill();
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -419,7 +421,7 @@
     yMomentum = 0;
     score++;
     document.getElementById("scoreDisplay").innerHTML = "Current Score: " + score;
-    if (size > 10) {
+    if (size > 20) {
       size -= 1;
     }
   }
