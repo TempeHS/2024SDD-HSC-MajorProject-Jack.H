@@ -68,11 +68,7 @@
       document.getElementById("tutorialPage").style.display = "block";
     } else if (page == "settings") {
       document.getElementById("settingsPage").style.display = "block";
-      if (ballCoulor == "default") {
-        document.getElementById("ballCoulor").value = "#000000";
-      } else {
-        document.getElementById("ballCoulor").value = ballCoulor;
-      }
+      document.getElementById("ballCoulor").value = ballCoulor;
       getThemes(0);
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
@@ -399,7 +395,6 @@
     } else if (yMomentum < -15) {
       yMomentum = -15;
     }
-    console.log(yMomentum);
   }
 
   function generateFrame() {
@@ -408,18 +403,18 @@
     if (xBall < 50) {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
-    } else if (xBall > window.innerWidth - size) {
-      xBall = window.innerWidth - size;
+    } else if (xBall > window.innerWidth - 50 - (size * 2 - 100)) {
+      xBall = window.innerWidth - 50 - (size * 2 - 100);
       xMomentum = -(xMomentum * 0.6);
     }
     if (yBall < 50) {
       yBall = 50;
       yMomentum = -(yMomentum * 0.6);
-    } else if (yBall > window.innerHeight - size) {
-      yBall = window.innerHeight - size;
+    } else if (yBall > window.innerHeight - 50 - (size * 2 - 100)) {
+      yBall = window.innerHeight - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - size * 1.56 && yBall > window.innerHeight - size * 1.56) {
+    if (xBall > window.innerWidth - size * 1.56 && yBall > window.innerHeight - size * 1.56 || win) {
       newLevel();
       win = false;
     }
@@ -429,6 +424,9 @@
     game.canvas.height = window.innerHeight;
     game.clearRect(0, 0, window.innerWidth, window.innerHeight);
     game.fillStyle = "#000000";
+    if (currentId == 6) {
+      game.fillStyle = "#ffffff";
+    }
     game.beginPath();
     game.arc(window.innerWidth - size * 1.2 - 3, window.innerHeight - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
     game.fill();
@@ -451,4 +449,8 @@
     if (size > 20) {
       size -= 1;
     }
+  }
+
+  function setWin() {
+    win = true;
   }
