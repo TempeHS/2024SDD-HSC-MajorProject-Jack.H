@@ -12,6 +12,7 @@
   var xBall = 80;
   var yBall = 100;
   var score = 0;
+  var size = 50;
   if (localStorage.currentUsername != undefined) { 
     username = localStorage.currentUsername;
     topScores = localStorage.currentScores.split(",");
@@ -85,6 +86,7 @@
       yBall = 100;
       score = 0;
       document.getElementById("scoreDisplay").innerHTML = "Current Score: 0";
+      size = 50;
     }
   }
 
@@ -389,7 +391,7 @@
       yBall = window.innerHeight - 50;
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - 98 && yBall > window.innerHeight - 98) {
+    if (xBall > window.innerWidth - 68 - size * 1.2 / 2 && yBall > window.innerHeight - 68 - size * 1.2 / 2) {
       newLevel();
     }
     const canvas = document.getElementById("graphics");
@@ -399,11 +401,11 @@
     game.clearRect(0, 0, window.innerWidth, window.innerHeight);
     game.fillStyle = "#000000";
     game.beginPath();
-    game.arc(window.innerWidth - 68, window.innerHeight - 68, 60, 0, 2 * Math.PI);
+    game.arc(window.innerWidth - 68, window.innerHeight - 68, size * 1.2, 0, 2 * Math.PI);
     game.fill();
     game.fillStyle = ballCoulor;
     game.beginPath();
-    game.arc(xBall, yBall, 50, 0, 2 * Math.PI);
+    game.arc(xBall, yBall, size, 0, 2 * Math.PI);
     game.fill();
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -417,4 +419,7 @@
     yMomentum = 0;
     score++;
     document.getElementById("scoreDisplay").innerHTML = "Current Score: " + score;
+    if (size > 10) {
+      size -= 1;
+    }
   }
