@@ -388,6 +388,18 @@
         yMomentum = 0;
       }
     }
+
+    if (xMomentum > 15) {
+      xMomentum = 15;
+    } else if (xMomentum < -15) {
+      xMomentum = -15;
+    }
+    if (yMomentum > 15) {
+      yMomentum = 15;
+    } else if (yMomentum < -15) {
+      yMomentum = -15;
+    }
+    console.log(yMomentum);
   }
 
   function generateFrame() {
@@ -396,18 +408,18 @@
     if (xBall < 50) {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
-    } else if (xBall > window.innerWidth - 50) {
-      xBall = window.innerWidth - 50;
+    } else if (xBall > window.innerWidth - size) {
+      xBall = window.innerWidth - size;
       xMomentum = -(xMomentum * 0.6);
     }
     if (yBall < 50) {
       yBall = 50;
       yMomentum = -(yMomentum * 0.6);
-    } else if (yBall > window.innerHeight - 50) {
-      yBall = window.innerHeight - 50;
+    } else if (yBall > window.innerHeight - size) {
+      yBall = window.innerHeight - size;
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - 48 - size * 1.2 / 2 && yBall > window.innerHeight - 48 - size * 1.2 / 2 || win) {
+    if (xBall > window.innerWidth - size * 1.56 && yBall > window.innerHeight - size * 1.56) {
       newLevel();
       win = false;
     }
