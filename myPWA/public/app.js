@@ -14,6 +14,8 @@
   var score = 0;
   var size = 50;
   var calibrate = true;
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   addLocalStorage();
   addScore(0, "N/A");
   getThemes(currentId);
@@ -404,31 +406,31 @@
     if (xBall < 50) {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
-    } else if (xBall > window.innerWidth - 50 - (size * 2 - 100)) {
-      xBall = window.innerWidth - 50 - (size * 2 - 100);
+    } else if (xBall > width - 50 - (size * 2 - 100)) {
+      xBall = width - 50 - (size * 2 - 100);
       xMomentum = -(xMomentum * 0.6);
     }
     if (yBall < 50) {
       yBall = 50;
       yMomentum = -(yMomentum * 0.6);
-    } else if (yBall > window.innerHeight - 50 - (size * 2 - 100)) {
-      yBall = window.innerHeight - 50 - (size * 2 - 100);
+    } else if (yBall > height - 50 - (size * 2 - 100)) {
+      yBall = height - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - size * 1.56 && yBall > window.innerHeight - size * 1.56) {
+    if (xBall > width - size * 1.56 && yBall > height - size * 1.56) {
       newLevel();
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
-    game.canvas.width = window.innerWidth;
-    game.canvas.height = window.innerHeight;
-    game.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    game.canvas.width = width;
+    game.canvas.height = height;
+    game.clearRect(0, 0, width, height);
     game.fillStyle = "#000000";
     if (currentId == 6) {
       game.fillStyle = "#ffffff";
     }
     game.beginPath();
-    game.arc(window.innerWidth - size * 1.2 - 3, window.innerHeight - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
+    game.arc(width - size * 1.2 - 3, height - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
     game.fill();
     game.fillStyle = ballCoulor;
     game.beginPath();
