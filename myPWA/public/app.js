@@ -391,7 +391,7 @@
       yBall = window.innerHeight - 50;
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - 68 - size * 1.2 / 2 && yBall > window.innerHeight - 68 - size * 1.2 / 2) {
+    if (xBall > window.innerWidth - 48 - size * 1.2 / 2 && yBall > window.innerHeight - 48 - size * 1.2 / 2) {
       newLevel();
     }
     const canvas = document.getElementById("graphics");
@@ -401,7 +401,7 @@
     game.clearRect(0, 0, window.innerWidth, window.innerHeight);
     game.fillStyle = "#000000";
     game.beginPath();
-    game.arc(window.innerWidth - 68, window.innerHeight - 68, size * 1.2, 0, 2 * Math.PI);
+    game.arc(window.innerWidth - 38 - size * 1.2 / 2, window.innerHeight - 38 - size * 1.2 / 2, size * 1.2, 0, 2 * Math.PI);
     game.fill();
     game.fillStyle = ballCoulor;
     game.beginPath();
