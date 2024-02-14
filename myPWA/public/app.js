@@ -14,16 +14,30 @@
   var score = 0;
   var size = 50;
   var win = false;
-  if (localStorage.currentUsername != undefined) { 
-    username = localStorage.currentUsername;
-    topScores = localStorage.currentScores.split(",");
-    topNames = localStorage.currentNames.split(",");
-    timesPlayed = localStorage.currentTimes - 1;
-    ballCoulor = localStorage.currentBallCoulor;
-    currentId = localStorage.currentCurrentId;
-  }
+  addLocalStorage();
   addScore(0, "N/A");
   getThemes(currentId);
+
+  function addLocalStorage() {
+    if (localStorage.currentUsername != undefined) { 
+      username = localStorage.currentUsername;
+    }
+    if (localStorage.currentScores != undefined) { 
+      topScores = localStorage.currentScores.split(",");
+    }
+    if (localStorage.currentNames != undefined) { 
+      topNames = localStorage.currentNames.split(",");
+    }
+    if (localStorage.currentTimes != undefined) { 
+      timesPlayed = localStorage.currentTimes - 1;
+    }
+    if (localStorage.currentBallCoulor != undefined) { 
+      ballCoulor = localStorage.currentBallCoulor;
+    }
+    if (localStorage.currentCurrentId != undefined) { 
+      currentId = localStorage.currentCurrentId;
+    }
+  }
 
   function signIn() {
     document.getElementById("namePage").style.display = "block";
@@ -79,7 +93,8 @@
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "none";  
       document.getElementById("gameplayBlocker").style.display = "none"; 
-      document.getElementById("pausePage").style.display = "none"; 
+      document.getElementById("pausePage").style.display = "none";
+      addScore(score, username);
       gameOn = false;
       xMomentum = 0;
       yMomentum = 0;
