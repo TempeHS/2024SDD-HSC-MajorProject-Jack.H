@@ -68,11 +68,11 @@
       <canvas class="graphics" id="graphics"></canvas>
       <p class="scoreDisplay" id="scoreDisplay">Current Score: 0</p>
       <button class="pause" onclick="pauseMenu()"><img src="icons/pause.png" class="pause"></button>
-      <button onclick="setWin()" style="position:fixed;">win</button>
       <div class="blocker" id="gameplayBlocker"></div>
-      <div class="namePage" id="pausePage">
-        <br><br><button class="homeButton" onclick="gameFromPause()">Resume</button><br><br><br>
-        <button class="homeButton" onclick="homescreen('gameplay')">Quit</button>
+      <div class="namePage" style="height:330px;" id="pausePage">
+        <br><button class="homeButton" onclick="gameFromPause()">Resume</button><br><br>
+        <button class="homeButton" onclick="homescreen('gameplay')">Quit</button><br><br>
+        <button class="homeButton" onclick="calibrate=true">Recalibrate</button>
       </div>
     </main>
     <script src="app.js"></script>

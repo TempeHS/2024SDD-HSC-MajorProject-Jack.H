@@ -13,7 +13,7 @@
   var yBall = 100;
   var score = 0;
   var size = 50;
-  var win = false;
+  var calibrate = true;
   addLocalStorage();
   addScore(0, "N/A");
   getThemes(currentId);
@@ -336,11 +336,12 @@
   }
 
   ondeviceorientation = (event) => {
-    if (gameOn && defaultBeta != undefined) {
+    if (gameOn && !calibrate) {
       generateMomentum(defaultGamma - event.gamma, defaultBeta - event.beta);
     } else {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
+      calibrate = false;
     }
   };
 
@@ -414,9 +415,8 @@
       yBall = window.innerHeight - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > window.innerWidth - size * 1.56 && yBall > window.innerHeight - size * 1.56 || win) {
+    if (xBall > window.innerWidth - size * 1.56 && yBall > window.innerHeight - size * 1.56) {
       newLevel();
-      win = false;
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
@@ -449,8 +449,4 @@
     if (size > 20) {
       size -= 1;
     }
-  }
-
-  function setWin() {
-    win = true;
   }

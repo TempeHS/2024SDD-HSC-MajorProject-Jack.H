@@ -7,7 +7,7 @@
     - ~~Makes the ball and goal slightly smaller~~
     - ~~Increases the score by 1~~
     - ~~Resets the player's momentum to 0~~
-* Scores are saved to stats page
+* ~~Scores are saved to stats page~~
 * Recalibration button
 # Increment (what must be finished)
 * The player can enter the goal
