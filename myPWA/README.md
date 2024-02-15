@@ -10,10 +10,11 @@
 * ~~Scores are saved to stats page~~
 * ~~Recalibration button~~
 # Increment (what must be finished)
-* The player can enter the goal
-* The game creates a new level after touching the goal
-* The game makes the player and goal smaller up to a certain point
-* The score is updated correctly
-* The score is saved correctly to the stats page
-* The recalibration button resets the default phone position
+* ~~The player can enter the goal~~
+* ~~The game creates a new level after touching the goal~~
+* ~~The game makes the player and goal smaller up to a certain point~~
+* ~~The score is updated correctly~~
+* ~~The score is saved correctly to the stats page~~
+* ~~The recalibration button resets the default phone position~~
 # Sprint Review
+This sprint ended up being quicker to complete than all previous sprints, and well set up the core gameplay so that the obstacles can be added to make the game function like a game.
