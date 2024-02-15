@@ -1,20 +1,17 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* ~~Goal is loaded into the screen~~
-* ~~Ball interacts with goal~~
-* ~~Finishing a level does the following:~~
-    - ~~Loads a new level with the ball and goal in starting positions~~
-    - ~~Makes the ball and goal slightly smaller~~
-    - ~~Increases the score by 1~~
-    - ~~Resets the player's momentum to 0~~
-* ~~Scores are saved to stats page~~
-* ~~Recalibration button~~
+* Diamond obstacle is drawn
+* Wall obstacle is drawn
+* Mine obstacle is drawn
+* Level generates randomly
+* More obstacles are added at higher levels
+* Obstacles interact with player
+* Diamond obstacle gains a moving variant
 # Increment (what must be finished)
-* ~~The player can enter the goal~~
-* ~~The game creates a new level after touching the goal~~
-* ~~The game makes the player and goal smaller up to a certain point~~
-* ~~The score is updated correctly~~
-* ~~The score is saved correctly to the stats page~~
-* ~~The recalibration button resets the default phone position~~
+* Diamond obstacle destroys player and ends their game
+* Wall obstacle prevents players from moving through it
+* Mine obstacle moves the player quickly
+* Level generation is random
+* Levels get harder at higher scores
+* Obstacles get smaller with the player
 # Sprint Review
-This sprint ended up being quicker to complete than all previous sprints, and well set up the core gameplay so that the obstacles can be added to make the game function like a game.
