@@ -143,15 +143,15 @@
       } else {
         currentTheme = levels[i].change;
       }
-      theme.fillStyle = "#" + currentTheme.substr(0, 6);
+      theme.fillStyle = "#" + currentTheme.slice(0, 6);
       theme.fillRect(0, 0, 80, 80);
-      theme.fillStyle = "#" + currentTheme.substr(12, 6);
+      theme.fillStyle = "#" + currentTheme.slice(12, 18);
       theme.beginPath();
       theme.moveTo(55, 40);
       theme.lineTo(70, 70);
       theme.lineTo(40, 70);
       theme.fill();
-      theme.fillStyle = "#" + currentTheme.substr(6, 6);
+      theme.fillStyle = "#" + currentTheme.slice(6, 12);
       theme.beginPath();
       theme.arc(25, 25, 15, 0, 2 * Math.PI);
       theme.fill();
@@ -178,10 +178,10 @@
     } else {
       currentTheme = levels[id].change;
     }
-
+    obstacles = "#" + currentTheme.slice(12, 18);
     cssClass = document.querySelectorAll('*');
     for(var i=0; i<cssClass.length; i++) {
-      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(0, 6);
+      cssClass[i].style.backgroundColor = "#" + currentTheme.slice(0, 6);
       if (id == 2 || id > 3) {
         cssClass[i].style.color = "white";
       } else {
@@ -191,7 +191,7 @@
 
     cssClass = document.querySelectorAll('.homeButton');
     for(var i=0; i<cssClass.length; i++) {
-      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(12, 6);
+      cssClass[i].style.backgroundColor = "#" + currentTheme.slice(12, 18);
       if (id == 1) {
         cssClass[i].style.color = "white";
       } else if (id == 2 || id == 5) {
@@ -201,7 +201,7 @@
 
     cssClass = document.querySelectorAll('.settingsButton');
     for(var i=0; i<cssClass.length; i++) {
-      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(12, 6);
+      cssClass[i].style.backgroundColor = "#" + currentTheme.slice(12, 18);
       if (id == 1) {
         cssClass[i].style.color = "white";
       } else if (id == 2 || id == 5) {
@@ -211,7 +211,7 @@
 
     cssClass = document.querySelectorAll('.changeButton');
     for(var i=0; i<cssClass.length; i++) {
-      cssClass[i].style.backgroundColor = "#" + currentTheme.substr(12, 6);
+      cssClass[i].style.backgroundColor = "#" + currentTheme.slice(12, 18);
       if (id == 1) {
         cssClass[i].style.color = "white";
       } else if (id == 2 || id == 5) {
@@ -295,7 +295,7 @@
       } else {
         currentTime = info[currentId-1].change;
       }
-      ballCoulor = "#" + currentTime.substr(6, 6);
+      ballCoulor = "#" + currentTime.slice(6, 12);
     }
     localStorage.currentBallCoulor = ballCoulor;
   }

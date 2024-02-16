@@ -8,6 +8,8 @@ var yBall = 100;
 var score = 0;
 var size = 50;
 var calibrate = true;
+var obstacles = "#ffffff"
+var diamond = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
 
@@ -21,10 +23,13 @@ function quit() {
     score = 0;
     document.getElementById("scoreDisplay").innerHTML = "Current Score: 0";
     size = 50;
+    diamond = [];
 }
 
 function enter() {
     gameOn = true;
+    score = -1;
+    newLevel();
     generateFrame();
 }
 
@@ -42,7 +47,8 @@ function pauseMenu() {
   }
 
   function random(min, max) {
-    return Math.random() * (max - min) + min;
+    var number = Math.random() * (max - min) + min;
+    return number;
   }
 
   ondeviceorientation = (event) => {
@@ -144,6 +150,11 @@ function pauseMenu() {
     game.beginPath();
     game.arc(xBall + size - 50, yBall + size - 50, size, 0, 2 * Math.PI);
     game.fill();
+    game.fillStyle = obstacles;
+    game.rotate(45 * Math.PI / 180);
+    for (let i=0; i<diamond.length; i++) {
+      game.fillRect(diamond[i].slice(0, 19), diamond[i].slice(20, 39), size * 1.2, size * 1.2);
+    }
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
     }
@@ -159,4 +170,10 @@ function pauseMenu() {
     if (size > 20) {
       size -= 1;
     }
+    for (let i=0; i<random(0, score); i++) {
+      diamond[i] = "" + random(80 + size, width) + random(100 + size, height); 
+    }
+    console.log(diamond[0].length);
+    console.log(diamond[0].slice(0, 18));
+    console.log(diamond[0].slice(19, 38));
   }

@@ -1,6 +1,6 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* Diamond obstacle is drawn
+* ~~Diamond obstacle is drawn~~
 * Wall obstacle is drawn
 * Mine obstacle is drawn
 * Level generates randomly
