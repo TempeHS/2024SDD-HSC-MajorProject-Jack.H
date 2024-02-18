@@ -9,9 +9,10 @@ var score = 0;
 var size = 50;
 var calibrate = true;
 var obstacles = "#ffffff"
-var diamond = [];
+var diamond = ["1,0"];
 const width = window.innerWidth;
 const height = window.innerHeight;
+var win = false;
 
 function quit() {
     addScore(score, username);
@@ -131,8 +132,9 @@ function pauseMenu() {
       yBall = height - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > width - size * 1.56 && yBall > height - size * 1.56) {
+    if (xBall > width - size * 1.56 && yBall > height - size * 1.56 || win) {
       newLevel();
+      win = false;
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
@@ -151,9 +153,13 @@ function pauseMenu() {
     game.arc(xBall + size - 50, yBall + size - 50, size, 0, 2 * Math.PI);
     game.fill();
     game.fillStyle = obstacles;
-    game.rotate(45 * Math.PI / 180);
     for (let i=0; i<diamond.length; i++) {
-      game.fillRect(diamond[i].slice(0, 19), diamond[i].slice(20, 39), size * 1.2, size * 1.2);
+      game.beginPath();
+      game.moveTo(Number(diamond[i].split(",")[0]) + (size * 1.15 / 2), diamond[i].split(",")[1]);
+      game.lineTo(Number(diamond[i].split(",")[0]) + (size * 1.15), Number(diamond[i].split(",")[1]) + (size * 1.15 / 2));
+      game.lineTo(Number(diamond[i].split(",")[0]) + (size * 1.15 / 2), Number(diamond[i].split(",")[1]) + (size * 1.15));
+      game.lineTo(diamond[i].split(",")[0], Number(diamond[i].split(",")[1]) + (size * 1.15 / 2));
+      game.fill();
     }
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -170,10 +176,7 @@ function pauseMenu() {
     if (size > 20) {
       size -= 1;
     }
-    for (let i=0; i<random(0, score); i++) {
-      diamond[i] = "" + random(80 + size, width) + random(100 + size, height); 
+    for (let i=0; i<random(0, Math.ceil(score / 2)); i++) {
+      diamond[i] = random(size + 30, width - size * 1.2 - 3) + "," + random(size + 50, height - size * 1.2 - 8); 
     }
-    console.log(diamond[0].length);
-    console.log(diamond[0].slice(0, 18));
-    console.log(diamond[0].slice(19, 38));
   }
