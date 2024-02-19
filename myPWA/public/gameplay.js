@@ -136,6 +136,12 @@ function pauseMenu() {
       newLevel();
       win = false;
     }
+    for (let i=0; i<diamond.length; i++) {
+      if (!(xBall > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall + size < Number(diamond[i].split(",")[0])) && !(yBall + size < Number(diamond[i].split(",")[1]) || yBall > Number(diamond[i].split(",")[1]) + size * 1.15)) {
+        gameOver();
+        console.log(diamond[i]);
+      }
+    }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
     game.canvas.width = width;
@@ -188,4 +194,9 @@ function pauseMenu() {
         i--;
       }
     }
+  }
+  function gameOver() {
+    gameOn = false;
+    addScore(score, username);
+    document.getElementById("gameplayBlocker").style.display = "block";
   }
