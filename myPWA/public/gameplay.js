@@ -9,7 +9,7 @@ var score = 0;
 var size = 50;
 var calibrate = true;
 var obstacles = "#ffffff"
-var diamond = ["1,0"];
+var diamond = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
 var win = false;
@@ -176,7 +176,16 @@ function pauseMenu() {
     if (size > 20) {
       size -= 1;
     }
-    for (let i=0; i<random(0, Math.ceil(score / 2)); i++) {
-      diamond[i] = random(size + 30, width - size * 1.2 - 3) + "," + random(size + 50, height - size * 1.2 - 8); 
+    diamond = [];
+    for (let i=0; i<random(Math.ceil(score / 20), Math.ceil(score / 2)); i++) {
+      if (i > 19) { 
+        i = Math.ceil(score / 2);
+      }
+      diamond[i] = random(0, width - size) + "," + random(0, height - size);
+      if (diamond[i].split(",")[0] < 80 + size && diamond[i].split(",")[1] < 100 + size) {
+        i--;
+      } else if (diamond[i].split(",")[0] > width - size * 3.4 && diamond[i].split(",")[1] > height - size * 3.4) {
+        i--;
+      }
     }
   }
