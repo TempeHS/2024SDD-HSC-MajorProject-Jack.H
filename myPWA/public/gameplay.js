@@ -171,10 +171,10 @@ function pauseMenu() {
       var wallTemp;
       game.beginPath();
       game.moveTo(wall[i].split(",")[0], wall[i].split(",")[1]);
-      game.lineTo(Number(wall[i].split(",")[0]) + (size * 2 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)), Number(wall[i].split(",")[1]) + (size * 2 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)));
-      wallTemp = Number(wall[i].split(",")[0]) + (size * 2 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) + "," + (Number(wall[i].split(",")[1]) + (size * 2 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180))) + "," + wall[i].split(",")[2];
-      game.lineTo(Number(wallTemp.split(",")[0]) - (size * 0.5 * (Math.cos((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))), Number(wallTemp.split(",")[1]) - (size * 0.5 * (Math.sin((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))));
-      game.lineTo(Number(wall[i].split(",")[0]) - (size * 0.5 * (Math.cos((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))), Number(wall[i].split(",")[1]) - (size * 0.5 * (Math.sin((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))));
+      game.lineTo(Number(wall[i].split(",")[0]) + (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)), Number(wall[i].split(",")[1]) + (size * 3.5 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)));
+      wallTemp = Number(wall[i].split(",")[0]) + (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) + "," + (Number(wall[i].split(",")[1]) + (size * 3.5 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180))) + "," + wall[i].split(",")[2];
+      game.lineTo(Number(wallTemp.split(",")[0]) - (size * 0.9 * (Math.cos((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))), Number(wallTemp.split(",")[1]) - (size * 0.9 * (Math.sin((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))));
+      game.lineTo(Number(wall[i].split(",")[0]) - (size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))), Number(wall[i].split(",")[1]) - (size * 0.9 * (Math.sin((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))));
       game.fill();
     }
     if (gameOn) {
@@ -206,11 +206,13 @@ function pauseMenu() {
     }
 
     wall = [];
-    for (let i=0; i<random(1, 1); i++) {
-      wall[i] = 200 + "," + 100 + "," + random(0, 90);
-      console.log(wall[i]);
-      console.log(Number(wall[i].split(",")[0]) + (size * 2 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)));
-      console.log(Number(wall[i].split(",")[1]) + (size * 2 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)));
+    for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
+      wall[i] = 0 + "," + 0 + "," + random(0, 90);
+      console.log(width);
+      console.log(wall[i].split(",")[2]);
+      console.log(size * 3.5);
+      console.log(width - (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180) - size * 0.5));
+      wall[i] = random(0, width - (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) * 2) + "," + random(0, (size * 3.5 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)) - size * 0.5) + "," + wall[i].split(",")[2];
     }
   }
 
