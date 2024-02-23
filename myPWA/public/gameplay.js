@@ -140,6 +140,7 @@ function pauseMenu() {
     for (let i=0; i<diamond.length; i++) {
       if (!(xBall + size * 0.1 > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall + size * 1.1 < Number(diamond[i].split(",")[0])) && !(yBall + size * 1.1 < Number(diamond[i].split(",")[1]) || yBall + size * 0.1 > Number(diamond[i].split(",")[1]) + size * 1.15)) {
         gameOver();
+        console.log(diamond[i]);
       }
     }
     const canvas = document.getElementById("graphics");
@@ -198,7 +199,7 @@ function pauseMenu() {
         i = Math.ceil(score / 2);
       }
       diamond[i] = random(0, width - size) + "," + random(0, height - size);
-      if (diamond[i].split(",")[0] < 80 + size && diamond[i].split(",")[1] < 100 + size) {
+      if (diamond[i].split(",")[0] < 80 + size * 2.15 && diamond[i].split(",")[1] < 100 + size * 2.15) {
         i--;
       } else if (diamond[i].split(",")[0] > width - size * 3.4 && diamond[i].split(",")[1] > height - size * 3.4) {
         i--;
@@ -207,12 +208,16 @@ function pauseMenu() {
 
     wall = [];
     for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
+      if (i > 10) {
+        i = Math.floor(score / 4);
+      }
       wall[i] = 0 + "," + 0 + "," + random(0, 90);
-      console.log(width);
-      console.log(wall[i].split(",")[2]);
-      console.log(size * 3.5);
-      console.log(width - (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180) - size * 0.5));
-      wall[i] = random(0, width - (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) * 2) + "," + random(0, (size * 3.5 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)) - size * 0.5) + "," + wall[i].split(",")[2];
+      wall[i] = random(0, width - (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) - (size * 0.9 * Math.sin((Number(wall[i].split(",")[2]))) * Math.PI / 180)) + "," + random(0, height - (size * 3.5 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)) - (size * 0.9 * Math.cos((Number(wall[i].split(",")[2]))) * Math.PI / 180)) + "," + wall[i].split(",")[2];
+      if (wall[i].split(",")[0] < 80 + size * 2 && wall[i].split(",")[i] < 100 + size * 2) {
+        i--;
+      } else if (wall[i].split(",")[0] > width - size * 5 && wall[i].split(",")[1] > height - size * 5) {
+        i--;
+      }
     }
   }
 
