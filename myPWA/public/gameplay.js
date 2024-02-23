@@ -10,6 +10,7 @@ var size = 50;
 var calibrate = true;
 var obstacles = "#ffffff"
 var diamond = [];
+var wall = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
 var win = false;
@@ -137,9 +138,8 @@ function pauseMenu() {
       win = false;
     }
     for (let i=0; i<diamond.length; i++) {
-      if (!(xBall > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall + size < Number(diamond[i].split(",")[0])) && !(yBall + size < Number(diamond[i].split(",")[1]) || yBall > Number(diamond[i].split(",")[1]) + size * 1.15)) {
+      if (!(xBall + size * 0.1 > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall + size * 1.1 < Number(diamond[i].split(",")[0])) && !(yBall + size * 1.1 < Number(diamond[i].split(",")[1]) || yBall + size * 0.1 > Number(diamond[i].split(",")[1]) + size * 1.15)) {
         gameOver();
-        console.log(diamond[i]);
       }
     }
     const canvas = document.getElementById("graphics");
@@ -165,6 +165,16 @@ function pauseMenu() {
       game.lineTo(Number(diamond[i].split(",")[0]) + (size * 1.15), Number(diamond[i].split(",")[1]) + (size * 1.15 / 2));
       game.lineTo(Number(diamond[i].split(",")[0]) + (size * 1.15 / 2), Number(diamond[i].split(",")[1]) + (size * 1.15));
       game.lineTo(diamond[i].split(",")[0], Number(diamond[i].split(",")[1]) + (size * 1.15 / 2));
+      game.fill();
+    }
+    for (let i=0; i<wall.length; i++) {
+      var wallTemp;
+      game.beginPath();
+      game.moveTo(wall[i].split(",")[0], wall[i].split(",")[1]);
+      game.lineTo(Number(wall[i].split(",")[0]) + (size * 2 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)), Number(wall[i].split(",")[1]) + (size * 2 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)));
+      wallTemp = Number(wall[i].split(",")[0]) + (size * 2 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) + "," + (Number(wall[i].split(",")[1]) + (size * 2 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180))) + "," + wall[i].split(",")[2];
+      game.lineTo(Number(wallTemp.split(",")[0]) - (size * 0.5 * (Math.cos((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))), Number(wallTemp.split(",")[1]) - (size * 0.5 * (Math.sin((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))));
+      game.lineTo(Number(wall[i].split(",")[0]) - (size * 0.5 * (Math.cos((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))), Number(wall[i].split(",")[1]) - (size * 0.5 * (Math.sin((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))));
       game.fill();
     }
     if (gameOn) {
@@ -194,7 +204,16 @@ function pauseMenu() {
         i--;
       }
     }
+
+    wall = [];
+    for (let i=0; i<random(1, 1); i++) {
+      wall[i] = 200 + "," + 100 + "," + random(0, 90);
+      console.log(wall[i]);
+      console.log(Number(wall[i].split(",")[0]) + (size * 2 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)));
+      console.log(Number(wall[i].split(",")[1]) + (size * 2 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)));
+    }
   }
+
   function gameOver() {
     gameOn = false;
     addScore(score, username);
