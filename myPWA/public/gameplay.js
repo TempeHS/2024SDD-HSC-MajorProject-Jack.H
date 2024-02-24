@@ -138,14 +138,15 @@ function pauseMenu() {
       win = false;
     }
     for (let i=0; i<diamond.length; i++) {
-      if (!(xBall + size * 0.2 > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall + size * 1.8 < Number(diamond[i].split(",")[0])) && !(yBall + size * 1.8 < Number(diamond[i].split(",")[1]) || yBall + size * 0.2 > Number(diamond[i].split(",")[1]) + size * 1.15)) {
+      if (!(xBall - size * 0.2 > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall - size * 1.8 < Number(diamond[i].split(",")[0])) && !(yBall - size * 1.8 < Number(diamond[i].split(",")[1]) || yBall - size * 0.2 > Number(diamond[i].split(",")[1]) + size * 1.15)) {
         gameOver();
         console.log(diamond[i]);
       }
     }
     for (let i=0; i<wall.length; i++) {
-      if (xBall < -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) && xBall + size * 2 > -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall < Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) && yBall + size * 1.8 > Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180)))) {
+      if (xBall < -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) && xBall + size * 2 > -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) + size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall < Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) && yBall + size * 1.8 > Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) + size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180)))) {
         gameOver();
+        console.log(wall[i]);
       }
     }
     const canvas = document.getElementById("graphics");
