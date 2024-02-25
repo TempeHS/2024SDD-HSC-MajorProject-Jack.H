@@ -12,9 +12,10 @@ var obstacles = "#ffffff"
 var diamond = [];
 var wall = [];
 const width = window.innerWidth;
+console.log(width);
 const height = window.innerHeight;
 var win = false;
-
+console.log(Math.tan(90 * Math.PI / 180))
 function quit() {
     addScore(score, username);
     gameOn = false;
@@ -133,22 +134,8 @@ function pauseMenu() {
       yBall = height - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
     }
-    if (xBall > width - size * 1.56 && yBall > height - size * 1.56 || win) {
-      newLevel();
-      win = false;
-    }
-    for (let i=0; i<diamond.length; i++) {
-      if (!(xBall - size * 0.2 > Number(diamond[i].split(",")[0]) + size * 1.15 || xBall - size * 1.8 < Number(diamond[i].split(",")[0])) && !(yBall - size * 1.8 < Number(diamond[i].split(",")[1]) || yBall - size * 0.2 > Number(diamond[i].split(",")[1]) + size * 1.15)) {
-        gameOver();
-        console.log(diamond[i]);
-      }
-    }
-    for (let i=0; i<wall.length; i++) {
-      if (xBall < -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) && xBall + size * 2 > -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) + size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall < Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) && yBall + size * 1.8 > Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) + size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180)))) {
-        gameOver();
-        console.log(wall[i]);
-      }
-    }
+    collision();
+    // xBall < -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) && xBall + size * 2 > -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall < Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) && yBall + size * 1.8 > Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180)))
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d");
     game.canvas.width = width;
@@ -213,7 +200,19 @@ function pauseMenu() {
     }
 
     wall = [];
-    for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
+    for (let i=0; i<random(1, 1); i++) {
+      if (i > 10) {
+        i = Math.floor(score / 4);
+      }
+      wall[i] = 0 + "," + 0 + "," + random(90, 90);
+      wall[i] = 200 + "," + 100 + "," + wall[i].split(",")[2];
+      if (wall[i].split(",")[0] < 80 + size * 2 && wall[i].split(",")[i] < 100 + size * 2) {
+        i--;
+      } else if (wall[i].split(",")[0] > width - size * 5 && wall[i].split(",")[1] > height - size * 5) {
+        i--;
+      }
+    }
+    /*for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
       if (i > 10) {
         i = Math.floor(score / 4);
       }
@@ -224,11 +223,32 @@ function pauseMenu() {
       } else if (wall[i].split(",")[0] > width - size * 5 && wall[i].split(",")[1] > height - size * 5) {
         i--;
       }
-    }
+    }*/
   }
 
   function gameOver() {
     gameOn = false;
     addScore(score, username);
     document.getElementById("gameplayBlocker").style.display = "block";
+  }
+
+  function collision() {
+    if (xBall > width - size * 1.56 && yBall > height - size * 1.56 || win) {
+      newLevel();
+      win = false;
+    }
+    for (let i=0; i<diamond.length; i++) {
+      if (xBall - size * 0.8 < Number(diamond[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diamond[i].split(",")[0]) && yBall + size * 0.8 > Number(diamond[i].split(",")[1]) && yBall - size * 0.8 < Number(diamond[i].split(",")[1]) + size * 1.15) {
+        gameOver();
+        console.log(diamond[i]);
+      }
+    }
+    for (let i=0; i<wall.length; i++) {
+      console.log(Number(wall[i].split(",")[0]) + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 3.5 * Math.abs((yBall-wall[i].split(",")[1])/(wall[i].split(",")[1]-Math.sin(Number(wall[i].split(",")[2]*Math.PI/180))*size*3.5)));
+      if (xBall - size < Number(wall[i].split(",")[0]) + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 3.5 * Math.abs((yBall-wall[i].split(",")[1])/(wall[i].split(",")[1]-Math.sin(Number(wall[i].split(",")[2]*Math.PI/180))*size*3.5)) && xBall + size > Number(wall[i].split(",")[0]) + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 3.5 * Math.abs((yBall-wall[i].split(",")[1])/(wall[i].split(",")[1]-Math.sin(Number(wall[i].split(",")[2]*Math.PI/180))*size*3.5)) - size * 0.9 * Math.sin(wall[i].split(",")[2] * Math.PI / 180)) {
+        //gameOver();
+        console.log(xBall);
+        console.log(wall[i]);
+      }
+    }
   }
