@@ -58,6 +58,7 @@ function pauseMenu() {
     document.getElementById("resume").style.display = "inline";
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
+    document.getElementById("calibration").style.display = "none";
     addScore(score, username);
     size = 50;
     score = -1;
@@ -79,8 +80,10 @@ function pauseMenu() {
     } else {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
-      calibrate = false;
-      document.getElementById("calibration").style.display = "block";
+      if (calibrate = true) {
+        calibrate = false;
+        document.getElementById("calibration").style.display = "block";
+      }
     }
   };
 
@@ -211,7 +214,6 @@ function pauseMenu() {
         game.arc(Number(mine[i].split(",")[0]) + size * 0.75, Number(mine[i].split(",")[1]) + size * 0.75, size * 0.75, 0, 2 * Math.PI);
         game.fill();
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + (Number(mine[i].split(",")[2]) - 1);
-        console.log(Number(mine[i].split(",")[2]));
         if (Number(mine[i].split(",")[2]) < 1) {
           mine.splice(i, 1);
         }
@@ -225,14 +227,14 @@ function pauseMenu() {
       game.lineTo(diaMove[i].split(",")[0], Number(diaMove[i].split(",")[1]) + (size * 1.15 / 2));
       game.fill();
       game.beginPath();
-      console.log(track[i]);
       game.moveTo(track[i].split(",")[0], track[i].split(",")[1]);
       game.lineTo(track[i].split(",")[2], track[i].split(",")[3]);
       game.stroke();
-      if (Math.abs(Number(diaMove[i].split(",")[2])) == 100) {
-        diaMove[i] = diaMove[i].split(",")[0] + "," + diaMove[i].split(",")[1] + "," + (Number(diaMove[i].split(",")[2]) * -1) + "," + diaMove[i].split(",")[3];
+      diaMove[i] = (-((Number(track[i].split(",")[0]) - size * 1.15 / 2) - (Number(track[i].split(",")[2]) - size * 1.15 / 2)) * (Number(diaMove[i].split(",")[2]) / 100) + (Number(track[i].split(",")[0]) - size * 1.15 / 2)) + "," + (-((Number(track[i].split(",")[1]) - size * 1.15 / 2) - (Number(track[i].split(",")[3]) - size * 1.15 / 2)) * (Number(diaMove[i].split(",")[2]) / 100) + (Number(track[i].split(",")[1]) - size * 1.15 / 2)) + "," + (Number(diaMove[i].split(",")[2]) + 0.2 * Number(diaMove[i].split(",")[3])) + "," + diaMove[i].split(",")[3];
+      if (Number(diaMove[i].split(",")[2]) > 100 || Number(diaMove[i].split(",")[2]) < 0) {
+        diaMove[i] = diaMove[i].split(",")[0] + "," + diaMove[i].split(",")[1] + ","+ diaMove[i].split(",")[2] + "," + (Number(diaMove[i].split(",")[3]) * -1);
       }
-      diaMove[i] = ((Number(track[i].split(",")[0]) - Number(track[i].split(",")[2])) * (Number(diaMove[i].split(",")[2]) / 100) + Number(track[i].split(",")[0])) + "," + ((Number(diaMove[i].split(",")[1]) - Number(track[i].split(",")[3])) * (Number(diaMove[i].split(",")[2]) / 100) + Number(track[i].split(",")[1])) + "," + (Number(diaMove[i].split(",")[2]) + 0.01 * Number(diaMove[i].split(",")[3])) + "," + diaMove[i].split(",")[3];
+      console.log(diaMove[i].split(",")[2]);
     }
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -306,21 +308,23 @@ function pauseMenu() {
         i--;
       }
     }
-//Math.floor(score / 25), Math.floor(score / 20)
+
     diaMove = [];
     track = [];
-    for (let i=0; i<random(1, 1); i++) {
-      if (i > 6) { 
-        i = Math.ceil(score / 20);
-      }
-      diaMove[i] = random(0, width - size) + "," + random(0, height - size) + "," + 0 + "," + 1;
-      track[i] = Number(diaMove[i].split(",")[0]) + size * 1.15 / 2 + "," + (Number(diaMove[i].split(",")[1]) + size * 1.15 / 2) + "," + random(0, width - size) + "," + random(0, height - size);
-      if (diaMove[i].split(",")[0] < 80 + size * 3.15 && diaMove[i].split(",")[1] < 100 + size * 3.15) {
-        diaMove.splice(i, 1);
-        i--;
-      } else if (diaMove[i].split(",")[0] > width - size * 3.4 && diaMove[i].split(",")[1] > height - size * 3.4) {
-        diaMove.splice(i, 1);
-        i--;
+    if (score >= 20) {
+      for (let i=0; i<random(Math.floor(score / 20), Math.floor(score / 13)); i++) {
+        if (i > 6) { 
+          i = Math.ceil(score / 20);
+        }
+        diaMove[i] = random(0, width - size) + "," + random(0, height - size) + "," + 0 + "," + 1;
+        track[i] = Number(diaMove[i].split(",")[0]) + size * 1.15 / 2 + "," + (Number(diaMove[i].split(",")[1]) + size * 1.15 / 2) + "," + random(0, width - size) + "," + random(0, height - size);
+        if (diaMove[i].split(",")[0] < 80 + size * 3.15 && diaMove[i].split(",")[1] < 100 + size * 3.15) {
+          diaMove.splice(i, 1);
+          i--;
+        } else if (diaMove[i].split(",")[0] > width - size * 3.4 && diaMove[i].split(",")[1] > height - size * 3.4) {
+          diaMove.splice(i, 1);
+          i--;
+        }
       }
     }
    }
@@ -358,6 +362,12 @@ function pauseMenu() {
         xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 2;
         yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 2;
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
+      }
+    }
+    for (let i=0; i<diaMove.length; i++) {
+      if (xBall - size * 0.8 < Number(diaMove[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diaMove[i].split(",")[0]) && yBall + size * 0.8 > Number(diaMove[i].split(",")[1]) && yBall - size * 0.8 < Number(diaMove[i].split(",")[1]) + size * 1.15) {
+        gameOver();
+        console.log(diaMove[i]);
       }
     }
   }
