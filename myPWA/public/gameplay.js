@@ -80,8 +80,8 @@ function pauseMenu() {
     } else {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
-      if (calibrate = true) {
-        calibrate = false;
+      calibrate = false;
+      if (!gameOn) {
         document.getElementById("calibration").style.display = "block";
       }
     }
@@ -350,11 +350,11 @@ function pauseMenu() {
       }
     }
     for (let i=0; i<wall.length; i++) {
-      //console.log(yBall * (Math.sin(wall[i].split(",")[2] * Math.PI / 180) / Math.cos(wall[i].split(",")[2] * Math.PI / 180)) + Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9 + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9);
-      if (xBall + size > yBall * (Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) / Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)) + Number(wall[i].split(",")[0])) {
-        //gameOver();
+      if (xBall - size < -((yBall - (Number(wall[i].split(",")[1]) + (size * 0.45 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180))) + (Number(wall[i].split(",")[0]) + (size * 0.45 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && xBall + size > -((yBall - Number(wall[i].split(",")[1])) * (Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180))) + Number(wall[i].split(",")[0]) 
+      && yBall - size < -((xBall - (Number(wall[i].split(",")[0]) + (size * 3.5 * Math.cos((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + (Number(wall[i].split(",")[1]) + (size * 3.5 * Math.sin((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) && yBall + size > -((xBall - Number(wall[i].split(",")[0])) * (Math.tan(Number((wall[i].split(",")[2]) + 90) * Math.PI / 180))) + Number(wall[i].split(",")[1])) {
+        gameOver();
         //console.log(xBall + size);
-        //console.log(wall[i]);
+        console.log(wall[i]);
       }
     }
     for (let i=0; i<mine.length; i++) {

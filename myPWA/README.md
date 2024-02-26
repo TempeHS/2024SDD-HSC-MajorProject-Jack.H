@@ -2,11 +2,11 @@
 # Sprint Backlog List of Achievables (changes made)
 * ~~Diamond obstacle is drawn~~
 * ~~Wall obstacle is drawn~~
-* Mine obstacle is drawn
-* Level generates randomly
-* More obstacles are added at higher levels
+* ~~Mine obstacle is drawn~~
+* ~~Level generates randomly~~
+* ~~More obstacles are added at higher levels~~
 * Obstacles interact with player
-* Diamond obstacle gains a moving variant
+* ~~Diamond obstacle gains a moving variant~~
 # Increment (what must be finished)
 * Diamond obstacle destroys player and ends their game
 * Wall obstacle prevents players from moving through it
