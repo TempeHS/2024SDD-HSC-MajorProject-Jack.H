@@ -4,13 +4,14 @@ var defaultGamma;
 var xMomentum = 0;
 var yMomentum = 0;
 var xBall = 80;
-var yBall = 100;
+var yBall = 110;
 var score = 0;
 var size = 50;
 var calibrate = true;
 var obstacles = "#ffffff"
 var diamond = [];
 var wall = [];
+var mine = [];
 const width = window.innerWidth;
 console.log(width);
 const height = window.innerHeight;
@@ -170,6 +171,20 @@ function pauseMenu() {
       game.lineTo(Number(wallTemp.split(",")[0]) - (size * 0.9 * (Math.cos((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))), Number(wallTemp.split(",")[1]) - (size * 0.9 * (Math.sin((Number(wallTemp.split(",")[2]) + 90) * Math.PI / 180))));
       game.lineTo(Number(wall[i].split(",")[0]) - (size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))), Number(wall[i].split(",")[1]) - (size * 0.9 * (Math.sin((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))));
       game.fill();
+      game.beginPath();
+    }
+    var rgb = convertRgb(obstacles);
+    var image = new Image();
+    image.src = "icons/mine.png";
+    for (let i=0; i<mine.length; i++) {
+      game.drawImage(image, mine[i].split(",")[0], mine[i].split(",")[1], size * 1.5, size * 1.5);
+      var img = game.getImageData(mine[i].split(",")[0], mine[i].split(",")[1], size * 1.5, size * 1.5);
+      for (let i=0; i<img.data.length; i+=4) {
+          img.data[i] = rgb.r;
+          img.data[i+1] = rgb.g;
+          img.data[i+2] = rgb.b; 
+      }
+      game.putImageData(img, mine[i].split(",")[0], mine[i].split(",")[1]);
     }
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -178,7 +193,7 @@ function pauseMenu() {
 
   function newLevel() {
     xBall = 80;
-    yBall = 100;
+    yBall = 110;
     xMomentum = 0;
     yMomentum = 0;
     score++;
@@ -204,7 +219,7 @@ function pauseMenu() {
       if (i > 10) {
         i = Math.floor(score / 4);
       }
-      wall[i] = 0 + "," + 0 + "," + random(90, 90);
+      wall[i] = 0 + "," + 0 + "," + random(89, 89);
       wall[i] = 200 + "," + 100 + "," + wall[i].split(",")[2];
       if (wall[i].split(",")[0] < 80 + size * 2 && wall[i].split(",")[i] < 100 + size * 2) {
         i--;
@@ -224,7 +239,20 @@ function pauseMenu() {
         i--;
       }
     }*/
-  }
+
+    mine = [];
+    for (let i=0; i<random(1, 1); i++) {
+      if (i > 15) {
+        i = 1;
+      }
+      mine[i] = random(0, width - size) + "," + random(0, height - size);
+      if (mine[i].split(",")[0] < 80 + size && wall[i].split(",")[1] < 100 + size) {
+        i--;
+      } else if (mine[i].split(",")[0] > width - size * 2 && mine[i].split(",")[1] > height - size * 2) {
+        i--;
+      }
+    }
+   }
 
   function gameOver() {
     gameOn = false;
@@ -244,11 +272,20 @@ function pauseMenu() {
       }
     }
     for (let i=0; i<wall.length; i++) {
-      console.log(Number(wall[i].split(",")[0]) + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 3.5 * Math.abs((yBall-wall[i].split(",")[1])/(wall[i].split(",")[1]-Math.sin(Number(wall[i].split(",")[2]*Math.PI/180))*size*3.5)));
-      if (xBall - size < Number(wall[i].split(",")[0]) + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 3.5 * Math.abs((yBall-wall[i].split(",")[1])/(wall[i].split(",")[1]-Math.sin(Number(wall[i].split(",")[2]*Math.PI/180))*size*3.5)) && xBall + size > Number(wall[i].split(",")[0]) + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 3.5 * Math.abs((yBall-wall[i].split(",")[1])/(wall[i].split(",")[1]-Math.sin(Number(wall[i].split(",")[2]*Math.PI/180))*size*3.5)) - size * 0.9 * Math.sin(wall[i].split(",")[2] * Math.PI / 180)) {
+      console.log(yBall * (Math.sin(wall[i].split(",")[2] * Math.PI / 180) / Math.cos(wall[i].split(",")[2] * Math.PI / 180)) + Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9 + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9);
+      if (xBall + size > yBall * (Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) / Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)) + Number(wall[i].split(",")[0])) {
         //gameOver();
-        console.log(xBall);
+        console.log(xBall + size);
         console.log(wall[i]);
       }
     }
+  }
+
+  function convertRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
   }
