@@ -15,8 +15,7 @@ var mine = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
 var win = false;
-var test = [];
-var off = true;
+
 
 function quit() {
     addScore(score, username);
@@ -48,6 +47,21 @@ function pauseMenu() {
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
     gameOn = true;
+    generateFrame();
+  }
+
+  function restart() {
+    document.getElementById("retry").style.display = "none";
+    document.getElementById("resume").style.display = "inline";
+    document.getElementById("gameplayBlocker").style.display = "none";
+    document.getElementById("pausePage").style.display = "none";
+    addScore(score, username);
+    size = 50;
+    score = -1;
+    xMomentum = 0;
+    yMomentum = 0;
+    gameOn = true;
+    newLevel();
     generateFrame();
   }
 
@@ -251,9 +265,9 @@ function pauseMenu() {
         i--;
       }
     }*/
-//Math.floor(score / 12), Math.floor(score / 10)
+
     mine = [];
-    for (let i=0; i<random(1, 1); i++) {
+    for (let i=0; i<random(Math.floor(score / 12), Math.floor(score / 10)); i++) {
       if (i > 10) {
         i = 1;
       }
@@ -270,6 +284,9 @@ function pauseMenu() {
     gameOn = false;
     addScore(score, username);
     document.getElementById("gameplayBlocker").style.display = "block";
+    document.getElementById("resume").style.display = "none";
+    document.getElementById("retry").style.display = "inline";
+    document.getElementById("pausePage").style.display = "block";
   }
 
   function collision() {
@@ -293,8 +310,8 @@ function pauseMenu() {
     }
     for (let i=0; i<mine.length; i++) {
       if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1]) && mine[i].split(",")[2] == 11) {
-        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2);
-        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2);
+        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 2;
+        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 2;
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
       }
     }

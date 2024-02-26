@@ -80,6 +80,7 @@
       document.getElementById("gameplay").style.display = "none";  
       document.getElementById("gameplayBlocker").style.display = "none"; 
       document.getElementById("pausePage").style.display = "none";
+      document.getElementById("retry").style.display = "none";
       quit();
     }
   }
