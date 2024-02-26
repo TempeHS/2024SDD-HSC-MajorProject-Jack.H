@@ -308,3 +308,16 @@ nav h1 {
     top: 0px;
     left: 0px;
   }
+
+  .calibration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-left: 37%;
+    width: 100px;
+    height: 35px;
+    background-color: black;
+    color: white;
+    padding-top: 6px;
+    display: none;
+  }

@@ -63,6 +63,7 @@
       getThemes(0);
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
+      document.getElementById("calibration").style.display = "none";
       enter();
     }
   }
@@ -223,6 +224,12 @@
     cssClass = document.querySelectorAll('.blocker');
     for(var i=0; i<cssClass.length; i++) {
       cssClass[i].style.backgroundColor = "black";
+    }
+
+    cssClass = document.querySelectorAll('.calibration');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "black";
+      cssClass[i].style.color = "white";
     }
 
     cssClass = document.querySelectorAll('.scoreDisplay');

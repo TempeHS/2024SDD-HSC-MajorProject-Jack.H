@@ -46,6 +46,7 @@ function pauseMenu() {
   function gameFromPause() {
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
+    document.getElementById("calibration").style.display = "none";
     gameOn = true;
     generateFrame();
   }
@@ -77,6 +78,7 @@ function pauseMenu() {
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
       calibrate = false;
+      document.getElementById("calibration").style.display = "block";
     }
   };
 
