@@ -15,6 +15,8 @@ var mine = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
 var win = false;
+var test = [];
+var off = true;
 
 function quit() {
     addScore(score, username);
@@ -135,7 +137,6 @@ function pauseMenu() {
       yMomentum = -(yMomentum * 0.6);
     }
     collision();
-    // xBall < -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) && xBall + size * 2 > -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall < Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) && yBall + size * 1.8 > Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180)))
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d", { willReadFrequently : true });
     game.canvas.width = width;
@@ -176,14 +177,25 @@ function pauseMenu() {
     var image = new Image();
     image.src = "icons/mine.png";
     for (let i=0; i<mine.length; i++) {
-      game.drawImage(image, mine[i].split(",")[0], mine[i].split(",")[1], size * 1.5, size * 1.5);
-      var img = game.getImageData(mine[i].split(",")[0], mine[i].split(",")[1], size * 1.5, size * 1.5);
-      for (let i=0; i<img.data.length; i+=4) {
-          img.data[i] = rgb.r;
-          img.data[i+1] = rgb.g;
-          img.data[i+2] = rgb.b; 
+      if (mine[i].split(",")[2] == 11) {
+        game.drawImage(image, mine[i].split(",")[0], mine[i].split(",")[1], size * 1.5, size * 1.5);
+        var img = game.getImageData(mine[i].split(",")[0], mine[i].split(",")[1], size * 1.5, size * 1.5);
+        for (let i=0; i<img.data.length; i+=4) {
+            img.data[i] = rgb.r;
+            img.data[i+1] = rgb.g;
+            img.data[i+2] = rgb.b; 
+        }
+        game.putImageData(img, mine[i].split(",")[0], mine[i].split(",")[1]);
+      } else {
+        game.beginPath();
+        game.arc(Number(mine[i].split(",")[0]) + size * 0.75, Number(mine[i].split(",")[1]) + size * 0.75, size * 0.75, 0, 2 * Math.PI);
+        game.fill();
+        mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + (Number(mine[i].split(",")[2]) - 1);
+        console.log(Number(mine[i].split(",")[2]));
+        if (Number(mine[i].split(",")[2]) < 1) {
+          mine.splice(i, 1);
+        }
       }
-      game.putImageData(img, mine[i].split(",")[0], mine[i].split(",")[1]);
     }
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -202,11 +214,12 @@ function pauseMenu() {
     }
     diamond = [];
     for (let i=0; i<random(Math.ceil(score / 20), Math.ceil(score / 2)); i++) {
-      if (i > 19) { 
+      if (i > 15) { 
         i = Math.ceil(score / 2);
       }
       diamond[i] = random(0, width - size) + "," + random(0, height - size);
-      if (diamond[i].split(",")[0] < 80 + size * 2.15 && diamond[i].split(",")[1] < 100 + size * 2.15) {
+      if (diamond[i].split(",")[0] < 80 + size * 3.15 && diamond[i].split(",")[1] < 100 + size * 3.15) {
+        console.log(diamond[i]);
         i--;
       } else if (diamond[i].split(",")[0] > width - size * 3.4 && diamond[i].split(",")[1] > height - size * 3.4) {
         i--;
@@ -238,14 +251,13 @@ function pauseMenu() {
         i--;
       }
     }*/
-
+//Math.floor(score / 12), Math.floor(score / 10)
     mine = [];
-    //Math.floor(score / 12), Math.floor(score / 10)
     for (let i=0; i<random(1, 1); i++) {
-      if (i > 11) {
+      if (i > 10) {
         i = 1;
       }
-      mine[i] = random(200, 200) + "," + random(50, 50);
+      mine[i] = random(0, width - size * 4.2) + "," + random(0, height - size * 4.2) + "," + 11; 
       if (mine[i].split(",")[0] < 80 + size && mine[i].split(",")[1] < 100 + size) {
         i--;
       } else if (mine[i].split(",")[0] > width - size * 3 && mine[i].split(",")[1] > height - size * 3) {
@@ -280,12 +292,10 @@ function pauseMenu() {
       }
     }
     for (let i=0; i<mine.length; i++) {
-      if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1])) {
-        console.log(xMomentum);
-        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 80;
-        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 80;
-        console.log(xMomentum);
-        mine.splice(i,1);
+      if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1]) && mine[i].split(",")[2] == 11) {
+        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2);
+        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2);
+        mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
       }
     }
   }
