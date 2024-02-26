@@ -12,6 +12,8 @@ var obstacles = "#ffffff"
 var diamond = [];
 var wall = [];
 var mine = [];
+var diaMove = [];
+var track = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
 var win = false;
@@ -166,6 +168,8 @@ function pauseMenu() {
     game.arc(width - size * 1.2 - 3, height - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
     game.fill();
     game.fillStyle = ballCoulor;
+    game.strokeStyle = obstacles;
+    game.lineWidth = 5;
     game.beginPath();
     game.arc(xBall + size - 50, yBall + size - 50, size, 0, 2 * Math.PI);
     game.fill();
@@ -213,6 +217,23 @@ function pauseMenu() {
         }
       }
     }
+    for (let i=0; i<diaMove.length; i++) {
+      game.beginPath();
+      game.moveTo(Number(diaMove[i].split(",")[0]) + (size * 1.15 / 2), diaMove[i].split(",")[1]);
+      game.lineTo(Number(diaMove[i].split(",")[0]) + (size * 1.15), Number(diaMove[i].split(",")[1]) + (size * 1.15 / 2));
+      game.lineTo(Number(diaMove[i].split(",")[0]) + (size * 1.15 / 2), Number(diaMove[i].split(",")[1]) + (size * 1.15));
+      game.lineTo(diaMove[i].split(",")[0], Number(diaMove[i].split(",")[1]) + (size * 1.15 / 2));
+      game.fill();
+      game.beginPath();
+      console.log(track[i]);
+      game.moveTo(track[i].split(",")[0], track[i].split(",")[1]);
+      game.lineTo(track[i].split(",")[2], track[i].split(",")[3]);
+      game.stroke();
+      if (Math.abs(Number(diaMove[i].split(",")[2])) == 100) {
+        diaMove[i] = diaMove[i].split(",")[0] + "," + diaMove[i].split(",")[1] + "," + (Number(diaMove[i].split(",")[2]) * -1) + "," + diaMove[i].split(",")[3];
+      }
+      diaMove[i] = ((Number(track[i].split(",")[0]) - Number(track[i].split(",")[2])) * (Number(diaMove[i].split(",")[2]) / 100) + Number(track[i].split(",")[0])) + "," + ((Number(diaMove[i].split(",")[1]) - Number(track[i].split(",")[3])) * (Number(diaMove[i].split(",")[2]) / 100) + Number(track[i].split(",")[1])) + "," + (Number(diaMove[i].split(",")[2]) + 0.01 * Number(diaMove[i].split(",")[3])) + "," + diaMove[i].split(",")[3];
+    }
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
     }
@@ -235,9 +256,10 @@ function pauseMenu() {
       }
       diamond[i] = random(0, width - size) + "," + random(0, height - size);
       if (diamond[i].split(",")[0] < 80 + size * 3.15 && diamond[i].split(",")[1] < 100 + size * 3.15) {
-        console.log(diamond[i]);
+        diamond.splice(i, 1);
         i--;
       } else if (diamond[i].split(",")[0] > width - size * 3.4 && diamond[i].split(",")[1] > height - size * 3.4) {
+        diamond.splice(i, 1);
         i--;
       }
     }
@@ -250,8 +272,10 @@ function pauseMenu() {
       wall[i] = 0 + "," + 0 + "," + random(89, 89);
       wall[i] = 200 + "," + 100 + "," + wall[i].split(",")[2];
       if (wall[i].split(",")[0] < 80 + size * 2 && wall[i].split(",")[i] < 100 + size * 2) {
+        wall.splice(i, 1);
         i--;
       } else if (wall[i].split(",")[0] > width - size * 5 && wall[i].split(",")[1] > height - size * 5) {
+        wall.splice(i, 1);
         i--;
       }
     }
@@ -275,8 +299,27 @@ function pauseMenu() {
       }
       mine[i] = random(0, width - size * 4.2) + "," + random(0, height - size * 4.2) + "," + 11; 
       if (mine[i].split(",")[0] < 80 + size && mine[i].split(",")[1] < 100 + size) {
+        mine.splice(i, 1);
         i--;
       } else if (mine[i].split(",")[0] > width - size * 3 && mine[i].split(",")[1] > height - size * 3) {
+        mine.splice(i, 1);
+        i--;
+      }
+    }
+//Math.floor(score / 25), Math.floor(score / 20)
+    diaMove = [];
+    track = [];
+    for (let i=0; i<random(1, 1); i++) {
+      if (i > 6) { 
+        i = Math.ceil(score / 20);
+      }
+      diaMove[i] = random(0, width - size) + "," + random(0, height - size) + "," + 0 + "," + 1;
+      track[i] = Number(diaMove[i].split(",")[0]) + size * 1.15 / 2 + "," + (Number(diaMove[i].split(",")[1]) + size * 1.15 / 2) + "," + random(0, width - size) + "," + random(0, height - size);
+      if (diaMove[i].split(",")[0] < 80 + size * 3.15 && diaMove[i].split(",")[1] < 100 + size * 3.15) {
+        diaMove.splice(i, 1);
+        i--;
+      } else if (diaMove[i].split(",")[0] > width - size * 3.4 && diaMove[i].split(",")[1] > height - size * 3.4) {
+        diaMove.splice(i, 1);
         i--;
       }
     }
