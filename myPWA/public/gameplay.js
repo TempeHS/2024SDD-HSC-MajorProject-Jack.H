@@ -4,7 +4,7 @@ var defaultGamma;
 var xMomentum = 0;
 var yMomentum = 0;
 var xBall = 80;
-var yBall = 110;
+var yBall = 100;
 var score = 0;
 var size = 50;
 var calibrate = true;
@@ -13,10 +13,9 @@ var diamond = [];
 var wall = [];
 var mine = [];
 const width = window.innerWidth;
-console.log(width);
 const height = window.innerHeight;
 var win = false;
-console.log(Math.tan(90 * Math.PI / 180))
+
 function quit() {
     addScore(score, username);
     gameOn = false;
@@ -138,7 +137,7 @@ function pauseMenu() {
     collision();
     // xBall < -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) && xBall + size * 2 > -Math.tan(Number(wall[i].split(",")[2]) * Math.PI / 180) * yBall + Number(wall[i].split(",")[0]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall < Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) && yBall + size * 1.8 > Math.tan((90 - Number(wall[i].split(",")[2])) * Math.PI / 180) * xBall + Number(wall[i].split(",")[1]) - size * 0.9 * (Math.cos((Number(wall[i].split(",")[2]) * Math.PI / 180)))
     const canvas = document.getElementById("graphics");
-    const game = canvas.getContext("2d");
+    const game = canvas.getContext("2d", { willReadFrequently : true });
     game.canvas.width = width;
     game.canvas.height = height;
     game.clearRect(0, 0, width, height);
@@ -193,7 +192,7 @@ function pauseMenu() {
 
   function newLevel() {
     xBall = 80;
-    yBall = 110;
+    yBall = 100;
     xMomentum = 0;
     yMomentum = 0;
     score++;
@@ -216,7 +215,7 @@ function pauseMenu() {
 
     wall = [];
     for (let i=0; i<random(1, 1); i++) {
-      if (i > 10) {
+      if (i > 11) {
         i = Math.floor(score / 4);
       }
       wall[i] = 0 + "," + 0 + "," + random(89, 89);
@@ -241,14 +240,15 @@ function pauseMenu() {
     }*/
 
     mine = [];
+    //Math.floor(score / 12), Math.floor(score / 10)
     for (let i=0; i<random(1, 1); i++) {
-      if (i > 15) {
+      if (i > 11) {
         i = 1;
       }
-      mine[i] = random(0, width - size) + "," + random(0, height - size);
-      if (mine[i].split(",")[0] < 80 + size && wall[i].split(",")[1] < 100 + size) {
+      mine[i] = random(200, 200) + "," + random(50, 50);
+      if (mine[i].split(",")[0] < 80 + size && mine[i].split(",")[1] < 100 + size) {
         i--;
-      } else if (mine[i].split(",")[0] > width - size * 2 && mine[i].split(",")[1] > height - size * 2) {
+      } else if (mine[i].split(",")[0] > width - size * 3 && mine[i].split(",")[1] > height - size * 3) {
         i--;
       }
     }
@@ -272,11 +272,20 @@ function pauseMenu() {
       }
     }
     for (let i=0; i<wall.length; i++) {
-      console.log(yBall * (Math.sin(wall[i].split(",")[2] * Math.PI / 180) / Math.cos(wall[i].split(",")[2] * Math.PI / 180)) + Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9 + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9);
+      //console.log(yBall * (Math.sin(wall[i].split(",")[2] * Math.PI / 180) / Math.cos(wall[i].split(",")[2] * Math.PI / 180)) + Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9 + Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180) * size * 0.9);
       if (xBall + size > yBall * (Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180) / Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)) + Number(wall[i].split(",")[0])) {
         //gameOver();
-        console.log(xBall + size);
-        console.log(wall[i]);
+        //console.log(xBall + size);
+        //console.log(wall[i]);
+      }
+    }
+    for (let i=0; i<mine.length; i++) {
+      if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1])) {
+        console.log(xMomentum);
+        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 80;
+        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 80;
+        console.log(xMomentum);
+        mine.splice(i,1);
       }
     }
   }
