@@ -4,7 +4,7 @@
 * Game sound effects
 * Music tracks
 * Vibrations
-* Ball bouncing
+* ~~Ball bouncing~~
 * Script comments
 * README for users
 * MAINTENANCE.md

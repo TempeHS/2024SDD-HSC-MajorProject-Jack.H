@@ -39,12 +39,14 @@ function enter() {
 }
 
 function pauseMenu() {
+    audio.pause();
     document.getElementById("gameplayBlocker").style.display = "block";
     document.getElementById("pausePage").style.display = "block";
     gameOn = false;
   }
   
   function gameFromPause() {
+    audio.play();
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
     document.getElementById("calibration").style.display = "none";
@@ -53,6 +55,8 @@ function pauseMenu() {
   }
 
   function restart() {
+    audio.currentTime = 0;
+    audio.play();
     document.getElementById("retry").style.display = "none";
     document.getElementById("resume").style.display = "inline";
     document.getElementById("gameplayBlocker").style.display = "none";
@@ -331,6 +335,7 @@ function pauseMenu() {
     document.getElementById("resume").style.display = "none";
     document.getElementById("retry").style.display = "inline";
     document.getElementById("pausePage").style.display = "block";
+    audio.pause();
   }
 
   function collision() {

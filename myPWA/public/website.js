@@ -10,6 +10,10 @@
   var homeY = random(50, height - 50);
   var angle = random(0, 360);
   var move = true;
+  var audio = document.getElementById("audio");
+  audio.loop = true;
+  audio.src = document.getElementById("homeTheme").src;
+  audio.play();
 
   addLocalStorage();
   addScore(0, "N/A");
@@ -72,6 +76,8 @@
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
       document.getElementById("calibration").style.display = "none";
+      audio.src = document.getElementById("gameTheme").src;
+      audio.play();
       enter();
     }
   }
@@ -92,6 +98,8 @@
       document.getElementById("gameplayBlocker").style.display = "none"; 
       document.getElementById("pausePage").style.display = "none";
       document.getElementById("retry").style.display = "none";
+      audio.src = document.getElementById("homeTheme").src;
+      audio.play();
       quit();
     }
   }
