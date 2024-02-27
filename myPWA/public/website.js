@@ -6,6 +6,10 @@
   var ballCoulor = "ff5757";
   const width = window.innerWidth;
   const height = window.innerHeight;
+  var homeX = random(50, width - 50);
+  var homeY = random(50, height - 50);
+  var angle = random(0, 360);
+  var move = true;
 
   addLocalStorage();
   addScore(0, "N/A");
@@ -55,6 +59,7 @@
 
   function outofhome(page) {
     getThemes(currentId);
+    move = false;
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
@@ -73,6 +78,7 @@
 
   function homescreen(page) {
     getThemes(currentId);
+    move = true;
     moveBall();
     document.getElementById("homescreen").style.display = "block";
     if (page == "stats") {
@@ -251,6 +257,16 @@
       cssClass[i].style.backgroundColor = "transparent";
     }
 
+    cssClass = document.querySelectorAll('.settings');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
+    cssClass = document.querySelectorAll('.signIn');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
     if (id == 5) {
       cssClass = document.querySelectorAll('.tutorialImage');
       for(var i=0; i<cssClass.length; i++) {
@@ -317,6 +333,11 @@
     localStorage.currentBallCoulor = ballCoulor;
   }
 
+  function random(min, max) {
+    var number = Math.random() * (max - min) + min;
+    return number;
+  }
+
   function moveBall() {
     const canvas = document.getElementById("homeBall");
     const ball = canvas.getContext("2d");
@@ -325,9 +346,41 @@
     ball.clearRect(0, 0, width, height);
     ball.fillStyle = ballCoulor;
     ball.beginPath();
-    ball.arc(0, 0, 50, 0, 2 * Math.PI);
+    ball.arc(homeX, homeY, 50, 0, 2 * Math.PI);
     ball.fill();
-    if (document.getElementById("homescreen").style.display == "block") {
+    homeX += 1.5 * Math.sin(angle * Math.PI / 180);
+    homeY -= 1.5 * Math.cos(angle * Math.PI / 180);
+    if (homeX < 50) {
+      homeX = 50;
+      if (angle <= 180) {
+        angle = random(0, 90);
+      } else {
+        angle = random(90, 180);
+      }
+    } else if (homeX > width - 50) {
+      homeX = width - 50;
+      if (angle >= 90) {
+        angle = random(180, 270);
+      } else {
+        angle = random(270, 360);
+      }
+    }
+    if (homeY < 50) {
+      homeY = 50;
+      if (angle <= 0) {
+        angle = random(90, 180);
+      } else {
+        angle = random(180, 270);
+      }
+    } else if (homeY > height - 50) {
+      homeY = height - 50;
+      if (angle >= 180) {
+        angle = random(270, 360);
+      } else {
+        angle = random(0, 90);
+      }
+    }
+    if (move) {
       window.requestAnimationFrame(moveBall);
     }
   }
