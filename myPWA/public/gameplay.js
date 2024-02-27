@@ -367,9 +367,9 @@ function pauseMenu() {
       if (wall[i] != undefined) {
         if (xBall - size < -((yBall - (Number(wall[i].split(",")[1]) - (size * 0.9 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + (Number(wall[i].split(",")[0]) + (size * 0.9 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && xBall + size > -((yBall - Number(wall[i].split(",")[1])) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + Number(wall[i].split(",")[0]) 
         && yBall - size < -((xBall - (Number(wall[i].split(",")[0]) - (size * 3.5 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) - 90) * Math.PI / 180))) + (Number(wall[i].split(",")[1]) + (size * 3.5 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall + size > -((xBall - Number(wall[i].split(",")[0])) * (Math.tan((Number(wall[i].split(",")[2]) - 90) * Math.PI / 180))) + Number(wall[i].split(",")[1])) {
-          //gameOver();
-          //console.log(xBall + size);
           console.log(wall[i]);
+          xMomentum = -(xMomentum * 0.6);
+          yMomentum = -(yMomentum * 0.6);
         }
       }
     }
