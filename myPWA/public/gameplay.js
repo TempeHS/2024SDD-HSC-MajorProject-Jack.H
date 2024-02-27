@@ -78,14 +78,13 @@ function pauseMenu() {
   ondeviceorientation = (event) => {
     if (gameOn && !calibrate) {
       generateMomentum(defaultGamma - event.gamma, defaultBeta - event.beta);
-    } else {
-      if (calibrate || document.getElementById("pausePage").style.display == "none")
+    } else { 
       if (document.getElementById("pausePage").style.display == "none") {
         defaultBeta = event.beta;
         defaultGamma = event.gamma; 
         calibrate = false;
       }
-      if (document.getElementById("pausePage").style.display == "block" && !gameOn && calibrate) {
+      if (document.getElementById("pausePage").style.display == "block" && calibrate) {
         document.getElementById("calibration").style.display = "block";
         defaultBeta = event.beta;
         defaultGamma = event.gamma; 
@@ -383,6 +382,8 @@ function pauseMenu() {
           }
         }
       } else {
+        xSave = xBall;
+        ySave = yBall;
       }
     }
     for (let i=0; i<mine.length; i++) {
