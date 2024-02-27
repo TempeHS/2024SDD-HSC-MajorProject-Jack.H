@@ -5,7 +5,7 @@
 * ~~Mine obstacle is drawn~~
 * ~~Level generates randomly~~
 * ~~More obstacles are added at higher levels~~
-* Obstacles interact with player
+* ~~Obstacles interact with player~~
 * ~~Diamond obstacle gains a moving variant~~
 # Increment (what must be finished)
 * Diamond obstacle destroys player and ends their game

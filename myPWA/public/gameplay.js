@@ -16,8 +16,6 @@ var diaMove = [];
 var track = [];
 const width = window.innerWidth;
 const height = window.innerHeight;
-var win = false;
-
 
 function quit() {
     addScore(score, username);
@@ -80,11 +78,16 @@ function pauseMenu() {
       generateMomentum(defaultGamma - event.gamma, defaultBeta - event.beta);
     } else {
       if (calibrate || document.getElementById("pausePage").style.display == "none")
-      defaultBeta = event.beta;
-      defaultGamma = event.gamma;
-      calibrate = false;
-      if (document.getElementById("pausePage").style.display == "block" && !gameOn) {
+      if (document.getElementById("pausePage").style.display == "none") {
+        defaultBeta = event.beta;
+        defaultGamma = event.gamma; 
+        calibrate = false;
+      }
+      if (document.getElementById("pausePage").style.display == "block" && !gameOn && calibrate) {
         document.getElementById("calibration").style.display = "block";
+        defaultBeta = event.beta;
+        defaultGamma = event.gamma; 
+        calibrate = false;
       }
     }
   };
@@ -275,26 +278,11 @@ function pauseMenu() {
     }
 
     wall = [];
-    /*for (let i=0; i<random(1, 1); i++) {
-      if (i > 11) {
-        i = Math.floor(score / 4);
-      }
-      wall[i] = 0 + "," + 0 + "," + random(0, 1);
-      wall[i] = 0 + "," + 200 + "," + Number(wall[i].split(",")[2]);
-      if (wall[i].split(",")[0] < 80 + size && wall[i].split(",")[i] < 100 + size) {
-        wall.splice(i, 1);
-        i--;
-      } else if (wall[i].split(",")[0] > width - size * 4 && wall[i].split(",")[1] > height - size * 4) {
-        console.log("hi");
-        wall.splice(i, 1);
-        i--;
-      }
-    }*/
     for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
       if (i > 10) {
         i = Math.floor(score / 4);
       }
-      wall[i] = 0 + "," + 0 + "," + Math.round(random(1, 1));
+      wall[i] = 0 + "," + 0 + "," + Math.round(random(0, 1));
       wall[i] = random(0, width - (size * 3.5 * Math.cos((Number(wall[i].split(",")[2])) * Math.PI / 180)) - (size * 0.9 * Math.sin((Number(wall[i].split(",")[2]))) * Math.PI / 180)) + "," + random(0, height - (size * 3.5 * Math.sin((Number(wall[i].split(",")[2])) * Math.PI / 180)) - (size * 0.9 * Math.cos((Number(wall[i].split(",")[2]))) * Math.PI / 180)) + "," + (Number(wall[i].split(",")[2]) * 90);
       if (wall[i].split(",")[0] < 80 + size * 2 && wall[i].split(",")[1] < 100 + size * 2) {
         wall.splice(i, 1);
@@ -352,26 +340,22 @@ function pauseMenu() {
   }
 
   function collision() {
-    if (xBall > width - size * 1.56 && yBall > height - size * 1.56 || win) {
+    if (xBall > width - size * 1.56 && yBall > height - size * 1.56) {
       newLevel();
-      win = false;
     }
     for (let i=0; i<diamond.length; i++) {
       if (diamond[i] != undefined) {
         if (xBall - size * 0.8 < Number(diamond[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diamond[i].split(",")[0]) && yBall + size * 0.8 > Number(diamond[i].split(",")[1]) && yBall - size * 0.8 < Number(diamond[i].split(",")[1]) + size * 1.15) {
           gameOver();
-          console.log(diamond[i]);
         }
       }
     }
     for (let i=0; i<wall.length; i++) {
-      console.log(wall[i].split(",")[1]);
       if (wall[i] != undefined) {
         if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size > wall[i].split(",")[1]) 
         || (wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
-          console.log(yBall);
-          xMomentum = -(xMomentum * 0.6);
-          yMomentum = -(yMomentum * 0.6);
+          xMomentum = -(xMomentum * 0.9);
+          yMomentum = -(yMomentum * 0.9);
         }
       }
     }
@@ -388,7 +372,6 @@ function pauseMenu() {
       if (diaMove[i] != undefined) {
         if (xBall - size * 0.8 < Number(diaMove[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diaMove[i].split(",")[0]) && yBall + size * 0.8 > Number(diaMove[i].split(",")[1]) && yBall - size * 0.8 < Number(diaMove[i].split(",")[1]) + size * 1.15) {
           gameOver();
-          console.log(diaMove[i]);
         }
       }
     }
