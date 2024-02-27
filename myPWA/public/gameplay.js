@@ -366,13 +366,12 @@ function pauseMenu() {
             xMomentum = -(xMomentum * 0.6); 
             yMomentum = -(yMomentum * 0.6);
           }
-        }
-        if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
+        } else if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
           if ((xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 0.9)) {
             xBall = xSave;
             xMomentum = -(xMomentum * 0.6);
           } else if (!(xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 3.5) && (yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 0.9)) {
-            yBall = ySave
+            yBall = ySave;
             yMomentum = -(yMomentum * 0.6);
           } else {
             xBall = xSave;
@@ -380,11 +379,11 @@ function pauseMenu() {
             xMomentum = -(xMomentum * 0.6); 
             yMomentum = -(yMomentum * 0.6);
           }
+        } else {
+          xSave = xBall;
+          ySave = yBall;
         }
-      } else {
-        xSave = xBall;
-        ySave = yBall;
-      }
+      } 
     }
     for (let i=0; i<mine.length; i++) {
     if (mine[i] != undefined) {
