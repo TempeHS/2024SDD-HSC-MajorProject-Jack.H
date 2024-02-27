@@ -7,6 +7,8 @@ var xBall = 80;
 var yBall = 100;
 var score = 0;
 var size = 50;
+var xSave = 80;
+var ySave = 100;
 var calibrate = true;
 var obstacles = "#ffffff"
 var diamond = [];
@@ -354,18 +356,33 @@ function pauseMenu() {
       if (wall[i] != undefined) {
         if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size > wall[i].split(",")[1])) {
           if ((xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 0.9) && !(yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 3.5)) {
-            xMomentum = -(xMomentum * 0.9);
+            xBall = xSave;
+            xMomentum = -(xMomentum * 0.6);
           } else if (!(xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 0.9) && (yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 3.5)) {
-            yMomentum = -(yMomentum * 0.9);
+            yBall = ySave
+            yMomentum = -(yMomentum * 0.6);
           } else {
-            xMomentum = -(xMomentum * 0.9); 
-            yMomentum = -(yMomentum * 0.9);
+            xBall = xSave;
+            yBall = ySave;
+            xMomentum = -(xMomentum * 0.6); 
+            yMomentum = -(yMomentum * 0.6);
           }
         }
         if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
-          xMomentum = -(xMomentum * 0.9);
-          yMomentum = -(yMomentum * 0.9);
+          if ((xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 0.9)) {
+            xBall = xSave;
+            xMomentum = -(xMomentum * 0.6);
+          } else if (!(xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 3.5) && (yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 0.9)) {
+            yBall = ySave
+            yMomentum = -(yMomentum * 0.6);
+          } else {
+            xBall = xSave;
+            yBall = ySave;
+            xMomentum = -(xMomentum * 0.6); 
+            yMomentum = -(yMomentum * 0.6);
+          }
         }
+      } else {
       }
     }
     for (let i=0; i<mine.length; i++) {
