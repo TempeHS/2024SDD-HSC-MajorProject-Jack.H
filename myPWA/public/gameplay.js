@@ -16,8 +16,6 @@ var wall = [];
 var mine = [];
 var diaMove = [];
 var track = [];
-const width = window.innerWidth;
-const height = window.innerHeight;
 
 function quit() {
     addScore(score, username);

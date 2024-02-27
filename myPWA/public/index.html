@@ -21,13 +21,14 @@
   </head>
   <body>
     <main id="homescreen">
+      <canvas id="homeBall" class="graphics"></canvas>
       <div class='title'>Tilt Rush</div><br>
       <button class="homeButton" onclick="outofhome('gameplay')">Play</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('tutorial')">Tutorial</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('stats')">Stats</button><br><br><br>
       <button class="settings" onclick="outofhome('settings')"><img class="settings" src="icons/settings.png"></button>
       <button class="signIn" onclick="signIn()"><img class="signIn" src="icons/signIn.png"></button>
-      <div class="blocker" id="blocker"></div>
+      <div class="blocker" id="blocker" style="z-index: 1;"></div>
       <div class="namePage" id="namePage">
         <p class="nameText" id="nameText">Current Name</p><br>
         <button class="xButton" onclick="homeFromSign()"><img src="icons/x_button.png" class="xImage"></button><br><br>

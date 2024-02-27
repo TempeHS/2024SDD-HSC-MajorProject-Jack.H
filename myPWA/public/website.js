@@ -4,10 +4,13 @@
   var timesPlayed = -1;
   var currentId = 1;
   var ballCoulor = "ff5757";
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
   addLocalStorage();
   addScore(0, "N/A");
   getThemes(currentId);
+  moveBall();
 
   function addLocalStorage() {
     if (localStorage.currentUsername != undefined) { 
@@ -70,6 +73,7 @@
 
   function homescreen(page) {
     getThemes(currentId);
+    moveBall();
     document.getElementById("homescreen").style.display = "block";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "none";
@@ -242,6 +246,11 @@
       cssClass[i].style.backgroundColor = "transparent";
     }
 
+    cssClass = document.querySelectorAll('.title');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
     if (id == 5) {
       cssClass = document.querySelectorAll('.tutorialImage');
       for(var i=0; i<cssClass.length; i++) {
@@ -306,4 +315,19 @@
       ballCoulor = "#" + currentTime.slice(6, 12);
     }
     localStorage.currentBallCoulor = ballCoulor;
+  }
+
+  function moveBall() {
+    const canvas = document.getElementById("homeBall");
+    const ball = canvas.getContext("2d");
+    ball.canvas.width = width;
+    ball.canvas.height = height;
+    ball.clearRect(0, 0, width, height);
+    ball.fillStyle = ballCoulor;
+    ball.beginPath();
+    ball.arc(0, 0, 50, 0, 2 * Math.PI);
+    ball.fill();
+    if (document.getElementById("homescreen").style.display == "block") {
+      window.requestAnimationFrame(moveBall);
+    }
   }
