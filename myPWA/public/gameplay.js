@@ -78,10 +78,11 @@ function pauseMenu() {
     if (gameOn && !calibrate) {
       generateMomentum(defaultGamma - event.gamma, defaultBeta - event.beta);
     } else {
-      if (!gameOn && calibrate) {
+      if (calibrate || document.getElementById("pausePage").style.display == "none")
       defaultBeta = event.beta;
       defaultGamma = event.gamma;
       calibrate = false;
+      if (document.getElementById("pausePage").style.display == "block") {
         document.getElementById("calibration").style.display = "block";
       }
     }
@@ -278,15 +279,16 @@ function pauseMenu() {
       if (i > 11) {
         i = Math.floor(score / 4);
       }
-      wall[i] = 0 + "," + 0 + "," + random(89, 89);
-      wall[i] = 200 + "," + 100 + "," + wall[i].split(",")[2];
-      if (wall[i].split(",")[0] < 80 + size * 2 && wall[i].split(",")[i] < 100 + size * 2) {
+      wall[i] = 0 + "," + 0 + "," + random(50, 50);
+      wall[i] = 80 + "," + 300 + "," + wall[i].split(",")[2 ];
+      /*if (wall[i].split(",")[0] < 80 + size && wall[i].split(",")[i] < 100 + size) {
         wall.splice(i, 1);
         i--;
-      } else if (wall[i].split(",")[0] > width - size * 5 && wall[i].split(",")[1] > height - size * 5) {
+      } else if (wall[i].split(",")[0] > width - size * 4 && wall[i].split(",")[1] > height - size * 4) {
+        console.log("hi");
         wall.splice(i, 1);
         i--;
-      }
+      }*/
     }
     /*for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
       if (i > 10) {
@@ -360,10 +362,11 @@ function pauseMenu() {
         }
       }
     }
+    //xBall - size < -((yBall - (Number(wall[i].split(",")[1]) - (size * 0.9 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + (Number(wall[i].split(",")[0]) + (size * 0.9 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && xBall + size > -((yBall - Number(wall[i].split(",")[1])) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + Number(wall[i].split(",")[0]) 
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
-        if (xBall - size * 2 < -((yBall - (Number(wall[i].split(",")[1]) - (size * 0.45 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + (Number(wall[i].split(",")[0]) + (size * 0.45 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && xBall + size > -((yBall - Number(wall[i].split(",")[1])) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + Number(wall[i].split(",")[0]) 
-        ) {
+        if ( xBall - size < -((yBall - (Number(wall[i].split(",")[1]) - (size * 0.9 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + (Number(wall[i].split(",")[0]) + (size * 0.9 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && xBall + size > -((yBall - Number(wall[i].split(",")[1])) * (Math.tan((Number(wall[i].split(",")[2]) + 90) * Math.PI / 180))) + Number(wall[i].split(",")[0]) 
+        && yBall - size < -((xBall - (Number(wall[i].split(",")[0]) - (size * 3.5 * Math.cos(Number(wall[i].split(",")[2]) * Math.PI / 180)))) * (Math.tan((Number(wall[i].split(",")[2]) - 90) * Math.PI / 180))) + (Number(wall[i].split(",")[1]) + (size * 3.5 * Math.sin(Number(wall[i].split(",")[2]) * Math.PI / 180))) && yBall + size > -((xBall - Number(wall[i].split(",")[0])) * (Math.tan((Number(wall[i].split(",")[2]) - 90) * Math.PI / 180))) + Number(wall[i].split(",")[1])) {
           //gameOver();
           //console.log(xBall + size);
           console.log(wall[i]);
