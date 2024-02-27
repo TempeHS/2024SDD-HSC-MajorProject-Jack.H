@@ -79,12 +79,7 @@ function pauseMenu() {
     if (gameOn && !calibrate) {
       generateMomentum(defaultGamma - event.gamma, defaultBeta - event.beta);
     } else { 
-      if (document.getElementById("pausePage").style.display == "none") {
-        defaultBeta = event.beta;
-        defaultGamma = event.gamma; 
-        calibrate = false;
-      }
-      if (document.getElementById("pausePage").style.display == "block" && calibrate) {
+      if (!(document.getElementById("pausePage").style.display == "block" && !calibrate)) {
         document.getElementById("calibration").style.display = "block";
         defaultBeta = event.beta;
         defaultGamma = event.gamma; 
@@ -354,30 +349,30 @@ function pauseMenu() {
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
         if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size > wall[i].split(",")[1])) {
-          if ((xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 0.9) && !(yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 3.5)) {
+          if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 0.9) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 3.5)) {
             xBall = xSave;
-            xMomentum = -(xMomentum * 0.6);
-          } else if (!(xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 0.9) && (yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 3.5)) {
+            xMomentum = -(xMomentum * 0.9);
+          } else if (!(xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 0.9) && (yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 3.5)) {
             yBall = ySave
-            yMomentum = -(yMomentum * 0.6);
+            yMomentum = -(yMomentum * 0.9);
           } else {
             xBall = xSave;
             yBall = ySave;
-            xMomentum = -(xMomentum * 0.6); 
-            yMomentum = -(yMomentum * 0.6);
+            xMomentum = -(xMomentum * 0.9); 
+            yMomentum = -(yMomentum * 0.9);
           }
         } else if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
-          if ((xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 0.9)) {
+          if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 0.9)) {
             xBall = xSave;
-            xMomentum = -(xMomentum * 0.6);
-          } else if (!(xBall > wall[i].split(",")[0] || xBall < Number(wall[i].split(",")[0]) + size * 3.5) && (yBall > wall[i].split(",")[1] || yBall < Number(wall[i].split(",")[1]) + size * 0.9)) {
+            xMomentum = -(xMomentum * 0.9);
+          } else if (!(xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 3.5) && (yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 0.9)) {
             yBall = ySave;
-            yMomentum = -(yMomentum * 0.6);
+            yMomentum = -(yMomentum * 0.9);
           } else {
             xBall = xSave;
             yBall = ySave;
-            xMomentum = -(xMomentum * 0.6); 
-            yMomentum = -(yMomentum * 0.6);
+            xMomentum = -(xMomentum * 0.9); 
+            yMomentum = -(yMomentum * 0.9);
           }
         } else {
           xSave = xBall;
