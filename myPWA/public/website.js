@@ -175,6 +175,7 @@
     }
     for (let i = 0; i < 6; i++) {
       const theme = document.getElementById("levelCanvas" + (i+1)).getContext("2d");
+      theme.clearRect(-10, -10, 100, 100);
       if (time == "day") {
         currentTheme = levels[i].day;
       } else if (time == "night") {
@@ -194,9 +195,15 @@
       theme.beginPath();
       theme.arc(25, 25, 15, 0, 2 * Math.PI);
       theme.fill();
-      theme.strokeStyle = "black";
-      theme.lineWidth = 4.0;
-      theme.strokeRect(0, 0, 80, 80);
+      if (i == currentId - 1) {
+        theme.strokeStyle = "yellow";
+        theme.lineWidth = 8.0;
+        theme.strokeRect(0, 0, 80, 80);
+      } else {
+        theme.strokeStyle = "black";
+        theme.lineWidth = 4.0;
+        theme.strokeRect(0, 0, 80, 80);
+      }
     }
   }
 
@@ -204,6 +211,9 @@
   function setTheme(levels, id) {
     if (currentId != id) {
       getThemes(7);
+    }
+    if (document.getElementById("settingsPage").style.display == "block") {
+      getThemes(0);
     }
     currentId = id;
     localStorage.currentCurrentId = currentId;
