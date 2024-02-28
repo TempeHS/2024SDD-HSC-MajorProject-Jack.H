@@ -334,7 +334,7 @@ function pauseMenu() {
         if (diamond.length > 1) {
           for (let j=0; j<diamond.length-1; j++) {
             if (diamond[j].split(",")[0] > width - size * 6 || diamond[j].split(",")[1] > height - size * 6) {
-              diamond[i].splice(i, 1);
+              diamond.splice(i, 1);
               j = diamond.length-1;
             }
           }
@@ -361,8 +361,10 @@ function pauseMenu() {
         for (let j=0; j<wall.length-1; j++) {
           if (wall[i].split(",")[0] - wall[j].split(",")[0] < 5 && wall[i].split(",")[2] == 0 && wall[j].split(",")[2] == 0) {
             wall.splice(i, 1);
+            j = wall.length-1;
           } else if (wall[i].split(",")[1] - wall[j].split(",")[1] < 5 && wall[i].split(",")[2] == 90 && wall[j].split(",")[2] == 90) {
             wall.splice(i, 1);
+            j = wall.length-1;
           }
         }
       }
@@ -419,7 +421,7 @@ function pauseMenu() {
     document.getElementById("retry").style.display = "inline";
     document.getElementById("pausePage").style.display = "block";
     music.pause();
-    navigator.vibrate(1000);
+    navigator.vibrate(200);
   }
 
   // Checks for collision between ball and obstacles
