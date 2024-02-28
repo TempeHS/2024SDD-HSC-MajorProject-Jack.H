@@ -1,9 +1,9 @@
 ## Agile Artefacts
 # Sprint Backlog List of Achievables (changes made)
-* Button sound effects
-* Game sound effects
+* ~~Button sound effects~~
+* ~~Game sound effects~~
 * ~~Music tracks~~
-* Vibrations
+* ~~Vibrations~~
 * ~~Ball bouncing~~
 * Script comments
 * README for users

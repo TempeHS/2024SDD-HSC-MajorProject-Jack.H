@@ -1,3 +1,4 @@
+// This js file handles everything in the game screen
 var gameOn = false;
 var defaultBeta;
 var defaultGamma;
@@ -112,6 +113,7 @@ function pauseMenu() {
     }
   }
 
+  // Speed calculations for ball
   function generateMomentum(x, y) {
     xMomentum -= (x^(1/3)) / 110;
     yMomentum -= (y^(1/3)) / 110;
@@ -150,9 +152,12 @@ function pauseMenu() {
     }
   }
 
+  // Loads graphics
   function generateFrame() {
     xBall += xMomentum;
     yBall += yMomentum;
+    
+    // Checks for screen borders
     if (xBall < 50) {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
@@ -195,11 +200,15 @@ function pauseMenu() {
     } else {
       hitOn = true;
     }
+
+    // Canvas generation
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d", { willReadFrequently : true });
     game.canvas.width = width;
     game.canvas.height = height;
     game.clearRect(0, 0, width, height);
+
+    // Draw goal
     game.fillStyle = "#000000";
     if (currentId == 6) {
       game.fillStyle = "#ffffff";
@@ -207,12 +216,16 @@ function pauseMenu() {
     game.beginPath();
     game.arc(width - size * 1.2 - 3, height - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
     game.fill();
+
+    // Draw ball
     game.fillStyle = ballCoulor;
     game.strokeStyle = obstacles;
     game.lineWidth = 5;
     game.beginPath();
     game.arc(xBall + size - 50, yBall + size - 50, size, 0, 2 * Math.PI);
     game.fill();
+
+    // Draw diamonds
     game.fillStyle = obstacles;
     for (let i=0; i<diamond.length; i++) {
       if (diamond[i] != undefined) {
@@ -224,6 +237,8 @@ function pauseMenu() {
         game.fill();
       }
     }
+
+    // Draw walls
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
         var wallTemp;
@@ -236,6 +251,8 @@ function pauseMenu() {
         game.fill();
       }
     }
+
+    // Draw mines
     var rgb = convertRgb(obstacles);
     var image = new Image();
     image.src = "icons/mine.png";
@@ -261,6 +278,8 @@ function pauseMenu() {
         }
       }
     }
+
+    // Draw moving diamonds
     for (let i=0; i<diaMove.length; i++) {
       if (diaMove[i] != undefined) {
         game.beginPath();
@@ -279,6 +298,7 @@ function pauseMenu() {
         }
       }
     }
+
     collision();
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -295,6 +315,8 @@ function pauseMenu() {
     if (size > 20) {
       size -= 1;
     }
+
+    // Generate diamonds
     diamond = [];
     for (let i=0; i<random(Math.ceil(score / 20), Math.ceil(score / 2)); i++) {
       if (i > 15) { 
@@ -310,6 +332,7 @@ function pauseMenu() {
       }
     }
 
+    // Generate walls
     wall = [];
     for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
       if (i > 10) {
@@ -326,6 +349,7 @@ function pauseMenu() {
       }
     }
 
+    // Generate mines
     mine = [];
     for (let i=0; i<random(Math.floor(score / 12), Math.floor(score / 10)); i++) {
       if (i > 10) {
@@ -341,6 +365,7 @@ function pauseMenu() {
       }
     }
 
+    // Generate moving diamonds
     diaMove = [];
     track = [];
     if (score >= 20) {
@@ -377,10 +402,14 @@ function pauseMenu() {
     navigator.vibrate(300);
   }
 
+  // Checks for collision between ball and obstacles
   function collision() {
+    // Goal collision
     if (xBall > width - size * 1.56 && yBall > height - size * 1.56) {
       newLevel();
     }
+
+    // Diamond collision
     for (let i=0; i<diamond.length; i++) {
       if (diamond[i] != undefined) {
         if (xBall - size * 0.8 < Number(diamond[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diamond[i].split(",")[0]) && yBall + size * 0.8 > Number(diamond[i].split(",")[1]) && yBall - size * 0.8 < Number(diamond[i].split(",")[1]) + size * 1.15) {
@@ -388,6 +417,8 @@ function pauseMenu() {
         }
       }
     }
+
+    // Wall collision
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
         if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size > wall[i].split(",")[1])) {
@@ -435,6 +466,8 @@ function pauseMenu() {
         }
       } 
     }
+
+    // Mine collision
     for (let i=0; i<mine.length; i++) {
     if (mine[i] != undefined) {
       if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1]) && mine[i].split(",")[2] == 11) {
@@ -447,6 +480,8 @@ function pauseMenu() {
       }
     }
     }
+
+    // Moving diamond collision
     for (let i=0; i<diaMove.length; i++) {
       if (diaMove[i] != undefined) {
         if (xBall - size * 0.8 < Number(diaMove[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diaMove[i].split(",")[0]) && yBall + size * 0.8 > Number(diaMove[i].split(",")[1]) && yBall - size * 0.8 < Number(diaMove[i].split(",")[1]) + size * 1.15) {

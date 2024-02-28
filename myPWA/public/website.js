@@ -1,3 +1,4 @@
+  // This js file handles everything outside of the game screen
   var username = "Default User";
   var topScores = [ 0, 0, 0, 0, 0 ];
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"];
@@ -141,6 +142,7 @@
     localStorage.currentNames = topNames.join();
   }
 
+  // Gets data from json file
   function getThemes(send) {
     if (send == 0) {
       fetch('frontEndData.json') 
@@ -160,6 +162,7 @@
     }
   }
 
+  // Loads buttons on settings page
   function defineButtons(levels) {
     var time = new Date();
     var currentTheme;
@@ -197,6 +200,7 @@
     }
   }
 
+  // Changes all elements to the theme coulors
   function setTheme(levels, id) {
     if (currentId != id) {
       getThemes(7);
@@ -340,6 +344,7 @@
     }
   }
 
+  // Changes ball coulor
   function setBall(info) {
     ballCoulor = document.getElementById("ballCoulor").value;
     if (info != "n/a") {
@@ -362,6 +367,7 @@
     return number;
   }
 
+  // Handles ball on homescreen
   function moveBall() {
     const canvas = document.getElementById("homeBall");
     const ball = canvas.getContext("2d");
