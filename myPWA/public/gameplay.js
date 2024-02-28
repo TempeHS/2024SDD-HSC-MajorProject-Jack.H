@@ -36,6 +36,7 @@ function quit() {
 function enter() {
     gameOn = true;
     score = -1;
+    sfx.src = document.getElementById("hit").src;
     newLevel();
     generateFrame();
 }
@@ -44,6 +45,7 @@ function pauseMenu() {
     sfx.src = document.getElementById("menu").src;
     sfx.volume = 1.0;
     sfx.play();
+    sfx.src = document.getElementById("hit").src;
     music.pause();
     document.getElementById("gameplayBlocker").style.display = "block";
     document.getElementById("pausePage").style.display = "block";
@@ -54,6 +56,7 @@ function pauseMenu() {
     sfx.src = document.getElementById("menu").src;
     sfx.volume = 1.0;
     sfx.play();
+    sfx.src = document.getElementById("hit").src;
     music.play();
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
@@ -76,6 +79,7 @@ function pauseMenu() {
     xMomentum = 0;
     yMomentum = 0;
     gameOn = true;
+    sfx.src = document.getElementById("hit").src;
     newLevel();
     generateFrame();
   }
@@ -162,7 +166,6 @@ function pauseMenu() {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
       if (hitOn) {
-        sfx.src = document.getElementById("hit").src;
         sfx.volume = 1.0;
         sfx.play();
       }
@@ -171,7 +174,6 @@ function pauseMenu() {
       xBall = width - 50 - (size * 2 - 100);
       xMomentum = -(xMomentum * 0.6);
       if (hitOn) {
-        sfx.src = document.getElementById("hit").src;
         sfx.volume = 1.0;
         sfx.play();
       }
@@ -183,7 +185,6 @@ function pauseMenu() {
       yBall = 50;
       yMomentum = -(yMomentum * 0.6);
       if (hitOn) {
-        sfx.src = document.getElementById("hit").src;
         sfx.volume = 1.0;
         sfx.play();
       }
@@ -192,7 +193,6 @@ function pauseMenu() {
       yBall = height - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
       if (hitOn) {
-        sfx.src = document.getElementById("hit").src;
         sfx.volume = 1.0;
         sfx.play();
       }
@@ -415,6 +415,7 @@ function pauseMenu() {
     sfx.src = document.getElementById("death").src;
     sfx.volume = 0.4;
     sfx.play();
+    sfx.src = document.getElementById("hit").src;
     gameOn = false;
     addScore(score, username);
     document.getElementById("gameplayBlocker").style.display = "block";
@@ -444,7 +445,7 @@ function pauseMenu() {
     // Wall collision
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
-        if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size > wall[i].split(",")[1])) {
+        if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size * 0.9 < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size * 0.9 > wall[i].split(",")[1])) {
           if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 0.9) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 3.5)) {
             xBall = xSave;
             xMomentum = -(xMomentum * 0.9);
@@ -458,12 +459,11 @@ function pauseMenu() {
             yMomentum = -(yMomentum * 0.9);
           }
           if (hitOn) {
-            sfx.src = document.getElementById("hit").src;
             sfx.volume = 1.0;
             sfx.play();
           }
           hitOn = false;
-        } else if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
+        } else if ((wall[i].split(",")[2] == 0 && xBall - size * 0.9 < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size * 0.9 > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
           if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 0.9)) {
             xBall = xSave;
             xMomentum = -(xMomentum * 0.9);
@@ -477,7 +477,6 @@ function pauseMenu() {
             yMomentum = -(yMomentum * 0.9);
           }
           if (hitOn) {
-            sfx.src = document.getElementById("hit").src;
             sfx.volume = 1.0;
             sfx.play();
           }
@@ -494,12 +493,13 @@ function pauseMenu() {
     for (let i=0; i<mine.length; i++) {
     if (mine[i] != undefined) {
       if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1]) && mine[i].split(",")[2] == 11) {
-        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 2;
-        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 2;
+        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size * 1.5))^2) / 2;
+        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size * 1.5))^2) / 2;
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
         sfx.src = document.getElementById("explode").src;
         sfx.volume = 0.3;
         sfx.play();
+        sfx.src = document.getElementById("hit").src;
       }
     }
     }
