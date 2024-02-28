@@ -336,6 +336,7 @@ function pauseMenu() {
             if (diamond[j].split(",")[0] > width - size * 6 || diamond[j].split(",")[1] > height - size * 6) {
               diamond.splice(i, 1);
               j = diamond.length-1;
+              i--;
             }
           }
         }
@@ -362,9 +363,11 @@ function pauseMenu() {
           if (wall[i].split(",")[0] - wall[j].split(",")[0] < 5 && wall[i].split(",")[2] == 0 && wall[j].split(",")[2] == 0) {
             wall.splice(i, 1);
             j = wall.length-1;
+            i--;
           } else if (wall[i].split(",")[1] - wall[j].split(",")[1] < 5 && wall[i].split(",")[2] == 90 && wall[j].split(",")[2] == 90) {
             wall.splice(i, 1);
             j = wall.length-1;
+            i--;
           }
         }
       }
