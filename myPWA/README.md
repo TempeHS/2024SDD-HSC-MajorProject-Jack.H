@@ -2,7 +2,7 @@
 # Sprint Backlog List of Achievables (changes made)
 * Button sound effects
 * Game sound effects
-* Music tracks
+* ~~Music tracks~~
 * Vibrations
 * ~~Ball bouncing~~
 * Script comments
