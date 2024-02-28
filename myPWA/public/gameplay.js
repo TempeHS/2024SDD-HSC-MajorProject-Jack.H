@@ -19,9 +19,6 @@ var diaMove = [];
 var track = [];
 
 function quit() {
-    sfx.src = document.getElementById("menu").src;
-    sfx.volume = 1.0;
-    sfx.play();
     addScore(score, username);
     gameOn = false;
     xMomentum = 0;
@@ -36,9 +33,6 @@ function quit() {
 }
 
 function enter() {
-    sfx.src = document.getElementById("menu").src;
-    sfx.volume = 1.0;
-    sfx.play();
     gameOn = true;
     score = -1;
     newLevel();
@@ -380,6 +374,7 @@ function pauseMenu() {
     document.getElementById("retry").style.display = "inline";
     document.getElementById("pausePage").style.display = "block";
     music.pause();
+    navigator.vibrate(300);
   }
 
   function collision() {

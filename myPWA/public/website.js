@@ -14,13 +14,15 @@
   var music = document.getElementById("music");
   music.loop = true;
   music.src = document.getElementById("homeTheme").src;
-  music.autoplay = true;
-  music.play();
 
   addLocalStorage();
   addScore(0, "N/A");
   getThemes(currentId);
   moveBall();
+
+  window.addEventListener("click", () => {
+    music.play();
+  }, { once: true });
 
   function addLocalStorage() {
     if (localStorage.currentUsername != undefined) { 
