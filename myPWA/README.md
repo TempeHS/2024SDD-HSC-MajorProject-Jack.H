@@ -5,7 +5,7 @@
 * ~~Music tracks~~
 * ~~Vibrations~~
 * ~~Ball bouncing~~
-* Script comments
+* ~~Script comments~~
 * README for users
 * MAINTENANCE.md
 # Increment (what must be finished)
