@@ -10,6 +10,7 @@
   var homeY = random(50, height - 50);
   var angle = random(0, 360);
   var move = true;
+  var sfx = document.getElementById("sfx");
   var music = document.getElementById("music");
   music.loop = true;
   music.src = document.getElementById("homeTheme").src;
@@ -43,12 +44,18 @@
   }
 
   function signIn() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("namePage").style.display = "block";
     document.getElementById("blocker").style.display = "block";
     document.getElementById("nameText").textContent = username;
   }
 
   function homeFromSign() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("namePage").style.display = "none";
     document.getElementById("blocker").style.display = "none";
     document.getElementById("usernameText").value = document.getElementById("usernameText").defaultValue;
@@ -65,6 +72,9 @@
   function outofhome(page) {
     getThemes(currentId);
     move = false;
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
@@ -87,6 +97,9 @@
     getThemes(currentId);
     move = true;
     moveBall();
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("homescreen").style.display = "block";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "none";

@@ -10,6 +10,7 @@ var size = 50;
 var xSave = 80;
 var ySave = 100;
 var calibrate = true;
+var hitOn = true;
 var obstacles = "#ffffff"
 var diamond = [];
 var wall = [];
@@ -18,6 +19,9 @@ var diaMove = [];
 var track = [];
 
 function quit() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     addScore(score, username);
     gameOn = false;
     xMomentum = 0;
@@ -32,6 +36,9 @@ function quit() {
 }
 
 function enter() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     gameOn = true;
     score = -1;
     newLevel();
@@ -39,6 +46,9 @@ function enter() {
 }
 
 function pauseMenu() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     music.pause();
     document.getElementById("gameplayBlocker").style.display = "block";
     document.getElementById("pausePage").style.display = "block";
@@ -46,6 +56,9 @@ function pauseMenu() {
   }
   
   function gameFromPause() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
     music.play();
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
@@ -149,16 +162,44 @@ function pauseMenu() {
     if (xBall < 50) {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
+      if (hitOn) {
+        sfx.src = document.getElementById("hit").src;
+        sfx.volume = 1.0;
+        sfx.play();
+      }
+      hitOn = false;
     } else if (xBall > width - 50 - (size * 2 - 100)) {
       xBall = width - 50 - (size * 2 - 100);
       xMomentum = -(xMomentum * 0.6);
+      if (hitOn) {
+        sfx.src = document.getElementById("hit").src;
+        sfx.volume = 1.0;
+        sfx.play();
+      }
+      hitOn = false;
+    } else {
+      hitOn = true;
     }
     if (yBall < 50) {
       yBall = 50;
       yMomentum = -(yMomentum * 0.6);
+      if (hitOn) {
+        sfx.src = document.getElementById("hit").src;
+        sfx.volume = 1.0;
+        sfx.play();
+      }
+      hitOn = false;
     } else if (yBall > height - 50 - (size * 2 - 100)) {
       yBall = height - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
+      if (hitOn) {
+        sfx.src = document.getElementById("hit").src;
+        sfx.volume = 1.0;
+        sfx.play();
+      }
+      hitOn = false;
+    } else {
+      hitOn = true;
     }
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d", { willReadFrequently : true });
@@ -329,6 +370,9 @@ function pauseMenu() {
    }
 
   function gameOver() {
+    sfx.src = document.getElementById("death").src;
+    sfx.volume = 0.4;
+    sfx.play();
     gameOn = false;
     addScore(score, username);
     document.getElementById("gameplayBlocker").style.display = "block";
@@ -364,6 +408,12 @@ function pauseMenu() {
             xMomentum = -(xMomentum * 0.9); 
             yMomentum = -(yMomentum * 0.9);
           }
+          if (hitOn) {
+            sfx.src = document.getElementById("hit").src;
+            sfx.volume = 1.0;
+            sfx.play();
+          }
+          hitOn = false;
         } else if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
           if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 0.9)) {
             xBall = xSave;
@@ -377,9 +427,16 @@ function pauseMenu() {
             xMomentum = -(xMomentum * 0.9); 
             yMomentum = -(yMomentum * 0.9);
           }
+          if (hitOn) {
+            sfx.src = document.getElementById("hit").src;
+            sfx.volume = 1.0;
+            sfx.play();
+          }
+          hitOn = false;
         } else {
           xSave = xBall;
           ySave = yBall;
+          hitOn = true;
         }
       } 
     }
@@ -389,6 +446,9 @@ function pauseMenu() {
         xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 2;
         yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 2;
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
+        sfx.src = document.getElementById("explode").src;
+        sfx.volume = 0.3;
+        sfx.play();
       }
     }
     }
