@@ -4,7 +4,7 @@
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"];
   var timesPlayed = -1;
   var currentId = 1;
-  var ballCoulor = "ff5757";
+  var ballCoulor = "#ff5757";
   const width = window.innerWidth;
   const height = window.innerHeight;
   var homeX = random(50, width - 50);
@@ -40,7 +40,7 @@
     }
     if (localStorage.currentBallCoulor != undefined) { 
       ballCoulor = localStorage.currentBallCoulor;
-    }
+    } 
     if (localStorage.currentCurrentId != undefined) { 
       currentId = localStorage.currentCurrentId;
     }
@@ -392,7 +392,7 @@
     homeY -= 1.5 * Math.cos(angle * Math.PI / 180);
     if (homeX < 50) {
       homeX = 50;
-      if (angle <= 180) {
+      if (angle >= 270) {
         angle = random(0, 90);
       } else {
         angle = random(90, 180);
@@ -407,7 +407,7 @@
     }
     if (homeY < 50) {
       homeY = 50;
-      if (angle <= 0) {
+      if (angle >= 0 && angle <= 180) {
         angle = random(90, 180);
       } else {
         angle = random(180, 270);
