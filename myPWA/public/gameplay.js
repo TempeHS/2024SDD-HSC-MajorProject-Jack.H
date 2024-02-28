@@ -330,14 +330,12 @@ function pauseMenu() {
         diamond.splice(i, 1);
         i--;
       }
-      if (diamond[i].split(",")[0] > width - size * 6 || diamond[i].split(",")[1] > height - size * 6) {
-        if (diamond.length > 1) {
-          for (let j=0; j<diamond.length-1; j++) {
-            if (diamond[j].split(",")[0] > width - size * 6 || diamond[j].split(",")[1] > height - size * 6) {
-              diamond.splice(i, 1);
-              j = diamond.length-1;
-              i--;
-            }
+      if (diamond.length > 1 && (diamond[i].split(",")[0] > width - size * 6 || diamond[i].split(",")[1] > height - size * 6)) {
+        for (let j=0; j<diamond.length-1; j++) {
+          if (diamond[j].split(",")[0] > width - size * 6 || diamond[j].split(",")[1] > height - size * 6) {
+            diamond.splice(i, 1);
+            j = diamond.length-1;
+            i--;
           }
         }
       }
