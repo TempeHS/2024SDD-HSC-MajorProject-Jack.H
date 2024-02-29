@@ -38,4 +38,4 @@ This page is also where the iOS Support button is located.
 The Sign-In page does not save an online account, but rather saves your inputted username to that device. The username chosen will be the one displayed on the stats page, and as such you can have multiple seperate usernames on the stats page. 
 The stats page will save the top 6 overall scores, as well as the amount of games you've played.
 
-<img src="/myPWA/public/gifs/goal.gif" width="250" height="364.67"/>
+<img src="/myPWA/public/icons/signInSS.png" width="250" height="441.52"/>
