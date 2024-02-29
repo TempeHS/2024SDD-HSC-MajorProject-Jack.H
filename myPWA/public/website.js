@@ -12,6 +12,7 @@
   var angle = random(0, 360);
   var move = true;
   var sfx = document.getElementById("sfx");
+  sfx.src = document.getElementById("menu").src;
   var music = document.getElementById("music");
   music.loop = true;
   music.src = document.getElementById("homeTheme").src;
@@ -47,7 +48,6 @@
   }
 
   function signIn() {
-    sfx.src = document.getElementById("menu").src;
     sfx.volume = 1.0;
     sfx.play();
     document.getElementById("namePage").style.display = "block";
@@ -56,7 +56,6 @@
   }
 
   function homeFromSign() {
-    sfx.src = document.getElementById("menu").src;
     sfx.volume = 1.0;
     sfx.play();
     document.getElementById("namePage").style.display = "none";
@@ -75,7 +74,6 @@
   function outofhome(page) {
     getThemes(currentId);
     move = false;
-    sfx.src = document.getElementById("menu").src;
     sfx.volume = 1.0;
     sfx.play();
     document.getElementById("homescreen").style.display = "none";
@@ -100,7 +98,6 @@
     getThemes(currentId);
     move = true;
     moveBall();
-    sfx.src = document.getElementById("menu").src;
     sfx.volume = 1.0;
     sfx.play();
     document.getElementById("homescreen").style.display = "block";
