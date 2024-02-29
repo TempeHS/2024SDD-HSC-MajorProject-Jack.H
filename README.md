@@ -22,12 +22,18 @@ To add difficulty to the gameplay, a number of obstacles have been added, includ
 
 If you feel you need to change the default phone orientation to a different position, you can enter the pause menu and click the "Recalibrate" button which will change the default position to what your phone is currently in.
 
+<img src="/myPWA/public/gifs/calibrate.gif" width="250" height="364.67"/>
+
 ## Settings
 
 Here you can change the theme and ball coulor. Changing the theme also resets the ball, so you'll need to set it again to keep your preference. This will change every screen to the new theme.
 This page is also where the iOS Support button is located.
 
+<img src="/myPWA/public/icons/settings.png" width="250" height="441.52"/>
+
 ## Sign-In and Stats
 
 The Sign-In page does not save an online account, but rather saves your inputted username to that device. The username chosen will be the one displayed on the stats page, and as such you can have multiple seperate usernames on the stats page. 
 The stats page will save the top 6 overall scores, as well as the amount of games you've played.
+
+<img src="/myPWA/public/gifs/goal.gif" width="250" height="364.67"/>

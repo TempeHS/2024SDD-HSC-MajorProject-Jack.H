@@ -494,8 +494,8 @@ function pauseMenu() {
     for (let i=0; i<mine.length; i++) {
     if (mine[i] != undefined) {
       if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1]) && mine[i].split(",")[2] == 11) {
-        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size * 1.5))^2) / 12;
-        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size * 1.5))^2) / 12;
+        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size * 1.5))^2) / 8;
+        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size * 1.5))^2) / 8;
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
         sfx.src = document.getElementById("explode").src;
         sfx.volume = 0.3;
