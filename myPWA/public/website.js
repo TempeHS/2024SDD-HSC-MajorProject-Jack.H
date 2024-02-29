@@ -1,13 +1,30 @@
+  // This js file handles everything outside of the game screen
   var username = "Default User";
   var topScores = [ 0, 0, 0, 0, 0 ];
   var topNames = ["N/A", "N/A", "N/A", "N/A", "N/A"];
   var timesPlayed = -1;
   var currentId = 1;
-  var ballCoulor = "ff5757";
+  var ballCoulor = "#ff5757";
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  var homeX = random(50, width - 50);
+  var homeY = random(50, height - 50);
+  var angle = random(0, 360);
+  var move = true;
+  var sfx = document.getElementById("sfx");
+  sfx.src = document.getElementById("menu").src;
+  var music = document.getElementById("music");
+  music.loop = true;
+  music.src = document.getElementById("homeTheme").src;
 
   addLocalStorage();
   addScore(0, "N/A");
   getThemes(currentId);
+  moveBall();
+
+  window.addEventListener("click", () => {
+    music.play();
+  }, { once: true });
 
   function addLocalStorage() {
     if (localStorage.currentUsername != undefined) { 
@@ -24,19 +41,23 @@
     }
     if (localStorage.currentBallCoulor != undefined) { 
       ballCoulor = localStorage.currentBallCoulor;
-    }
+    } 
     if (localStorage.currentCurrentId != undefined) { 
       currentId = localStorage.currentCurrentId;
     }
   }
 
   function signIn() {
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("namePage").style.display = "block";
     document.getElementById("blocker").style.display = "block";
     document.getElementById("nameText").textContent = username;
   }
 
   function homeFromSign() {
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("namePage").style.display = "none";
     document.getElementById("blocker").style.display = "none";
     document.getElementById("usernameText").value = document.getElementById("usernameText").defaultValue;
@@ -52,6 +73,9 @@
 
   function outofhome(page) {
     getThemes(currentId);
+    move = false;
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("homescreen").style.display = "none";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "block";
@@ -64,12 +88,18 @@
     } else if (page == "gameplay") {
       document.getElementById("gameplay").style.display = "block";
       document.getElementById("calibration").style.display = "none";
+      music.src = document.getElementById("gameTheme").src;
+      music.play();
       enter();
     }
   }
 
   function homescreen(page) {
     getThemes(currentId);
+    move = true;
+    moveBall();
+    sfx.volume = 1.0;
+    sfx.play();
     document.getElementById("homescreen").style.display = "block";
     if (page == "stats") {
       document.getElementById("statsPage").style.display = "none";
@@ -82,6 +112,8 @@
       document.getElementById("gameplayBlocker").style.display = "none"; 
       document.getElementById("pausePage").style.display = "none";
       document.getElementById("retry").style.display = "none";
+      music.src = document.getElementById("homeTheme").src;
+      music.play();
       quit();
     }
   }
@@ -107,6 +139,7 @@
     localStorage.currentNames = topNames.join();
   }
 
+  // Gets data from json file
   function getThemes(send) {
     if (send == 0) {
       fetch('frontEndData.json') 
@@ -126,6 +159,7 @@
     }
   }
 
+  // Loads buttons on settings page
   function defineButtons(levels) {
     var time = new Date();
     var currentTheme;
@@ -138,6 +172,7 @@
     }
     for (let i = 0; i < 6; i++) {
       const theme = document.getElementById("levelCanvas" + (i+1)).getContext("2d");
+      theme.clearRect(-10, -10, 100, 100);
       if (time == "day") {
         currentTheme = levels[i].day;
       } else if (time == "night") {
@@ -157,15 +192,25 @@
       theme.beginPath();
       theme.arc(25, 25, 15, 0, 2 * Math.PI);
       theme.fill();
-      theme.strokeStyle = "black";
-      theme.lineWidth = 4.0;
-      theme.strokeRect(0, 0, 80, 80);
+      if (i == currentId - 1) {
+        theme.strokeStyle = "yellow";
+        theme.lineWidth = 8.0;
+        theme.strokeRect(0, 0, 80, 80);
+      } else {
+        theme.strokeStyle = "black";
+        theme.lineWidth = 4.0;
+        theme.strokeRect(0, 0, 80, 80);
+      }
     }
   }
 
+  // Changes all elements to the theme coulors
   function setTheme(levels, id) {
     if (currentId != id) {
       getThemes(7);
+    }
+    if (document.getElementById("settingsPage").style.display == "block") {
+      getThemes(0);
     }
     currentId = id;
     localStorage.currentCurrentId = currentId;
@@ -242,6 +287,21 @@
       cssClass[i].style.backgroundColor = "transparent";
     }
 
+    cssClass = document.querySelectorAll('.title');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
+    cssClass = document.querySelectorAll('.settings');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
+    cssClass = document.querySelectorAll('.signIn');
+    for(var i=0; i<cssClass.length; i++) {
+      cssClass[i].style.backgroundColor = "transparent";
+    }
+
     if (id == 5) {
       cssClass = document.querySelectorAll('.tutorialImage');
       for(var i=0; i<cssClass.length; i++) {
@@ -291,6 +351,7 @@
     }
   }
 
+  // Changes ball coulor
   function setBall(info) {
     ballCoulor = document.getElementById("ballCoulor").value;
     if (info != "n/a") {
@@ -306,4 +367,57 @@
       ballCoulor = "#" + currentTime.slice(6, 12);
     }
     localStorage.currentBallCoulor = ballCoulor;
+  }
+
+  function random(min, max) {
+    var number = Math.random() * (max - min) + min;
+    return number;
+  }
+
+  // Handles ball on homescreen
+  function moveBall() {
+    const canvas = document.getElementById("homeBall");
+    const ball = canvas.getContext("2d");
+    ball.canvas.width = width;
+    ball.canvas.height = height;
+    ball.clearRect(0, 0, width, height);
+    ball.fillStyle = ballCoulor;
+    ball.beginPath();
+    ball.arc(homeX, homeY, 50, 0, 2 * Math.PI);
+    ball.fill();
+    homeX += 1.5 * Math.sin(angle * Math.PI / 180);
+    homeY -= 1.5 * Math.cos(angle * Math.PI / 180);
+    if (homeX < 50) {
+      homeX = 50;
+      if (angle >= 270) {
+        angle = random(0, 90);
+      } else {
+        angle = random(90, 180);
+      }
+    } else if (homeX > width - 50) {
+      homeX = width - 50;
+      if (angle >= 90) {
+        angle = random(180, 270);
+      } else {
+        angle = random(270, 360);
+      }
+    }
+    if (homeY < 50) {
+      homeY = 50;
+      if (angle >= 0 && angle <= 180) {
+        angle = random(90, 180);
+      } else {
+        angle = random(180, 270);
+      }
+    } else if (homeY > height - 50) {
+      homeY = height - 50;
+      if (angle >= 180) {
+        angle = random(270, 360);
+      } else {
+        angle = random(0, 90);
+      }
+    }
+    if (move) {
+      window.requestAnimationFrame(moveBall);
+    }
   }

@@ -1,3 +1,4 @@
+// This js file handles everything in the game screen
 var gameOn = false;
 var defaultBeta;
 var defaultGamma;
@@ -10,14 +11,16 @@ var size = 50;
 var xSave = 80;
 var ySave = 100;
 var calibrate = true;
+var hitOn = true;
 var obstacles = "#ffffff"
 var diamond = [];
 var wall = [];
 var mine = [];
 var diaMove = [];
 var track = [];
-const width = window.innerWidth;
-const height = window.innerHeight;
+var hit = document.getElementById("hit");
+hit.src = document.getElementById("hitFX").src;
+hit.volume = 1.0;
 
 function quit() {
     addScore(score, username);
@@ -27,6 +30,7 @@ function quit() {
     xBall = 80;
     yBall = 100;
     score = 0;
+    sfx.src = document.getElementById("menu").src;
     document.getElementById("scoreDisplay").innerHTML = "Current Score: 0";
     document.getElementById("resume").style.display = "inline";
     size = 50;
@@ -41,12 +45,20 @@ function enter() {
 }
 
 function pauseMenu() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
+    music.pause();
     document.getElementById("gameplayBlocker").style.display = "block";
     document.getElementById("pausePage").style.display = "block";
     gameOn = false;
   }
   
   function gameFromPause() {
+    sfx.src = document.getElementById("menu").src;
+    sfx.volume = 1.0;
+    sfx.play();
+    music.play();
     document.getElementById("gameplayBlocker").style.display = "none";
     document.getElementById("pausePage").style.display = "none";
     document.getElementById("calibration").style.display = "none";
@@ -55,6 +67,8 @@ function pauseMenu() {
   }
 
   function restart() {
+    music.currentTime = 0;
+    music.play();
     document.getElementById("retry").style.display = "none";
     document.getElementById("resume").style.display = "inline";
     document.getElementById("gameplayBlocker").style.display = "none";
@@ -103,6 +117,7 @@ function pauseMenu() {
     }
   }
 
+  // Speed calculations for ball
   function generateMomentum(x, y) {
     xMomentum -= (x^(1/3)) / 110;
     yMomentum -= (y^(1/3)) / 110;
@@ -141,28 +156,55 @@ function pauseMenu() {
     }
   }
 
+  // Loads graphics
   function generateFrame() {
     xBall += xMomentum;
     yBall += yMomentum;
+    
+    // Checks for screen borders
     if (xBall < 50) {
       xBall = 50;
       xMomentum = -(xMomentum * 0.6);
+      if (hitOn) {
+        hit.play();
+      }
+      hitOn = false;
     } else if (xBall > width - 50 - (size * 2 - 100)) {
       xBall = width - 50 - (size * 2 - 100);
       xMomentum = -(xMomentum * 0.6);
+      if (hitOn) {
+        hit.play();
+      }
+      hitOn = false;
+    } else {
+      hitOn = true;
     }
     if (yBall < 50) {
       yBall = 50;
       yMomentum = -(yMomentum * 0.6);
+      if (hitOn) {
+        hit.play();
+      }
+      hitOn = false;
     } else if (yBall > height - 50 - (size * 2 - 100)) {
       yBall = height - 50 - (size * 2 - 100);
       yMomentum = -(yMomentum * 0.6);
+      if (hitOn) {
+        hit.play();
+      }
+      hitOn = false;
+    } else {
+      hitOn = true;
     }
+
+    // Canvas generation
     const canvas = document.getElementById("graphics");
     const game = canvas.getContext("2d", { willReadFrequently : true });
     game.canvas.width = width;
     game.canvas.height = height;
     game.clearRect(0, 0, width, height);
+
+    // Draw goal
     game.fillStyle = "#000000";
     if (currentId == 6) {
       game.fillStyle = "#ffffff";
@@ -170,12 +212,16 @@ function pauseMenu() {
     game.beginPath();
     game.arc(width - size * 1.2 - 3, height - size * 1.2 - 8, size * 1.2, 0, 2 * Math.PI);
     game.fill();
+
+    // Draw ball
     game.fillStyle = ballCoulor;
     game.strokeStyle = obstacles;
     game.lineWidth = 5;
     game.beginPath();
     game.arc(xBall + size - 50, yBall + size - 50, size, 0, 2 * Math.PI);
     game.fill();
+
+    // Draw diamonds
     game.fillStyle = obstacles;
     for (let i=0; i<diamond.length; i++) {
       if (diamond[i] != undefined) {
@@ -187,6 +233,8 @@ function pauseMenu() {
         game.fill();
       }
     }
+
+    // Draw walls
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
         var wallTemp;
@@ -199,6 +247,8 @@ function pauseMenu() {
         game.fill();
       }
     }
+
+    // Draw mines
     var rgb = convertRgb(obstacles);
     var image = new Image();
     image.src = "icons/mine.png";
@@ -224,6 +274,8 @@ function pauseMenu() {
         }
       }
     }
+
+    // Draw moving diamonds
     for (let i=0; i<diaMove.length; i++) {
       if (diaMove[i] != undefined) {
         game.beginPath();
@@ -242,6 +294,7 @@ function pauseMenu() {
         }
       }
     }
+
     collision();
     if (gameOn) {
       window.requestAnimationFrame(generateFrame);
@@ -258,6 +311,8 @@ function pauseMenu() {
     if (size > 20) {
       size -= 1;
     }
+
+    // Generate diamonds
     diamond = [];
     for (let i=0; i<random(Math.ceil(score / 20), Math.ceil(score / 2)); i++) {
       if (i > 15) { 
@@ -267,12 +322,22 @@ function pauseMenu() {
       if (diamond[i].split(",")[0] < 80 + size * 3.15 && diamond[i].split(",")[1] < 100 + size * 3.15) {
         diamond.splice(i, 1);
         i--;
-      } else if (diamond[i].split(",")[0] > width - size * 3.4 && diamond[i].split(",")[1] > height - size * 3.4) {
+      } else if (diamond[i].split(",")[0] > width - size * 4 && diamond[i].split(",")[1] > height - size * 4) {
         diamond.splice(i, 1);
         i--;
       }
+      if (diamond.length > 1 && (diamond[i].split(",")[0] > width - size * 6 || diamond[i].split(",")[1] > height - size * 6)) {
+        for (let j=0; j<diamond.length-1; j++) {
+          if (diamond[j].split(",")[0] > width - size * 6 || diamond[j].split(",")[1] > height - size * 6) {
+            diamond.splice(i, 1);
+            j = diamond.length-1;
+            i--;
+          }
+        }
+      }
     }
 
+    // Generate walls
     wall = [];
     for (let i=0; i<random(Math.floor(score / 10), Math.floor(score / 4)); i++) {
       if (i > 10) {
@@ -286,9 +351,24 @@ function pauseMenu() {
       } else if (wall[i].split(",")[0] > width - size * 5 && wall[i].split(",")[1] > height - size * 5) {
         wall.splice(i, 1);
         i--;
+      } 
+      if (wall.length > 1) {
+        for (let j=0; j<wall.length-1; j++) {
+          if (wall[i].split(",")[0] - wall[j].split(",")[0] < 5 && wall[i].split(",")[2] == 0 && wall[j].split(",")[2] == 0) {
+            wall.splice(i, 1);
+            j = wall.length-1;
+            i--;
+          } else if (wall[i].split(",")[1] - wall[j].split(",")[1] < 5 && wall[i].split(",")[2] == 90 && wall[j].split(",")[2] == 90) {
+            wall.splice(i, 1);
+            j = wall.length-1;
+            i--;
+          }
+        }
       }
     }
 
+
+    // Generate mines
     mine = [];
     for (let i=0; i<random(Math.floor(score / 12), Math.floor(score / 10)); i++) {
       if (i > 10) {
@@ -304,6 +384,7 @@ function pauseMenu() {
       }
     }
 
+    // Generate moving diamonds
     diaMove = [];
     track = [];
     if (score >= 20) {
@@ -327,18 +408,27 @@ function pauseMenu() {
    }
 
   function gameOver() {
+    sfx.src = document.getElementById("death").src;
+    sfx.volume = 0.4;
+    sfx.play();
     gameOn = false;
     addScore(score, username);
     document.getElementById("gameplayBlocker").style.display = "block";
     document.getElementById("resume").style.display = "none";
     document.getElementById("retry").style.display = "inline";
     document.getElementById("pausePage").style.display = "block";
+    music.pause();
+    navigator.vibrate(200);
   }
 
+  // Checks for collision between ball and obstacles
   function collision() {
+    // Goal collision
     if (xBall > width - size * 1.56 && yBall > height - size * 1.56) {
       newLevel();
     }
+
+    // Diamond collision
     for (let i=0; i<diamond.length; i++) {
       if (diamond[i] != undefined) {
         if (xBall - size * 0.8 < Number(diamond[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diamond[i].split(",")[0]) && yBall + size * 0.8 > Number(diamond[i].split(",")[1]) && yBall - size * 0.8 < Number(diamond[i].split(",")[1]) + size * 1.15) {
@@ -346,9 +436,11 @@ function pauseMenu() {
         }
       }
     }
+
+    // Wall collision
     for (let i=0; i<wall.length; i++) {
       if (wall[i] != undefined) {
-        if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size > wall[i].split(",")[1])) {
+        if ((wall[i].split(",")[2] == 90 && xBall - size < Number(wall[i].split(",")[0]) + size * 0.9 && xBall + size > wall[i].split(",")[0] && yBall - size * 0.8 < Number(wall[i].split(",")[1]) + size * 3.5 && yBall + size * 0.8 > wall[i].split(",")[1])) {
           if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 0.9) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 3.5)) {
             xBall = xSave;
             xMomentum = -(xMomentum * 0.9);
@@ -361,7 +453,11 @@ function pauseMenu() {
             xMomentum = -(xMomentum * 0.9); 
             yMomentum = -(yMomentum * 0.9);
           }
-        } else if ((wall[i].split(",")[2] == 0 && xBall - size < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
+          if (hitOn) {
+            hit.play();
+          }
+          hitOn = false;
+        } else if ((wall[i].split(",")[2] == 0 && xBall - size * 0.8 < Number(wall[i].split(",")[0]) + size * 3.5 && xBall + size * 0.8 > wall[i].split(",")[0] && yBall - size < wall[i].split(",")[1] && yBall + size > Number(wall[i].split(",")[1]) - size * 0.9)) {
           if ((xBall < wall[i].split(",")[0] || xBall > Number(wall[i].split(",")[0]) + size * 3.5) && !(yBall < wall[i].split(",")[1] || yBall > Number(wall[i].split(",")[1]) + size * 0.9)) {
             xBall = xSave;
             xMomentum = -(xMomentum * 0.9);
@@ -374,21 +470,33 @@ function pauseMenu() {
             xMomentum = -(xMomentum * 0.9); 
             yMomentum = -(yMomentum * 0.9);
           }
+          if (hitOn) {
+            hit.play();
+          }
+          hitOn = false;
         } else {
           xSave = xBall;
           ySave = yBall;
+          hitOn = true;
         }
       } 
     }
+
+    // Mine collision
     for (let i=0; i<mine.length; i++) {
     if (mine[i] != undefined) {
       if (xBall - size * 0.8 < Number(mine[i].split(",")[0]) + size * 2 && xBall + size * 0.8 > Number(mine[i].split(",")[0]) && yBall - size * 0.8 < Number(mine[i].split(",")[1]) + size * 2 && yBall + size * 0.8 > Number(mine[i].split(",")[1]) && mine[i].split(",")[2] == 11) {
-        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size))^2) / 2;
-        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size))^2) / 2;
+        xMomentum = ((xBall - (Number(mine[i].split(",")[0]) + size * 1.5))^2) / 5;
+        yMomentum = ((yBall - (Number(mine[i].split(",")[1]) + size * 1.5))^2) / 5;
         mine[i] = mine[i].split(",")[0] + "," + mine[i].split(",")[1] + "," + 10;
+        sfx.src = document.getElementById("explode").src;
+        sfx.volume = 0.3;
+        sfx.play();
       }
     }
     }
+
+    // Moving diamond collision
     for (let i=0; i<diaMove.length; i++) {
       if (diaMove[i] != undefined) {
         if (xBall - size * 0.8 < Number(diaMove[i].split(",")[0]) + size * 1.15 && xBall + size * 0.8 > Number(diaMove[i].split(",")[0]) && yBall + size * 0.8 > Number(diaMove[i].split(",")[1]) && yBall - size * 0.8 < Number(diaMove[i].split(",")[1]) + size * 1.15) {

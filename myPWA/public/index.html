@@ -21,13 +21,14 @@
   </head>
   <body>
     <main id="homescreen">
+      <canvas id="homeBall" class="graphics"></canvas>
       <div class='title'>Tilt Rush</div><br>
       <button class="homeButton" onclick="outofhome('gameplay')">Play</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('tutorial')">Tutorial</button><br><br><br><br>
       <button class="homeButton" onclick="outofhome('stats')">Stats</button><br><br><br>
       <button class="settings" onclick="outofhome('settings')"><img class="settings" src="icons/settings.png"></button>
       <button class="signIn" onclick="signIn()"><img class="signIn" src="icons/signIn.png"></button>
-      <div class="blocker" id="blocker"></div>
+      <div class="blocker" id="blocker" style="z-index: 1;"></div>
       <div class="namePage" id="namePage">
         <p class="nameText" id="nameText">Current Name</p><br>
         <button class="xButton" onclick="homeFromSign()"><img src="icons/x_button.png" class="xImage"></button><br><br>
@@ -35,6 +36,7 @@
         <br><br><br><button class="changeButton" onclick="changeName()">Change Name</button>
       </div>
     </main>
+
     <main id="statsPage" class="otherPage">
       <button class="backButton" onclick="homescreen('stats')"><img class="backButton" src="icons/back_arrow.png"></button><br><br>
       <p class="bestGames">Best Games</p><br><br>
@@ -42,6 +44,7 @@
       </div>
       <p class="scoreText" id="attemptCount">Total Attempts: 0</p>
     </main>
+
     <main id="tutorialPage" class="otherPage">
       <button class="backButton" onclick="homescreen('tutorial')"><img class="backButton" src="icons/back_arrow.png"></button><br><br><br><br>
       <p class="tiltText">Tilt the phone to play!</p>
@@ -51,6 +54,7 @@
       <img src="icons/obstacle-tutorial.png" class="tutorialImage" style="top:460px;"><br><br><br>
       <p class="tiltText">Avoid the various objects!</p>
     </main>
+
     <main id="settingsPage" class="otherPage">
       <button class="backButton" onclick="homescreen('settings')"><img class="backButton" src="icons/back_arrow.png"></button><br><br><br>
       <p class="scoreText" style="font-size: 35px;">Ball Coulor: <input type="color" class="ballCoulor" id="ballCoulor"></p><br>
@@ -64,6 +68,7 @@
       <button class="themeButton" onclick="getThemes(6)"><canvas id="levelCanvas6" height="130"></canvas></button>
       <button class="changeButton" onclick="requestDeviceOrientation()">iOS Support</button>
     </main>
+
     <main id="gameplay" class="otherPage">
       <canvas class="graphics" id="graphics"></canvas>
       <p class="scoreDisplay" id="scoreDisplay">Current Score: 0</p>
@@ -77,6 +82,21 @@
       </div>
       <div class="calibration" id="calibration">Calibrated</div>
     </main>
+    
+    <audio id="music">
+      <source id="homeTheme" src="./audio/homeTheme.mp3" type="audio/mpeg">
+      <source id="gameTheme" src="./audio/gameTheme.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx">
+      <source id="death" src="./audio/death.mp3" type="audio/mpeg">
+      <source id="explode" src="./audio/explode.mp3" type="audio/mpeg">
+      <source id="menu" src="./audio/menu.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+    <audio id="hit">
+      <source id="hitFX" src="./audio/hit.mp3" type="audio/mpeg">
+    </audio>
     <script src="website.js"></script>
     <script src="gameplay.js"></script>
   </body>
