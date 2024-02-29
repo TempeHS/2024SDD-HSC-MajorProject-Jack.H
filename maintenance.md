@@ -1,7 +1,18 @@
 # Maintenance
+## Device Requirements
 
 This game is entirely optimised for landscape mobile use, and will have strange formatting if used with other formats. If your device does not contain a gyroscope, the game will not be able to function. There are specific fixes put in place to make this game work with iOS devices, including the button in settings labled "iOS Support" which requests permission to get gyroscope information, and having the music only play once the user has interacted with the website.
-This app is run off of a web server, built from node.js, and is using the Tempe High School server to run publicly on GitHub. All of the code for the app itself is located at "myPWA/public", including the HTML page, the CSS file, and the two Javascript files which run the app. website.js is used to run everything outside of the game, while gameplay.js runs everything inside of it.
+
+# Running
+
+This app is run off of a web server, built from node.js, and is using the Tempe High School server to run publicly on GitHub. 
+It is mainly run during testing with LocalHost through the "Preview on Web Server" extension.
+
+# File Information
+
+All of the code for the app itself is located at "myPWA/public", including the HTML page, the CSS file, and the two Javascript files which run the app. website.js is used to run everything outside of the game, while gameplay.js runs everything inside of it.
+Within public, there also exists 3 folders, containing the sources for the elements in HTML. Many of the images located in "icons" contain an inverted variant, which used for the darker themes the user can choose.
+These themes were created on a backend SQL database, and extracted through the json file "frontEndData.json", to be accessed by the Javascript files.
 
 # website.js
 ## addLocalStorage
