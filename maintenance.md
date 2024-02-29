@@ -1,3 +1,8 @@
+# Maintenance
+
+This game is entirely optimised for landscape mobile use, and will have strange formatting if used with other formats. If your device does not contain a gyroscope, the game will not be able to function. There are specific fixes put in place to make this game work with iOS devices, including the button in settings labled "iOS Support" which requests permission to get gyroscope information, and having the music only play once the user has interacted with the website.
+This app is run off of a web server, built from node.js, and is using the Tempe High School server to run publicly on GitHub. All of the code for the app itself is located at "myPWA/public", including the HTML page, the CSS file, and the two Javascript files which run the app. website.js is used to run everything outside of the game, while gameplay.js runs everything inside of it.
+
 # website.js
 ## addLocalStorage
 
@@ -72,4 +77,20 @@ Adds x and y momentum based on the difference between the current device orienta
 
 ## generateFrame
 
-S
+Controls the movement and generation of all of the elements contained within the main canvas element. Begins by changing the position of the ball based off of the momentum generated, and checking if it goes past a screen boundary. It then goes into the main canvas drawing, starting with the goal, then the ball, and then the various obstacles. The generation of each of the obstacles is contained within a for loop, which goes through each of the obstacles within its own array. The mine object, being an image instead of drawn in canvas, has its own function to convert the theme to an rgb format in order to coulor it correctly. At the end of the generation it calls for collision checking.
+
+## newLevel
+
+Handles resetting the level when first entering the game or when completing the previous level. It resets the ball's movement, updates the score, and generates new obstacles. The amount of obstacles and position are determined randomly, and only become available past a certain score.
+
+## gameOver
+
+Plays a death sound, and opens up the game over menu, which is a deviation off of the normal pause menu.
+
+## collision
+
+As canvas doesn't have a way to check for overlap between its elements, this function has manually had the hitboxes for each element added, and it checks for collision between the ball and the obstacles one after the other. Due to the complex shape of most of the obstacles and the ball, the hitboxes are simplified to squares.
+
+## convertRgb
+
+Handles the conversion between hex coulor codes and rbg formats.
