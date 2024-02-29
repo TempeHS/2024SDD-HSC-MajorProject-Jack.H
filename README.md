@@ -18,6 +18,8 @@ The objective of the game is to go inside of the "goal" circle seen in the botto
 
 To add difficulty to the gameplay, a number of obstacles have been added, including diamonds (which end your game upon contact), walls (which stop you from moving past them), mines (which bounce you off of them), and a variant of the diamond which moves around on a track.
 
+<img src="/myPWA/public/icons/obstacleSS.png" width="250" height="441.52"/>
+
 ## Recalibration
 
 If you feel you need to change the default phone orientation to a different position, you can enter the pause menu and click the "Recalibrate" button which will change the default position to what your phone is currently in.
@@ -29,7 +31,7 @@ If you feel you need to change the default phone orientation to a different posi
 Here you can change the theme and ball coulor. Changing the theme also resets the ball, so you'll need to set it again to keep your preference. This will change every screen to the new theme.
 This page is also where the iOS Support button is located.
 
-<img src="/myPWA/public/icons/settings.png" width="250" height="441.52"/>
+<img src="/myPWA/public/icons/settingsSS.png" width="250" height="441.52"/>
 
 ## Sign-In and Stats
 
